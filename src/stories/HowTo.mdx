@@ -1,0 +1,25 @@
+import { Meta } from '@storybook/blocks'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { TableOfContents } from '../../lib/components/TableOfContents'
+
+<Meta title="How To Use These Components" />
+
+# @markdownspace/components
+
+These components are designed to be used on the Markdown Space platform. They may, or may not function elsewhere. You can simply import them from @markdownspace/components and use them on a page with mdx enabled
+
+## Example Markdown
+
+```mdx
+---
+mdx: true
+---
+
+import { TableOfContents } from 'https://esm.sh/@markdownspace/components'
+
+<TableOfContents projectSlug="home" />
+```
+
+## Example Output
+
+<TableOfContents projectSlug="home" />
