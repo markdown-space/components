@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { HeroSection } from "../../lib/main";
+import { HeroSection } from "../../lib";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {
