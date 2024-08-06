@@ -42,19 +42,20 @@ export const TableOfContents = ({
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
   const [docs, setDocs] = useState([]);
+
   useEffect(() => {
     fetch(
       `https://api.markdown.space/projects/${projectSlug}?offset=${offset}&limit=${
         pageLength - 1
-      }&order=${order}${filter ? `&filter=${filter}` : ""}`
+      }&order=${order}${filter ? `&filter=${filter}` : ""}`,
     ).then(async (response) => {
       setTotal(
-        Number(response.headers.get("content-range")?.split("/")[1]) || 0
+        Number(response.headers.get("content-range")?.split("/")[1]) || 0,
       );
       const _data = await response.json();
       if (_data.docs?.length) setDocs(_data.docs);
     });
-  }, [projectSlug, offset, pageLength, order]);
+  }, [projectSlug, offset, pageLength, order, filter]);
 
   return (
     <>
