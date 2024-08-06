@@ -48,6 +48,7 @@
     "vite-plugin-dts": "^3.8.3"
   },
   "dependencies": {
+    "@rollup/rollup-darwin-arm64": "^4.20.0",
     "bulma": "^1.0.0"
   },
   "prettier": {}
