@@ -1,6 +1,4 @@
-import { TableOfContents } from "../dist";
-import { HeroSection } from "../dist/HeroSection";
-import { Buttons } from "../lib";
+import { Buttons, HeroSection, TableOfContents } from "../lib";
 
 export default function App() {
   return (
