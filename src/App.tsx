@@ -1,4 +1,4 @@
-import { Buttons, HeroSection, TableOfContents } from "../lib";
+import { Buttons, HeroSection, Modal, TableOfContents } from "../lib";
 
 export default function App() {
   return (
@@ -15,6 +15,8 @@ export default function App() {
       <TableOfContents projectSlug="home" pageLength={2} />
       <hr />
       <Buttons />
+      <hr />
+      <Modal />
       <hr />
     </>
   );
