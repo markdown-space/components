@@ -1,3 +1,4 @@
+export { Box } from "./Box";
 export { Buttons } from "./Buttons";
 export { HeroSection } from "./HeroSection";
 export { Modal } from "./Modal";
