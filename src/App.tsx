@@ -1,4 +1,10 @@
-import { Buttons, HeroSection, Modal, TableOfContents } from "../lib";
+import {
+  Buttons,
+  HeroSection,
+  Modal,
+  Notifications,
+  TableOfContents,
+} from "../lib";
 import { Box } from "../lib/Box";
 
 export default function App() {
@@ -20,6 +26,8 @@ export default function App() {
       <Buttons />
       <hr />
       <Modal />
+      <hr />
+      <Notifications />
       <hr />
     </>
   );
