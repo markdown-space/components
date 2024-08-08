@@ -6,6 +6,7 @@ import {
   TableOfContents,
 } from "../lib";
 import { Box } from "../lib/Box";
+import { Pagination } from "../lib/Pagination";
 
 export default function App() {
   return (
@@ -28,6 +29,8 @@ export default function App() {
       <Modal />
       <hr />
       <Notifications />
+      <hr />
+      <Pagination />
       <hr />
     </>
   );
