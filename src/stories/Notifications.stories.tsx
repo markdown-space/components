@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { Notifications } from "../../lib";
+import { Notifications } from "../components/Notification";
 
 const meta = {
   title: "Components/Notifications",
