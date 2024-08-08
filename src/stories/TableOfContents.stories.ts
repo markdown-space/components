@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { TableOfContents } from "../../lib";
+import { TableOfContents } from "../components/TableOfContents";
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const meta = {

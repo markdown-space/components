@@ -1,4 +1,4 @@
-export const Buttons = () => {
+export const Button = () => {
   return (
     <section className="section" id="button">
       <div className="columns">

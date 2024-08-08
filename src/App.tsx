@@ -1,12 +1,10 @@
-import {
-  Buttons,
-  HeroSection,
-  Modal,
-  Notifications,
-  TableOfContents,
-} from "../lib";
-import { Box } from "../lib/Box";
-import { Pagination } from "../lib/Pagination";
+import { Box } from "./components/Box";
+import { Button } from "./components/Button";
+import { HeroSection } from "./components/HeroSection";
+import { Modal } from "./components/Modal";
+import { Notifications } from "./components/Notification";
+import { Pagination } from "./components/Pagination";
+import { TableOfContents } from "./components/TableOfContents";
 
 export default function App() {
   return (
@@ -24,7 +22,7 @@ export default function App() {
       <hr />
       <Box />
       <hr />
-      <Buttons />
+      <Button />
       <hr />
       <Modal />
       <hr />

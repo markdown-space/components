@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { Buttons } from "../../lib";
+import { Button } from "../components/Button";
 
 export default {
-  title: "Components/Buttons",
-  component: Buttons,
+  title: "Components/Button",
+  component: Button,
   parameters: {
     layout: "padded",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Buttons>;
+} satisfies Meta<typeof Button>;
 
-type Story = StoryObj<typeof Buttons>;
+type Story = StoryObj<typeof Button>;
 
 // Main story showing all buttons
 export const AllButtons: Story = {
-  render: () => <Buttons />,
+  render: () => <Button />,
 };
 
 // Basic button variations

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { Box } from "../../lib";
+import { Box } from "../components/Box";
 
 const meta = {
   title: "Components/Box",

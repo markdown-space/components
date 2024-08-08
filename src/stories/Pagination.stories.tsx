@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { Pagination } from "lib/Pagination";
+import { Pagination } from "../components/Pagination";
 
 const meta = {
   title: "Components/Pagination",
