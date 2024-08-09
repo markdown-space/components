@@ -9,3 +9,4 @@ export { Notifications } from "./components/Notifications";
 export { Pagination } from "./components/Pagination";
 export { Tab } from "./components/Tab";
 export { TableOfContents } from "./components/TableOfContents";
+export { Tag } from "./components/Tag";

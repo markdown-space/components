@@ -9,6 +9,7 @@ import {
   Pagination,
   Tab,
   TableOfContents,
+  Tag,
 } from "./index";
 
 export default function App() {
@@ -40,6 +41,8 @@ export default function App() {
       <Breadcrumb />
       <hr />
       <Card />
+      <hr />
+      <Tag />
       <hr />
     </>
   );
