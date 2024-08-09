@@ -1,3 +1,5 @@
+import { Breadcrumb } from "./components/Breadcrumb";
+import { Card } from "./components/Card";
 import {
   Box,
   Button,
@@ -34,6 +36,10 @@ export default function App() {
       <Pagination />
       <hr />
       <Tab />
+      <hr />
+      <Breadcrumb />
+      <hr />
+      <Card />
       <hr />
     </>
   );
