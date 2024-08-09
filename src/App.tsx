@@ -1,8 +1,8 @@
-import { Breadcrumb } from "./components/Breadcrumb";
-import { Card } from "./components/Card";
 import {
   Box,
+  Breadcrumb,
   Button,
+  Card,
   HeroSection,
   Modal,
   Notifications,
