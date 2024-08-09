@@ -1,4 +1,13 @@
-import { Box, HeroSection, TableOfContents, Button, Modal, Notifications, Pagination} from './index'
+import {
+  Box,
+  Button,
+  HeroSection,
+  Modal,
+  Notifications,
+  Pagination,
+  Tab,
+  TableOfContents,
+} from "./index";
 
 export default function App() {
   return (
@@ -23,6 +32,8 @@ export default function App() {
       <Notifications />
       <hr />
       <Pagination />
+      <hr />
+      <Tab />
       <hr />
     </>
   );
