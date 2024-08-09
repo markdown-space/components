@@ -1,10 +1,4 @@
-import { Box } from "./components/Box";
-import { Button } from "./components/Button";
-import { HeroSection } from "./components/HeroSection";
-import { Modal } from "./components/Modal";
-import { Notifications } from "./components/Notification";
-import { Pagination } from "./components/Pagination";
-import { TableOfContents } from "./components/TableOfContents";
+import { Box, HeroSection, TableOfContents, Button, Modal, Notifications, Pagination} from './index'
 
 export default function App() {
   return (
