@@ -1,7 +1,10 @@
 export { Box } from "./components/Box";
+export { Breadcrumb } from "./components/Breadcrumb";
 export { Button } from "./components/Button";
+export { Card } from "./components/Card";
 export { HeroSection } from "./components/HeroSection";
 export { Modal } from "./components/Modal";
+export { Navbar } from "./components/Navbar";
 export { Notifications } from "./components/Notifications";
 export { Pagination } from "./components/Pagination";
 export { Tab } from "./components/Tab";
