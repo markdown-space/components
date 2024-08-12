@@ -9,129 +9,197 @@ export default {
     layout: "padded",
   },
   tags: ["autodocs"],
+  argTypes: {
+    color: {
+      control: "select",
+      options: [
+        "white",
+        "light",
+        "dark",
+        "black",
+        "link",
+        "text",
+        "primary",
+        "info",
+        "success",
+        "warning",
+        "danger",
+      ],
+    },
+    size: {
+      control: "select",
+      options: ["small", "normal", "medium", "large"],
+    },
+    isOutlined: { control: "boolean" },
+    isInverted: { control: "boolean" },
+    isRounded: { control: "boolean" },
+    isLoading: { control: "boolean" },
+    isActive: { control: "boolean" },
+    isFocused: { control: "boolean" },
+    isHovered: { control: "boolean" },
+    fullWidth: { control: "boolean" },
+  },
 } satisfies Meta<typeof Button>;
 
 type Story = StoryObj<typeof Button>;
 
-// Main story showing all buttons
 export const AllButtons: Story = {
-  render: () => <Button />,
+  render: () => (
+    <div className="buttons">
+      <Button>Default Button</Button>
+      <Button color="primary">Primary</Button>
+      <Button color="link">Link</Button>
+      <Button color="info">Info</Button>
+      <Button color="success">Success</Button>
+      <Button color="warning">Warning</Button>
+      <Button color="danger">Danger</Button>
+    </div>
+  ),
 };
 
-// Basic button variations
 export const BasicButtons: Story = {
   render: () => (
     <div className="buttons">
-      <a className="button">Button</a>
-      <a className="button is-white">White</a>
-      <a className="button is-light">Light</a>
-      <a className="button is-dark">Dark</a>
-      <a className="button is-black">Black</a>
-      <a className="button is-link">Link</a>
-      <a className="button is-text">Text</a>
+      <Button>Button</Button>
+      <Button color="white">White</Button>
+      <Button color="light">Light</Button>
+      <Button color="dark">Dark</Button>
+      <Button color="black">Black</Button>
+      <Button color="link">Link</Button>
+      <Button color="text">Text</Button>
     </div>
   ),
 };
 
-// Color variations
 export const ColorButtons: Story = {
   render: () => (
     <div className="buttons">
-      <a className="button is-primary">Primary</a>
-      <a className="button is-info">Info</a>
-      <a className="button is-success">Success</a>
-      <a className="button is-warning">Warning</a>
-      <a className="button is-danger">Danger</a>
+      <Button color="primary">Primary</Button>
+      <Button color="info">Info</Button>
+      <Button color="success">Success</Button>
+      <Button color="warning">Warning</Button>
+      <Button color="danger">Danger</Button>
     </div>
   ),
 };
 
-// State variations
 export const StateButtons: Story = {
   render: () => (
     <div>
       <div className="buttons">
-        <a className="button is-focused">Focused</a>
-        <a className="button is-primary is-focused">Focused</a>
+        <Button isFocused>Focused</Button>
+        <Button color="primary" isFocused>
+          Focused
+        </Button>
       </div>
       <div className="buttons">
-        <a className="button is-hovered">Hovered</a>
-        <a className="button is-primary is-hovered">Hovered</a>
+        <Button isHovered>Hovered</Button>
+        <Button color="primary" isHovered>
+          Hovered
+        </Button>
       </div>
       <div className="buttons">
-        <a className="button is-active">Active</a>
-        <a className="button is-primary is-active">Active</a>
+        <Button isActive>Active</Button>
+        <Button color="primary" isActive>
+          Active
+        </Button>
       </div>
       <div className="buttons">
-        <a className="button is-loading">Loading</a>
-        <a className="button is-primary is-loading">Loading</a>
+        <Button isLoading>Loading</Button>
+        <Button color="primary" isLoading>
+          Loading
+        </Button>
       </div>
     </div>
   ),
 };
 
-// Rounded buttons
 export const RoundedButtons: Story = {
   render: () => (
     <div className="buttons">
-      <a className="button is-rounded">Rounded</a>
-      <a className="button is-primary is-rounded">Rounded</a>
-      <a className="button is-link is-rounded">Rounded</a>
-      <a className="button is-info is-rounded">Rounded</a>
-      <a className="button is-success is-rounded">Rounded</a>
-      <a className="button is-danger is-rounded">Rounded</a>
+      <Button isRounded>Rounded</Button>
+      <Button color="primary" isRounded>
+        Rounded
+      </Button>
+      <Button color="link" isRounded>
+        Rounded
+      </Button>
+      <Button color="info" isRounded>
+        Rounded
+      </Button>
+      <Button color="success" isRounded>
+        Rounded
+      </Button>
+      <Button color="danger" isRounded>
+        Rounded
+      </Button>
     </div>
   ),
 };
 
-// Size variations
 export const SizeButtons: Story = {
   render: () => (
     <div className="buttons">
-      <a className="button is-small">Small</a>
-      <a className="button">Normal</a>
-      <a className="button is-medium">Medium</a>
-      <a className="button is-large">Large</a>
+      <Button size="small">Small</Button>
+      <Button>Normal</Button>
+      <Button size="medium">Medium</Button>
+      <Button size="large">Large</Button>
     </div>
   ),
 };
 
-// Outlined buttons
 export const OutlinedButtons: Story = {
   render: () => (
     <div className="buttons">
-      <a className="button is-link is-outlined">Outlined</a>
-      <a className="button is-primary is-outlined">Outlined</a>
-      <a className="button is-info is-outlined">Outlined</a>
-      <a className="button is-success is-outlined">Outlined</a>
-      <a className="button is-danger is-outlined">Outlined</a>
+      <Button color="link" isOutlined>
+        Outlined
+      </Button>
+      <Button color="primary" isOutlined>
+        Outlined
+      </Button>
+      <Button color="info" isOutlined>
+        Outlined
+      </Button>
+      <Button color="success" isOutlined>
+        Outlined
+      </Button>
+      <Button color="danger" isOutlined>
+        Outlined
+      </Button>
     </div>
   ),
 };
 
-// Inverted and Inverted Outlined buttons
 export const InvertedButtons: Story = {
   render: () => (
     <div className="notification is-primary">
       <div className="buttons">
-        <a className="button is-primary is-inverted is-outlined">
+        <Button color="primary" isInverted isOutlined>
           Invert Outlined
-        </a>
-        <a className="button is-info is-inverted is-outlined">
+        </Button>
+        <Button color="info" isInverted isOutlined>
           Invert Outlined
-        </a>
-        <a className="button is-success is-inverted is-outlined">
+        </Button>
+        <Button color="success" isInverted isOutlined>
           Invert Outlined
-        </a>
-        <a className="button is-danger is-inverted is-outlined">
+        </Button>
+        <Button color="danger" isInverted isOutlined>
           Invert Outlined
-        </a>
+        </Button>
       </div>
       <div className="buttons">
-        <a className="button is-primary is-inverted">Inverted</a>
-        <a className="button is-info is-inverted">Inverted</a>
-        <a className="button is-success is-inverted">Inverted</a>
-        <a className="button is-danger is-inverted">Inverted</a>
+        <Button color="primary" isInverted>
+          Inverted
+        </Button>
+        <Button color="info" isInverted>
+          Inverted
+        </Button>
+        <Button color="success" isInverted>
+          Inverted
+        </Button>
+        <Button color="danger" isInverted>
+          Inverted
+        </Button>
       </div>
     </div>
   ),
