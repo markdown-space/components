@@ -1,0 +1,28 @@
+.language-jsx .tag {
+  background: initial;
+  height: initial;
+  line-height: initial;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.language-jsx .punctuation {
+  padding-right: 0 !important;
+}
+
+.tag.attr-name {
+  padding-right: 0 !important;
+  padding-left: 4px;
+}
+
+.tag.attr-value {
+  padding-right: 0 !important;
+}
+
+.tag.class-name {
+  padding-right: 0;
+}
+
+.language-jsx .plain-text {
+  color: #f5f5f5;
+}
