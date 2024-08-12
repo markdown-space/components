@@ -1,3 +1,15 @@
+import { Dropdown } from "./components/Dropdown";
+import { Form } from "./components/Form";
+import { Hero } from "./components/Hero";
+import { Image } from "./components/Image";
+import { Level } from "./components/Level";
+import { Media } from "./components/Media";
+import { Menu } from "./components/Menu";
+import { Message } from "./components/Message";
+import { Panel } from "./components/Panel";
+import { Progress } from "./components/Progress";
+import { Table } from "./components/Table";
+import { Typography } from "./components/Typography";
 import {
   Box,
   Breadcrumb,
@@ -43,6 +55,30 @@ export default function App() {
       <Card />
       <hr />
       <Tag />
+      <hr />
+      <Form />
+      <hr />
+      <Hero />
+      <hr />
+      <Image />
+      <hr />
+      <Level />
+      <hr />
+      <Media />
+      <hr />
+      <Menu />
+      <hr />
+      <Message />
+      <hr />
+      <Panel />
+      <hr />
+      <Progress />
+      <hr />
+      <Table />
+      <hr />
+      <Typography />
+      <hr />
+      <Dropdown />
       <hr />
     </>
   );
