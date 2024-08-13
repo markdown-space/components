@@ -43,7 +43,6 @@ export const Button = ({
   const activeClass = isActive ? "is-active" : "";
   const focusedClass = isFocused ? "is-focused" : "";
   const hoveredClass = isHovered ? "is-hovered" : "";
-
   const fullWidthClass = fullWidth ? "is-fullwidth" : "";
   const themeClass = theme ? `is-${theme}` : "";
 
