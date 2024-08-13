@@ -11,7 +11,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive?: boolean;
   isFocused?: boolean;
   isHovered?: boolean;
+  isLight?: boolean;
+  isDark?: boolean;
   fullWidth?: boolean;
+  theme?: "light" | "dark";
 }
 
 export const Button = ({
@@ -26,6 +29,7 @@ export const Button = ({
   isFocused = false,
   isHovered = false,
   fullWidth = false,
+  theme = undefined,
   className,
   ...props
 }: ButtonProps) => {
@@ -39,7 +43,9 @@ export const Button = ({
   const activeClass = isActive ? "is-active" : "";
   const focusedClass = isFocused ? "is-focused" : "";
   const hoveredClass = isHovered ? "is-hovered" : "";
+
   const fullWidthClass = fullWidth ? "is-fullwidth" : "";
+  const themeClass = theme ? `is-${theme}` : "";
 
   const buttonClasses = [
     baseClasses,
@@ -53,6 +59,7 @@ export const Button = ({
     focusedClass,
     hoveredClass,
     fullWidthClass,
+    themeClass,
     className,
   ]
     .filter(Boolean)
