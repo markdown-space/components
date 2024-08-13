@@ -26,3 +26,7 @@
 .language-jsx .plain-text {
   color: #f5f5f5;
 }
+
+pre {
+  color: unset !important;
+}
