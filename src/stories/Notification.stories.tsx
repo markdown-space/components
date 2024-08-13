@@ -47,12 +47,23 @@ export default {
       action: "deleted",
       description: "Callback when delete button is clicked",
     },
+    className: {
+      control: "text",
+      description: "Additional CSS classes to apply",
+    },
+    styles: {
+      control: "object",
+      description: "Custom styles for the notification",
+    },
+    deleteButtonStyles: {
+      control: "object",
+      description: "Custom styles for the delete button",
+    },
   },
 } satisfies Meta<typeof Notification>;
 
 type Story = StoryObj<typeof Notification>;
 
-// Default story
 export const Default: Story = {
   args: {
     children:
@@ -60,7 +71,6 @@ export const Default: Story = {
   },
 };
 
-// Color variants story
 export const ColorVariants: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -72,11 +82,11 @@ export const ColorVariants: Story = {
       <Notification color="danger">Danger Notification</Notification>
       <Notification color="dark">Dark Notification</Notification>
       <Notification color="light">Light Notification</Notification>
+      <Notification color="ghost">Ghost Notification</Notification>
     </div>
   ),
 };
 
-// Light variants story
 export const LightVariants: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -102,7 +112,6 @@ export const LightVariants: Story = {
   ),
 };
 
-// Without delete button story
 export const WithoutDelete: Story = {
   args: {
     hasDelete: false,
@@ -110,7 +119,6 @@ export const WithoutDelete: Story = {
   },
 };
 
-// With custom content story
 export const WithCustomContent: Story = {
   render: () => (
     <Notification color="info">
@@ -123,7 +131,6 @@ export const WithCustomContent: Story = {
   ),
 };
 
-// Interactive delete story
 export const InteractiveDelete: Story = {
   render: () => {
     const [isVisible, setIsVisible] = useState(true);
@@ -136,5 +143,20 @@ export const InteractiveDelete: Story = {
         Click the delete button to hide this notification.
       </Notification>
     );
+  },
+};
+
+export const CustomStyles: Story = {
+  args: {
+    children: "This notification has custom styles.",
+    styles: {
+      backgroundColor: "#f0f0f0",
+      border: "2px solid #333",
+      borderRadius: "10px",
+    },
+    deleteButtonStyles: {
+      backgroundColor: "red",
+      borderRadius: "50%",
+    },
   },
 };
