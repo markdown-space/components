@@ -1,67 +1,99 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
+import React from "react";
 import { Box } from "../components/Box";
 
-const meta = {
+export default {
   title: "Components/Box",
   component: Box,
   parameters: {
-    layout: "padded",
+    layout: "centered",
+    docs: {
+      description: {
+        component:
+          "A versatile Box component based on Bulma classes with additional features.",
+      },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    children: {
+      control: "text",
+      description: "The content of the box",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS classes to apply",
+    },
+    style: {
+      control: "object",
+      description: "Custom styles for the box",
+    },
+  },
 } satisfies Meta<typeof Box>;
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Box>;
 
-// Default Box story
-export const DefaultBox: Story = {
-  render: () => <Box />,
+export const Default: Story = {
+  args: {
+    children: "This is a default Box component.",
+  },
 };
 
-// Box with custom content
-export const CustomContentBox: Story = {
-  render: () => (
-    <div className="box">
-      <h2 className="title is-4">Custom Box Content</h2>
-      <p>This is a box with custom content.</p>
-    </div>
-  ),
+export const CustomStyle: Story = {
+  args: {
+    children: "This Box has custom styles.",
+    style: {
+      backgroundColor: "#f0f0f0",
+      border: "2px solid #333",
+      color: "#333",
+    },
+  },
 };
 
-// Box with different background color
-export const ColoredBox: Story = {
-  render: () => (
-    <div className="box has-background-primary has-text-white">
-      <h2 className="title is-4 has-text-white">Colored Box</h2>
-      <p>This box has a primary background color.</p>
-    </div>
-  ),
-};
-
-// Box with custom size
-export const LargeBox: Story = {
-  render: () => (
-    <div className="box" style={{ width: "500px", height: "300px" }}>
-      <h2 className="title is-4">Large Box</h2>
-      <p>This is a larger box with custom dimensions.</p>
-    </div>
-  ),
-};
-
-// Box with nested boxes
 export const NestedBoxes: Story = {
   render: () => (
-    <div className="box">
+    <Box>
       <h2 className="title is-4">Outer Box</h2>
-      <div className="box">
-        <h3 className="title is-5">Inner Box 1</h3>
-        <p>This is a nested box.</p>
+      <Box style={{ backgroundColor: "#f0f0f0" }}>
+        <h3 className="title is-5">Inner Box</h3>
+        <p>This is a nested box with custom styling.</p>
+      </Box>
+    </Box>
+  ),
+};
+
+export const InteractiveBox: Story = {
+  render: () => {
+    const [clickCount, setClickCount] = React.useState(0);
+    return (
+      <Box
+        onClick={() => setClickCount((prev) => prev + 1)}
+        style={{ cursor: "pointer" }}
+      >
+        <p>This is an interactive box. Click me!</p>
+        <p>Click count: {clickCount}</p>
+      </Box>
+    );
+  },
+};
+
+export const BoxWithContent: Story = {
+  render: () => (
+    <Box>
+      <h2 className="title is-4">Box Title</h2>
+      <p className="subtitle">A subtitle for the box</p>
+      <div className="content">
+        <p>
+          This is some content inside the box. It can include various elements:
+        </p>
+        <ul>
+          <li>List items</li>
+          <li>Paragraphs</li>
+          <li>Images</li>
+        </ul>
       </div>
-      <div className="box">
-        <h3 className="title is-5">Inner Box 2</h3>
-        <p>This is another nested box.</p>
-      </div>
-    </div>
+      <button className="button is-primary">A Button</button>
+    </Box>
   ),
 };
