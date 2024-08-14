@@ -5,7 +5,7 @@ export { Card } from "./components/Card";
 export { HeroSection } from "./components/HeroSection";
 export { Modal } from "./components/Modal";
 export { Navbar } from "./components/Navbar";
-export { Notifications } from "./components/Notifications";
+export { Notification } from "./components/Notification";
 export { Pagination } from "./components/Pagination";
 export { Tab } from "./components/Tab";
 export { TableOfContents } from "./components/TableOfContents";
