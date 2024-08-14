@@ -1,9 +1,4 @@
-import { ReactNode } from "react";
-
-export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-  className?: string;
-}
+export type BoxProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const Box = ({ className, children, style, ...props }: BoxProps) => {
   const baseClasses = "box";

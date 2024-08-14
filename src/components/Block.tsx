@@ -1,8 +1,6 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties } from "react";
 
 export interface BlockProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-  className?: string;
   marginBottom?: CSSProperties["marginBottom"];
 }
 
