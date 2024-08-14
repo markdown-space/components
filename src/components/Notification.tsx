@@ -6,8 +6,8 @@ export interface NotificationProps {
   isLight?: boolean;
   children: ReactNode;
   className?: string;
-  styles?: CSSProperties;
-  deleteButtonStyles?: CSSProperties;
+  style?: CSSProperties;
+  deleteButtonStyle?: CSSProperties;
   hasDelete?: boolean;
   onDelete?: () => void;
 }
@@ -18,9 +18,9 @@ export const Notification = ({
   hasDelete = true,
   className,
   children,
-  styles,
+  style,
   onDelete,
-  deleteButtonStyles,
+  deleteButtonStyle,
 }: NotificationProps) => {
   const baseClasses = "notification";
   const colorClass = color ? `is-${color}` : "";
@@ -31,12 +31,12 @@ export const Notification = ({
     .join(" ");
 
   return (
-    <div className={classes} style={styles}>
+    <div className={classes} style={style}>
       {hasDelete && (
         <button
           className="delete"
           onClick={onDelete}
-          style={{ top: "0.5rem", right: "0.5rem", ...deleteButtonStyles }}
+          style={{ top: "0.5rem", right: "0.5rem", ...deleteButtonStyle }}
         ></button>
       )}
       {children}

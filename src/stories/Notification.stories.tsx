@@ -51,11 +51,11 @@ export default {
       control: "text",
       description: "Additional CSS classes to apply",
     },
-    styles: {
+    style: {
       control: "object",
       description: "Custom styles for the notification",
     },
-    deleteButtonStyles: {
+    deleteButtonStyle: {
       control: "object",
       description: "Custom styles for the delete button",
     },
@@ -165,12 +165,12 @@ export const InteractiveDelete: Story = {
 export const CustomStyles: Story = {
   args: {
     children: "This notification has custom styles.",
-    styles: {
+    style: {
       backgroundColor: "#f0f0f0",
       border: "2px solid #333",
       borderRadius: "10px",
     },
-    deleteButtonStyles: {
+    deleteButtonStyle: {
       backgroundColor: "red",
       borderRadius: "50%",
     },
