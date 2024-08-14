@@ -17,7 +17,6 @@ import {
   Card,
   HeroSection,
   Modal,
-  Notifications,
   Pagination,
   Tab,
   TableOfContents,
@@ -43,8 +42,6 @@ export default function App() {
       <Button />
       <hr />
       <Modal />
-      <hr />
-      <Notifications />
       <hr />
       <Pagination />
       <hr />
