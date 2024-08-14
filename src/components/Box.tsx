@@ -1,9 +1,8 @@
-import { CSSProperties, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface BoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
-  style?: CSSProperties;
 }
 
 export const Box = ({ className, children, style, ...props }: BoxProps) => {
