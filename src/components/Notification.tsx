@@ -36,7 +36,7 @@ export const Notification = ({
         <button
           className="delete"
           onClick={onDelete}
-          style={deleteButtonStyles}
+          style={{ top: "0.5rem", right: "0.5rem", ...deleteButtonStyles }}
         ></button>
       )}
       {children}
