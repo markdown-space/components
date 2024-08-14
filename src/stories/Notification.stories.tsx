@@ -73,7 +73,15 @@ export const Default: Story = {
 
 export const ColorVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        width: "100%",
+        minWidth: "300px",
+      }}
+    >
       <Notification color="primary">Primary Notification</Notification>
       <Notification color="link">Link Notification</Notification>
       <Notification color="info">Info Notification</Notification>
@@ -89,7 +97,15 @@ export const ColorVariants: Story = {
 
 export const LightVariants: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        width: "100%",
+        minWidth: "300px",
+      }}
+    >
       <Notification color="primary" isLight>
         Primary Light Notification
       </Notification>
