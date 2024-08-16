@@ -1,7 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import React from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
+import { Box } from "../components/Box";
 import { Progress } from "../components/Progress";
+import { Title } from "../components/Title";
 import { Color, Size } from "../types";
 
 export default {
@@ -37,12 +39,18 @@ export default {
 
 type Story = StoryObj<typeof Progress>;
 
-const ProgressContainer: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <div
-    style={{ width: "100%", maxWidth: "calc(100%-2rem)", padding: "80px 20px" }}
+const ProgressContainer = ({ children }: PropsWithChildren) => (
+  <Box
+    style={{
+      width: "100%",
+      maxWidth: "calc(100%-2rem)",
+      height: "100%",
+      padding: "80px 20px",
+      boxShadow: "none",
+    }}
   >
     {children}
-  </div>
+  </Box>
 );
 
 export const Default: Story = {
@@ -61,13 +69,11 @@ export const Default: Story = {
 export const ColorVariants: Story = {
   render: () => (
     <ProgressContainer>
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        {["primary", "link", "info", "success", "warning", "danger"].map(
-          (color) => (
-            <Progress key={color} value={75} color={color as Color} />
-          ),
-        )}
-      </div>
+      {["primary", "link", "info", "success", "warning", "danger"].map(
+        (color) => (
+          <Progress key={color} value={75} color={color as Color} />
+        ),
+      )}
     </ProgressContainer>
   ),
 };
@@ -75,20 +81,18 @@ export const ColorVariants: Story = {
 export const SizeVariants: Story = {
   render: () => (
     <ProgressContainer>
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        {["small", "normal", "medium", "large"].map((size) => (
-          <Progress key={size} value={75} size={size as Size} />
-        ))}
-      </div>
+      {["small", "normal", "medium", "large"].map((size) => (
+        <Progress key={size} value={75} size={size as Size} />
+      ))}
     </ProgressContainer>
   ),
 };
 
 export const DynamicProgress: Story = {
   render: function Render() {
-    const [progress, setProgress] = React.useState(0);
+    const [progress, setProgress] = useState(0);
 
-    React.useEffect(() => {
+    useEffect(() => {
       const timer = setInterval(() => {
         setProgress((oldProgress) => {
           if (oldProgress === 100) {
@@ -118,9 +122,18 @@ export const WithLabel: Story = {
     return (
       <ProgressContainer>
         <Progress value={progress} color="info" />
-        <p
-          style={{ marginTop: "10px", textAlign: "center" }}
-        >{`${progress}% complete`}</p>
+        <Title
+          type="subtitle"
+          size={6}
+          tag="span"
+          style={{
+            marginTop: "10px",
+            display: "block",
+            textAlign: "center",
+            width: "100%",
+            fontWeight: "bolder",
+          }}
+        >{`${progress}% complete`}</Title>
       </ProgressContainer>
     );
   },
@@ -128,14 +141,19 @@ export const WithLabel: Story = {
 
 export const MultipleProgressBars: Story = {
   render: () => (
-    <ProgressContainer>
-      <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-        <Progress value={30} color="primary" size="small" />
-        <Progress value={50} color="info" />
-        <Progress value={70} color="success" size="medium" />
-        <Progress value={90} color="warning" size="large" />
-      </div>
-    </ProgressContainer>
+    <Box
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "20px",
+        padding: "80px 20px",
+      }}
+    >
+      <Progress value={30} color="primary" size="small" />
+      <Progress value={50} color="info" />
+      <Progress value={70} color="success" size="medium" />
+      <Progress value={90} color="warning" size="large" />
+    </Box>
   ),
 };
 
