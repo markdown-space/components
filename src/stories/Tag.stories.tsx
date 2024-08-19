@@ -1,100 +1,196 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
 import { Tag } from "../components/Tag";
+import { Color, Size } from "../types";
 
-const meta = {
+export default {
   title: "Components/Tag",
   component: Tag,
   parameters: {
-    layout: "padded",
+    layout: "centered",
+    docs: {
+      description: {
+        component:
+          "A versatile Tag component based on Bulma classes with various colors, sizes, and modifiers.",
+      },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    color: {
+      control: "select",
+      options: [
+        "primary",
+        "link",
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "dark",
+        "light",
+      ],
+      description: "The color of the tag",
+    },
+    size: {
+      control: "select",
+      options: ["normal", "medium", "large"],
+      description: "The size of the tag",
+    },
+    isLight: {
+      control: "boolean",
+      description: "Applies a lighter version of the color",
+    },
+    isHoverable: {
+      control: "boolean",
+      description: "Adds a hover effect to the tag",
+    },
+    isRounded: {
+      control: "boolean",
+      description: "Applies rounded corners to the tag",
+    },
+    isDelete: {
+      control: "boolean",
+      description: "Renders the tag as a delete button",
+    },
+    children: {
+      control: "text",
+      description: "The content of the tag",
+    },
+  },
 } satisfies Meta<typeof Tag>;
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Tag>;
 
-export const DefaultTag: Story = {
-  render: () => <Tag />,
+export const Default: Story = {
+  args: {
+    children: "Tag",
+  },
 };
 
-export const SingleTag: Story = {
-  render: () => <span className="tag">Tag</span>,
-};
-
-export const ColoredTags: Story = {
+export const ColorVariants: Story = {
   render: () => (
-    <div className="tags">
-      <span className="tag is-primary">Primary</span>
-      <span className="tag is-link">Link</span>
-      <span className="tag is-info">Info</span>
-      <span className="tag is-success">Success</span>
-      <span className="tag is-warning">Warning</span>
-      <span className="tag is-danger">Danger</span>
-      <span className="tag is-dark">Dark</span>
-    </div>
-  ),
-};
-
-export const SizedTags: Story = {
-  render: () => (
-    <div className="tags">
-      <span className="tag">Normal</span>
-      <span className="tag is-medium">Medium</span>
-      <span className="tag is-large">Large</span>
-    </div>
-  ),
-};
-
-export const TagsWithDelete: Story = {
-  render: () => (
-    <div className="tags">
-      <span className="tag is-success">
-        Success
-        <button className="delete is-small"></button>
-      </span>
-      <span className="tag is-warning is-medium">
-        Warning
-        <button className="delete is-small"></button>
-      </span>
-      <span className="tag is-danger is-large">
-        Danger
-        <button className="delete"></button>
-      </span>
-    </div>
-  ),
-};
-
-export const TagsWithAddons: Story = {
-  render: () => (
-    <div className="field is-grouped is-grouped-multiline">
-      <div className="control">
-        <div className="tags has-addons">
-          <span className="tag is-dark">npm</span>
-          <span className="tag is-info">0.5.0</span>
-        </div>
-      </div>
-      <div className="control">
-        <div className="tags has-addons">
-          <span className="tag is-dark">build</span>
-          <span className="tag is-success">passing</span>
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-export const TagsWithLinks: Story = {
-  render: () => (
-    <div className="field is-grouped is-grouped-multiline">
-      {["Technology", "CSS", "Flexbox"].map((tag, index) => (
-        <div key={index} className="control">
-          <div className="tags has-addons">
-            <a className="tag is-link">{tag}</a>
-            <a className="tag is-delete"></a>
-          </div>
-        </div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      {[
+        "primary",
+        "link",
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "dark",
+        "light",
+      ].map((color) => (
+        <Tag key={color} color={color as Color}>
+          {color}
+        </Tag>
       ))}
+    </div>
+  ),
+};
+
+export const SizeVariants: Story = {
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      {["normal", "medium", "large"].map((size) => (
+        <Tag key={size} size={size as Exclude<Size, "small">} color="primary">
+          {size}
+        </Tag>
+      ))}
+    </div>
+  ),
+};
+
+export const LightTags: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      {["primary", "link", "info", "success", "warning", "danger"].map(
+        (color) => (
+          <Tag key={color} color={color as Color} isLight>
+            {color}
+          </Tag>
+        ),
+      )}
+    </div>
+  ),
+};
+
+export const RoundedTags: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <Tag color="primary" isRounded>
+        Rounded
+      </Tag>
+      <Tag color="info" isRounded>
+        Rounded
+      </Tag>
+      <Tag color="success" isRounded>
+        Rounded
+      </Tag>
+    </div>
+  ),
+};
+
+export const HoverableTags: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <Tag color="primary" isHoverable>
+        Hoverable
+      </Tag>
+      <Tag color="info" isHoverable>
+        Hover me
+      </Tag>
+      <Tag color="success" isHoverable>
+        Hover effect
+      </Tag>
+    </div>
+  ),
+};
+
+export const DeleteTags: Story = {
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+      <Tag>Tag</Tag>
+      <Tag isDelete />
+    </div>
+  ),
+};
+
+export const CombinedFeatures: Story = {
+  render: () => (
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+      <Tag color="primary" isLight isRounded>
+        Light & Rounded
+      </Tag>
+      <Tag color="info" isHoverable isRounded>
+        Hoverable & Rounded
+      </Tag>
+      <Tag color="success" size="medium" isLight>
+        Medium & Light
+      </Tag>
+      <Tag color="warning" size="large" isRounded>
+        Large & Rounded
+      </Tag>
+    </div>
+  ),
+};
+
+export const TagGroup: Story = {
+  render: () => (
+    <div className="tags">
+      <Tag color="primary">First</Tag>
+      <Tag color="info">Second</Tag>
+      <Tag color="success">Third</Tag>
+      <Tag color="warning">Fourth</Tag>
+      <Tag color="danger">Fifth</Tag>
+    </div>
+  ),
+};
+
+export const TagWithDelete: Story = {
+  render: () => (
+    <div className="tags has-addons">
+      <Tag color="info">Package</Tag>
+      <Tag isDelete />
     </div>
   ),
 };
