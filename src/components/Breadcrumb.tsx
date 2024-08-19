@@ -1,24 +1,47 @@
-export const Breadcrumb = () => {
+import { ComponentProps, ReactNode } from "react";
+import { Size } from "../types";
+
+export type BreadcrumbProps = ComponentProps<"nav"> & {
+  alignment?: "centered" | "right";
+  seperator?: "arrow" | "bullet" | "dot" | "succeeds";
+  size?: Exclude<Size, "normal">;
+  /**
+   * The children of a breadcrumb component should be `<li/>` elements.
+   */
+  children: ReactNode;
+  /**
+   * Props to pass to the `<ul/>` element.
+   */
+  ulProps?: Omit<ComponentProps<"ul">, "children">;
+};
+
+export const Breadcrumb = ({
+  alignment,
+  seperator,
+  size,
+  className,
+  children,
+  ulProps,
+  ...props
+}: BreadcrumbProps) => {
+  const baseClasses = "breadcrumb";
+  const alignmentClass = alignment ? `is-${alignment}` : "";
+  const seperatorClass = seperator ? `has-${seperator}-separator` : "";
+  const sizeClass = size ? `is-${size}` : "";
+
+  const classes = [
+    baseClasses,
+    alignmentClass,
+    seperatorClass,
+    sizeClass,
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <section className="section" id="breadcrumb">
-      <h1 className="title">Breadcrumb</h1>
-      <hr />
-      <nav className="breadcrumb">
-        <ul>
-          <li>
-            <a>Bulma</a>
-          </li>
-          <li>
-            <a>Documentation</a>
-          </li>
-          <li>
-            <a>Components</a>
-          </li>
-          <li className="is-active">
-            <a>Breadcrumb</a>
-          </li>
-        </ul>
-      </nav>
-    </section>
+    <nav className={classes} aria-label="breadcrumbs" {...props}>
+      <ul {...ulProps}>{children}</ul>
+    </nav>
   );
 };
