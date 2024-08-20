@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 
 export type DropdownItem = {
   type: "item" | "divider";
-  label?: string;
+  label?: ReactNode;
   href?: string;
   onClick?: () => void;
   isActive?: boolean;
