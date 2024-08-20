@@ -1,167 +1,202 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { Dropdown } from "../components/Dropdown";
+import { ReactNode } from "react";
+import { Button } from "../components/Button";
+import { Dropdown, DropdownItem } from "../components/Dropdown";
 
-const meta = {
+const defaultItems: DropdownItem[] = [
+  {
+    type: "item",
+    label: "Item 1",
+    onClick: () => console.log("Item 1 clicked"),
+  },
+  {
+    type: "item",
+    label: "Item 2",
+    onClick: () => console.log("Item 2 clicked"),
+  },
+  { type: "divider" },
+  {
+    type: "item",
+    label: "Item 3",
+    href: "https://example.com",
+    onClick: () => console.log("Item 3 clicked"),
+  },
+];
+
+const StoryContainer = ({ children }: { children: ReactNode }) => (
+  <div
+    style={{
+      padding: "10rem 0",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      gap: "2rem",
+    }}
+  >
+    {children}
+  </div>
+);
+
+export default {
   title: "Components/Dropdown",
   component: Dropdown,
   parameters: {
     layout: "padded",
+    docs: {
+      description: {
+        component:
+          "A versatile Dropdown component with various configurations.",
+      },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    isRight: {
+      control: "boolean",
+      description: "Aligns the dropdown to the right",
+    },
+    isUp: {
+      control: "boolean",
+      description: "Opens the dropdown upwards",
+    },
+    isHoverable: {
+      control: "boolean",
+      description: "Makes the dropdown open on hover",
+    },
+    className: {
+      control: "text",
+      description: "Additional CSS classes",
+    },
+    trigger: {
+      control: { type: "text" },
+      description: "The content of the dropdown trigger",
+    },
+  },
+  decorators: [
+    (Story) => (
+      <StoryContainer>
+        <Story />
+      </StoryContainer>
+    ),
+  ],
 } satisfies Meta<typeof Dropdown>;
 
-export default meta;
 type Story = StoryObj<typeof Dropdown>;
 
-export const DefaultDropdown: Story = {
-  render: () => <Dropdown />,
+export const Default: Story = {
+  args: {
+    trigger: <Button>Dropdown</Button>,
+    items: defaultItems,
+  },
 };
 
-export const SimpleDropdown: Story = {
+export const RightAligned: Story = {
+  args: {
+    ...Default.args,
+    isRight: true,
+  },
+};
+
+export const UpwardOpening: Story = {
+  args: {
+    ...Default.args,
+    isUp: true,
+  },
+};
+
+export const Hoverable: Story = {
+  args: {
+    ...Default.args,
+    isHoverable: true,
+  },
+};
+
+export const CustomTrigger: Story = {
+  args: {
+    ...Default.args,
+    trigger: <Button color="primary">Custom Trigger</Button>,
+  },
+};
+
+export const WithActiveItem: Story = {
+  args: {
+    ...Default.args,
+    items: [
+      ...defaultItems.slice(0, 2),
+      {
+        type: "item",
+        label: "Active Item",
+        isActive: true,
+        onClick: () => console.log("Active item clicked"),
+      },
+      ...defaultItems.slice(2),
+    ],
+  },
+};
+
+export const MultipleDropdowns: Story = {
   render: () => (
-    <div className="dropdown is-active">
-      <div className="dropdown-trigger">
-        <button
-          className="button"
-          aria-haspopup="true"
-          aria-controls="dropdown-menu"
-        >
-          <span>Dropdown button</span>
-          <span className="icon is-small">
-            <i className="fa fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </button>
-      </div>
-      <div className="dropdown-menu" id="dropdown-menu" role="menu">
-        <div className="dropdown-content">
-          <a href="#" className="dropdown-item">
-            Dropdown item
-          </a>
-          <a className="dropdown-item">Other dropdown item</a>
-          <a href="#" className="dropdown-item is-active">
-            Active dropdown item
-          </a>
-          <a href="#" className="dropdown-item">
-            Other dropdown item
-          </a>
-          <hr className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            With a divider
-          </a>
-        </div>
-      </div>
-    </div>
+    <StoryContainer>
+      <Dropdown
+        trigger={<button className="button is-info">Info Dropdown</button>}
+        items={defaultItems}
+      />
+      <Dropdown
+        trigger={
+          <button className="button is-success">Success Dropdown</button>
+        }
+        items={defaultItems}
+        isRight
+      />
+      <Dropdown
+        trigger={
+          <button className="button is-warning">Warning Dropdown</button>
+        }
+        items={defaultItems}
+        isUp
+      />
+    </StoryContainer>
   ),
 };
 
-export const DropdownWithContent: Story = {
-  render: () => (
-    <div className="dropdown is-active">
-      <div className="dropdown-trigger">
-        <button
-          className="button is-info"
-          aria-haspopup="true"
-          aria-controls="dropdown-menu2"
-        >
-          <span>Content</span>
-        </button>
-      </div>
-      <div className="dropdown-menu" id="dropdown-menu2" role="menu">
-        <div className="dropdown-content">
-          <div className="dropdown-item">
-            <p>
-              You can insert <strong>any type of content</strong> within the
-              dropdown menu.
-            </p>
+export const NestedContent: Story = {
+  args: {
+    trigger: <Button>Nested Content</Button>,
+    items: [
+      { type: "item", label: "Simple Item" },
+      {
+        type: "item",
+        label: (
+          <div>
+            <strong>Bold Item</strong>
+            <p>With additional content</p>
           </div>
-          <hr className="dropdown-divider" />
-          <div className="dropdown-item">
-            <p>
-              You simply need to use a <code>&lt;div&gt;</code> instead.
-            </p>
+        ),
+      },
+      { type: "divider" },
+      {
+        type: "item",
+        label: (
+          <div className="is-flex is-align-items-center">
+            <span className="icon mr-2">
+              <i className="fas fa-exclamation-triangle"></i>
+            </span>
+            <span>Item with Icon</span>
           </div>
-          <hr className="dropdown-divider" />
-          <a href="#" className="dropdown-item">
-            This is a link
-          </a>
-        </div>
-      </div>
-    </div>
-  ),
+        ),
+      },
+    ],
+  },
 };
 
-export const DropdownWithHover: Story = {
-  render: () => (
-    <div className="dropdown is-hoverable">
-      <div className="dropdown-trigger">
-        <button
-          className="button"
-          aria-haspopup="true"
-          aria-controls="dropdown-menu3"
-        >
-          <span>Hover me</span>
-          <span className="icon is-small">
-            <i className="fa fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </button>
-      </div>
-      <div className="dropdown-menu" id="dropdown-menu3" role="menu">
-        <div className="dropdown-content">
-          <a href="#" className="dropdown-item">
-            Overview
-          </a>
-          <a href="#" className="dropdown-item">
-            Elements
-          </a>
-          <a href="#" className="dropdown-item">
-            Components
-          </a>
-        </div>
-      </div>
-    </div>
-  ),
-};
-
-export const DropdownWithDifferentAlignments: Story = {
-  render: () => (
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <div className="dropdown is-active">
-        <div className="dropdown-trigger">
-          <button
-            className="button"
-            aria-haspopup="true"
-            aria-controls="dropdown-menu4"
-          >
-            <span>Aligned left</span>
-          </button>
-        </div>
-        <div className="dropdown-menu" id="dropdown-menu4" role="menu">
-          <div className="dropdown-content">
-            <a href="#" className="dropdown-item">
-              Dropdown item
-            </a>
-          </div>
-        </div>
-      </div>
-      <div className="dropdown is-active is-right">
-        <div className="dropdown-trigger">
-          <button
-            className="button"
-            aria-haspopup="true"
-            aria-controls="dropdown-menu5"
-          >
-            <span>Aligned right</span>
-          </button>
-        </div>
-        <div className="dropdown-menu" id="dropdown-menu5" role="menu">
-          <div className="dropdown-content">
-            <a href="#" className="dropdown-item">
-              Dropdown item
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  ),
+export const Playground: Story = {
+  args: {
+    trigger: <Button>Playground Dropdown</Button>,
+    items: defaultItems,
+    isRight: false,
+    isUp: false,
+    isHoverable: false,
+    className: "",
+  },
 };

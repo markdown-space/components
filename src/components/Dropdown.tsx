@@ -1,75 +1,95 @@
-export const Dropdown = () => {
+import { ReactNode, useEffect, useRef, useState } from "react";
+
+export type DropdownItem = {
+  type: "item" | "divider";
+  label?: ReactNode;
+  href?: string;
+  onClick?: () => void;
+  isActive?: boolean;
+};
+
+type DropdownProps = {
+  trigger: ReactNode;
+  items: DropdownItem[];
+  isRight?: boolean;
+  isUp?: boolean;
+  isHoverable?: boolean;
+  className?: string;
+};
+
+export const Dropdown = ({
+  trigger,
+  items,
+  isRight = false,
+  isUp = false,
+  isHoverable = false,
+  className = "",
+}: DropdownProps) => {
+  const [isActive, setIsActive] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdown = () => setIsActive(!isActive);
+
+  const dropdownClasses = [
+    "dropdown",
+    isActive ? "is-active" : "",
+    isRight ? "is-right" : "",
+    isUp ? "is-up" : "",
+    isHoverable ? "is-hoverable" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <section className="section" id="dropdown">
-      <div className="columns">
-        <div className="column">
-          <div className="dropdown is-active">
-            <div className="dropdown-trigger">
-              <button
-                className="button"
-                aria-haspopup="true"
-                aria-controls="dropdown-menu"
-              >
-                <span>Dropdown button</span>
-                <span className="icon is-small">
-                  <i className="fa fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            <div className="dropdown-menu" id="dropdown-menu" role="menu">
-              <div className="dropdown-content">
-                <a href="#" className="dropdown-item">
-                  Dropdown item
-                </a>
-                <a className="dropdown-item">Other dropdown item</a>
-                <a href="#" className="dropdown-item is-active">
-                  Active dropdown item
-                </a>
-                <a href="#" className="dropdown-item">
-                  Other dropdown item
-                </a>
-                <hr className="dropdown-divider" />
-                <a href="#" className="dropdown-item">
-                  With a divider
-                </a>
+    <div className={dropdownClasses} ref={dropdownRef}>
+      <div className="dropdown-trigger" onClick={toggleDropdown}>
+        {trigger}
+      </div>
+      <div className="dropdown-menu" role="menu">
+        <div className="dropdown-content">
+          {items.map((item, index) => {
+            if (item.type === "divider") {
+              return <hr key={index} className="dropdown-divider" />;
+            }
+
+            const commonProps = {
+              className: `dropdown-item ${item.isActive ? "is-active" : ""}`,
+              onClick: (e: React.MouseEvent) => {
+                if (!item.href) e.preventDefault();
+                item.onClick?.();
+                if (!isHoverable) setIsActive(false);
+              },
+            };
+
+            return item.href ? (
+              <a href={item.href} {...commonProps} key={index}>
+                {item.label}
+              </a>
+            ) : (
+              <div {...commonProps} key={index}>
+                {item.label}
               </div>
-            </div>
-          </div>
-        </div>
-        <div className="column">
-          <div className="dropdown is-active">
-            <div className="dropdown-trigger">
-              <button
-                className="button is-info"
-                aria-haspopup="true"
-                aria-controls="dropdown-menu2"
-              >
-                <span>Content</span>
-              </button>
-            </div>
-            <div className="dropdown-menu" id="dropdown-menu2" role="menu">
-              <div className="dropdown-content">
-                <div className="dropdown-item">
-                  <p>
-                    You can insert <strong>any type of content</strong> within
-                    the dropdown menu.
-                  </p>
-                </div>
-                <hr className="dropdown-divider" />
-                <div className="dropdown-item">
-                  <p>
-                    You simply need to use a <code>&lt;div&gt;</code> instead.
-                  </p>
-                </div>
-                <hr className="dropdown-divider" />
-                <a href="#" className="dropdown-item">
-                  This is a link
-                </a>
-              </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
