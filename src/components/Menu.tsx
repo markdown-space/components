@@ -20,8 +20,6 @@ type MenuProps = {
   onItemClick?: (item: MenuItem) => void;
   renderItem?: (item: MenuItem) => ReactNode;
   renderLabel?: (label: string) => ReactNode;
-  isCompact?: boolean;
-  isBoxed?: boolean;
 };
 
 export const Menu = ({
@@ -31,8 +29,6 @@ export const Menu = ({
   onItemClick,
   renderItem,
   renderLabel,
-  isCompact = false,
-  isBoxed = false,
 }: MenuProps) => {
   const renderMenuItem = (
     item: MenuItem,
@@ -72,14 +68,7 @@ export const Menu = ({
     );
   };
 
-  const menuClasses = [
-    "menu",
-    className,
-    isCompact ? "is-compact" : "",
-    isBoxed ? "is-boxed" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const menuClasses = ["menu", className].filter(Boolean).join(" ");
 
   return (
     <aside className={menuClasses}>

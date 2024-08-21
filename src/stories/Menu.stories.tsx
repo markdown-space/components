@@ -54,14 +54,6 @@ export default {
   },
   tags: ["autodocs"],
   argTypes: {
-    isCompact: {
-      control: "boolean",
-      description: "Applies a compact style to the menu",
-    },
-    isBoxed: {
-      control: "boolean",
-      description: "Applies a boxed style to the menu",
-    },
     className: {
       control: "text",
       description: "Additional CSS classes",
@@ -74,20 +66,6 @@ type Story = StoryObj<typeof Menu>;
 export const Default: Story = {
   args: {
     sections: defaultMenuData,
-  },
-};
-
-export const CompactMenu: Story = {
-  args: {
-    ...Default.args,
-    isCompact: true,
-  },
-};
-
-export const BoxedMenu: Story = {
-  args: {
-    ...Default.args,
-    isBoxed: true,
   },
 };
 
@@ -155,8 +133,6 @@ export const DynamicMenu: Story = {
 export const Playground: Story = {
   args: {
     sections: defaultMenuData,
-    isCompact: false,
-    isBoxed: false,
     className: "",
   },
 };
