@@ -1,39 +1,81 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-export const Modal = () => {
-  const [isActive, setIsActive] = useState(false);
+export type ModalProps = {
+  isActive: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+  footer?: (
+    setIsRendered: React.Dispatch<React.SetStateAction<boolean>>,
+  ) => ReactNode;
+  closeOnBackgroundClick?: boolean;
+  closeOnEsc?: boolean;
+  showCloseButton?: boolean;
+  className?: string;
+};
 
-  const toggleModal = () => setIsActive(!isActive);
+export const Modal = ({
+  isActive,
+  onClose,
+  title,
+  children,
+  footer,
+  closeOnBackgroundClick = true,
+  closeOnEsc = true,
+  showCloseButton = true,
+  className = "",
+}: ModalProps) => {
+  const [isRendered, setIsRendered] = useState(isActive);
+
+  useEffect(() => {
+    if (isActive) {
+      setIsRendered(true);
+    } else {
+      const timer = setTimeout(() => setIsRendered(false), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isActive]);
+
+  useEffect(() => {
+    const handleEsc = (event: KeyboardEvent) => {
+      if (closeOnEsc && event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    if (isActive) {
+      document.addEventListener("keydown", handleEsc);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [isActive, closeOnEsc, onClose]);
+
+  if (!isRendered) return null;
 
   return (
-    <section className="section" id="modal">
-      <a className="button is-primary is-large" onClick={toggleModal}>
-        Launch example modal
-      </a>
-      <div className={`modal ${isActive ? "is-active" : ""}`} id="myModal">
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Modal title</p>
-            <button className="delete" onClick={toggleModal}></button>
-          </header>
-          <section className="modal-card-body">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </section>
-          <footer className="modal-card-foot">
-            <a className="button is-primary">Save changes</a>
-            <a className="button" onClick={toggleModal}>
-              Cancel
-            </a>
-          </footer>
-        </div>
+    <div className={`modal ${isActive ? "is-active" : ""} ${className}`}>
+      <div
+        className="modal-background"
+        onClick={closeOnBackgroundClick ? onClose : undefined}
+      ></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">{title}</p>
+          {showCloseButton && (
+            <button
+              className="delete"
+              aria-label="close"
+              onClick={onClose}
+            ></button>
+          )}
+        </header>
+        <section className="modal-card-body">{children}</section>
+        {footer && (
+          <footer className="modal-card-foot">{footer(setIsRendered)}</footer>
+        )}
       </div>
-    </section>
+    </div>
   );
 };
