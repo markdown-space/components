@@ -8,7 +8,7 @@ export type DropdownItem = {
   isActive?: boolean;
 };
 
-type DropdownProps = {
+export type DropdownProps = {
   trigger: ReactNode;
   items: DropdownItem[];
   isRight?: boolean;
