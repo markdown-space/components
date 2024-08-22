@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Color } from "../types";
 import { Button } from "./Button";
 
@@ -19,7 +19,7 @@ export type EndButtonProps = {
 };
 
 export type NavbarProps = {
-  brand: React.ReactNode;
+  brand: ReactNode;
   startItems: (NavbarItemProps | NavbarDropdownProps)[];
   endButtons: EndButtonProps[];
 };
@@ -73,10 +73,8 @@ export const Navbar = ({ brand, startItems, endButtons }: NavbarProps) => {
           <span aria-hidden="true"></span>
         </a>
       </div>
-
       <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
         <div className="navbar-start">{startItems.map(renderNavbarItem)}</div>
-
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
