@@ -13,7 +13,7 @@ export default defineConfig({
       external: ["react", "react-dom", "react/jsx-runtime"],
       preserveEntrySignatures: "strict",
       input: {
-        index: path.resolve(__dirname, "src/main.tsx"),
+        index: path.resolve(__dirname, "lib/index.ts"),
       },
       output: {
         preserveModules: true,
@@ -21,11 +21,6 @@ export default defineConfig({
         format: "es",
         entryFileNames: "[name].js",
       },
-    },
-  },
-  resolve: {
-    alias: {
-      src: path.resolve("src/"),
     },
   },
 });

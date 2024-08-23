@@ -20,6 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "lib"],
-  "exclude": ["dist"]
+  "include": ["src", "lib"]
 }
