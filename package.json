@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "npm run build && storybook build"
   },
   "peerDependencies": {
     "react": "^18.2.0",
