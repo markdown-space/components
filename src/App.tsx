@@ -1,4 +1,4 @@
-import { Button, HeroSection, TableOfContents } from "./index";
+import { Button, HeroSection, TableOfContents } from "../dist/index";
 
 export default function App() {
   return (
@@ -13,7 +13,9 @@ export default function App() {
       </HeroSection>
       <hr />
       <TableOfContents projectSlug="home" pageLength={2} />
-      <Button>Click me</Button>
+      <Button color="primary" isOutlined={true}>
+        Click me
+      </Button>
     </>
   );
 }

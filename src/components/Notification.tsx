@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from "react";
-import { Color } from "../types";
+import { Color } from "../types/shared";
 
 export interface NotificationProps {
   color?: Color;

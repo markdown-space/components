@@ -1,5 +1,5 @@
 import { ComponentProps, ReactNode } from "react";
-import { Size } from "../types";
+import { Size } from "../types/shared";
 
 export type BreadcrumbProps = ComponentProps<"nav"> & {
   alignment?: "centered" | "right";

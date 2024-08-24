@@ -4,7 +4,7 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { Box } from "../components/Box";
 import { Progress } from "../components/Progress";
 import { Title } from "../components/Title";
-import { Color, Size } from "../types";
+import { Color, Size } from "../types/shared";
 
 export default {
   title: "Components/Progress",
