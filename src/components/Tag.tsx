@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { Color, Size } from "../types";
+import { Color, Size } from "../types/shared";
 
 export interface TagProps extends ComponentProps<"span"> {
   color?: Color;

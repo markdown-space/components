@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import { Color } from "../types";
+import { Color } from "../types/shared";
 
 type TableProps = ComponentProps<"table"> & {
   children: ReactNode;

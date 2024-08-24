@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { Color } from "../types";
+import { Color } from "../types/shared";
 import { Button } from "./Button";
 
 export type NavbarItemProps = {

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
 import { Tag } from "../components/Tag";
-import { Color, Size } from "../types";
+import { Color, Size } from "../types/shared";
 
 export default {
   title: "Components/Tag",

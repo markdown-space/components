@@ -1,27 +1,4 @@
-import { Dropdown } from "./components/Dropdown";
-import { Form } from "./components/Form";
-import { Hero } from "./components/Hero";
-import { Image } from "./components/Image";
-import { Level } from "./components/Level";
-import { Media } from "./components/Media";
-import { Menu } from "./components/Menu";
-import { Message } from "./components/Message";
-import { Panel } from "./components/Panel";
-import { Progress } from "./components/Progress";
-import { Table } from "./components/Table";
-import { Typography } from "./components/Typography";
-import {
-  Box,
-  Breadcrumb,
-  Button,
-  Card,
-  HeroSection,
-  Modal,
-  Pagination,
-  Tab,
-  TableOfContents,
-  Tag,
-} from "./index";
+import { Button, HeroSection, TableOfContents } from "../dist/index";
 
 export default function App() {
   return (
@@ -36,47 +13,9 @@ export default function App() {
       </HeroSection>
       <hr />
       <TableOfContents projectSlug="home" pageLength={2} />
-      <hr />
-      <Box />
-      <hr />
-      <Button />
-      <hr />
-      <Modal />
-      <hr />
-      <Pagination />
-      <hr />
-      <Tab />
-      <hr />
-      <Breadcrumb />
-      <hr />
-      <Card />
-      <hr />
-      <Tag />
-      <hr />
-      <Form />
-      <hr />
-      <Hero />
-      <hr />
-      <Image />
-      <hr />
-      <Level />
-      <hr />
-      <Media />
-      <hr />
-      <Menu />
-      <hr />
-      <Message />
-      <hr />
-      <Panel />
-      <hr />
-      <Progress />
-      <hr />
-      <Table />
-      <hr />
-      <Typography />
-      <hr />
-      <Dropdown />
-      <hr />
+      <Button color="primary" isOutlined={true}>
+        Click me
+      </Button>
     </>
   );
 }

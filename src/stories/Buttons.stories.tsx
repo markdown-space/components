@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
 import React from "react";
 import { Button } from "../components/Button";
-import { Color, Size } from "../types";
+import { Color, Size } from "../types/shared";
 
 const colors: Color[] = [
   "white",
