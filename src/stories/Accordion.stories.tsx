@@ -3,15 +3,14 @@ import "bulma/css/bulma.min.css";
 import { Accordion } from "../components/Accordion";
 import { Color } from "../types/shared";
 
-const colors = [
+const colors: Color[] = [
   "primary",
   "link",
   "info",
   "success",
   "warning",
   "danger",
-] as Color[];
-const sizes = ["small", "normal", "medium", "large"];
+];
 
 export default {
   title: "Components/Accordion",
@@ -21,7 +20,7 @@ export default {
     docs: {
       description: {
         component:
-          "A versatile Accordion component with various styles and options.",
+          "A versatile Accordion component with animations and various styles.",
       },
     },
   },
@@ -35,23 +34,10 @@ export default {
       control: "boolean",
       description: "Allow multiple items to be open simultaneously",
     },
-    isFullwidth: {
-      control: "boolean",
-      description: "Make the accordion full width",
-    },
-    size: {
-      control: "select",
-      options: sizes,
-      description: "The size of the accordion",
-    },
     color: {
       control: "select",
       options: colors,
       description: "The color of the accordion",
-    },
-    isBoxed: {
-      control: "boolean",
-      description: "Apply a boxed style to the accordion",
     },
     isToggle: {
       control: "boolean",
@@ -81,13 +67,6 @@ export const Multiple: Story = {
   },
 };
 
-export const Fullwidth: Story = {
-  args: {
-    items: defaultItems,
-    isFullwidth: true,
-  },
-};
-
 export const ColorVariants: Story = {
   render: () => (
     <div>
@@ -105,31 +84,6 @@ export const ColorVariants: Story = {
       ))}
     </div>
   ),
-};
-
-export const SizeVariants: Story = {
-  render: () => (
-    <div>
-      {sizes.map((size) => (
-        <Accordion
-          key={size}
-          items={[
-            {
-              title: `${size.charAt(0).toUpperCase() + size.slice(1)} Accordion`,
-              content: `This is a ${size} accordion.`,
-            },
-          ]}
-        />
-      ))}
-    </div>
-  ),
-};
-
-export const Boxed: Story = {
-  args: {
-    items: defaultItems,
-    isBoxed: true,
-  },
 };
 
 export const Toggle: Story = {
@@ -166,14 +120,39 @@ export const ComplexContent: Story = {
   },
 };
 
+export const WithNestedAccordion: Story = {
+  args: {
+    items: [
+      {
+        title: "Outer Item 1",
+        content: "Outer content 1",
+      },
+      {
+        title: "Outer Item 2 with nested accordion",
+        content: (
+          <Accordion
+            items={[
+              { title: "Nested Item 1", content: "Nested content 1" },
+              { title: "Nested Item 2", content: "Nested content 2" },
+            ]}
+            color="info"
+          />
+        ),
+      },
+      {
+        title: "Outer Item 3",
+        content: "Outer content 3",
+      },
+    ],
+    isMultiple: true,
+  },
+};
+
 export const Playground: Story = {
   args: {
     items: defaultItems,
     isMultiple: false,
-    isFullwidth: false,
-    size: "medium",
     color: "primary",
-    isBoxed: false,
     isToggle: false,
   },
 };
