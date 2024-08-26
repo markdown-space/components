@@ -1,40 +1,36 @@
-import React, { useState } from "react";
-import { Color, Size } from "../types/shared";
+import { motion } from "framer-motion";
+import { ReactNode, useState } from "react";
+import { Color } from "../types/shared";
 
 export interface AccordionItemProps {
   title: string;
-  content: React.ReactNode;
+  content: ReactNode;
   isOpen: boolean;
   onClick: () => void;
   color?: string;
-  isBoxed?: boolean;
   isToggle?: boolean;
-  isLast: boolean; // New prop to identify the last item
+  isLast: boolean;
 }
 
-const AccordionItem = ({
+export const AccordionItem = ({
   title,
   content,
   isOpen,
   onClick,
   color,
-  isBoxed,
   isToggle,
   isLast,
 }: AccordionItemProps) => {
-  const baseClasses = "accordion-header";
   const colorClass = color ? `has-background-${color}` : "";
-  const boxedClass = isBoxed ? "is-boxed" : "";
   const toggleClass = isToggle ? "is-toggle" : "";
-  const headerClasses = [baseClasses, colorClass, boxedClass, toggleClass]
-    .filter(Boolean)
-    .join(" ");
+  const headerClasses = [colorClass, toggleClass].filter(Boolean).join(" ");
 
   return (
     <div
       className={`accordion-item ${isOpen ? "is-active" : ""}`}
       style={{
         borderBottom: isLast ? "none" : "1px solid #dbdbdb", // Add border bottom except for last item
+        overflow: "hidden",
       }}
     >
       <div
@@ -43,40 +39,46 @@ const AccordionItem = ({
         style={{
           display: "flex",
           justifyContent: "space-between",
-          padding: "0.5rem 1rem", // Add some padding for better appearance
+          padding: "0.5rem 1rem",
+          cursor: "pointer",
         }}
       >
         <p>{title}</p>
         <span className="icon">
-          <i className={`fas fa-angle-${isOpen ? "up" : "down"}`}></i>
+          <motion.i
+            className="fas fa-angle-up"
+            animate={{ rotate: isOpen ? 180 : 0 }}
+          />
         </span>
       </div>
-      {isOpen && (
-        <div className="accordion-content" style={{ padding: "1rem" }}>
-          {content}
-        </div>
-      )}
+      <motion.div
+        className="accordion-content"
+        initial={{
+          height: 0,
+          opacity: 0,
+        }}
+        animate={{
+          height: isOpen ? "auto" : 0,
+          opacity: 1,
+        }}
+      >
+        <div style={{ padding: "0 1rem 0.5rem" }}>{content}</div>
+      </motion.div>
     </div>
   );
 };
 
 export interface AccordionProps {
-  items: Array<{ title: string; content: React.ReactNode }>;
+  items: { title: string; content: ReactNode }[];
   isMultiple?: boolean;
-  isFullwidth?: boolean;
-  size?: Size;
   color?: Color;
-  isBoxed?: boolean;
   isToggle?: boolean;
 }
 
 export const Accordion = ({
   items,
   isMultiple = false,
-  isFullwidth = false,
-  size,
   color,
-  isBoxed = false,
   isToggle = false,
 }: AccordionProps) => {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -95,15 +97,8 @@ export const Accordion = ({
     }
   };
 
-  const baseClasses = "accordion";
-  const sizeClass = size ? `is-${size}` : "";
-  const fullwidthClass = isFullwidth ? "is-fullwidth" : "";
-  const accordionClasses = [baseClasses, sizeClass, fullwidthClass]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <div className={accordionClasses}>
+    <div>
       {items.map((item, index) => (
         <AccordionItem
           key={index}
@@ -111,9 +106,8 @@ export const Accordion = ({
           isOpen={openItems.includes(index)}
           onClick={() => toggleItem(index)}
           color={color}
-          isBoxed={isBoxed}
           isToggle={isToggle}
-          isLast={index === items.length - 1} // Pass isLast prop
+          isLast={index === items.length - 1}
         />
       ))}
     </div>
