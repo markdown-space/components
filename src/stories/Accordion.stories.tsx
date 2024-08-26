@@ -159,23 +159,6 @@ export const CustomRenderItem: Story = {
   },
 };
 
-export const AccessibilityDemo: Story = {
-  args: {
-    items: [
-      {
-        title: "Keyboard Navigation",
-        content: "Try using Tab to focus and Enter to toggle",
-        key: "a11y1",
-      },
-      {
-        title: "Screen Reader Info",
-        content: "This content is announced when expanded",
-        key: "a11y2",
-      },
-    ],
-  },
-};
-
 export const LargeDataset: Story = {
   args: {
     items: Array.from({ length: 100 }, (_, i) => ({
