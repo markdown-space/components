@@ -1,129 +1,151 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import "bulma/css/bulma.min.css";
-import { Hero } from "../components/Hero";
+import { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../components/Button";
+import { Hero, HeroSubtitle, HeroTitle } from "../components/Hero";
+import { Color } from "../types/shared";
 
-const meta = {
+const meta: Meta<typeof Hero> = {
   title: "Components/Hero",
   component: Hero,
-  parameters: {
-    layout: "fullscreen",
-  },
   tags: ["autodocs"],
-} satisfies Meta<typeof Hero>;
+  argTypes: {
+    color: {
+      control: "select",
+      options: [
+        "primary",
+        "link",
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "light",
+        "dark",
+      ],
+    },
+  },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Hero>;
 
-export const DefaultHero: Story = {
-  render: () => <Hero />,
+export const Default: Story = {
+  args: {
+    color: "primary",
+    children: (
+      <>
+        <HeroTitle>Hero Title</HeroTitle>
+        <HeroSubtitle>Hero Subtitle</HeroSubtitle>
+      </>
+    ),
+  },
 };
 
-const colors = [
-  "",
-  "primary",
-  "link",
-  "info",
-  "success",
-  "warning",
-  "danger",
-  "dark",
-] as const;
-
-type ColorType = (typeof colors)[number];
-
-const createHeroStory = (color: ColorType): Story => ({
+export const ColorVariants: Story = {
   render: () => (
-    <div className={`hero ${color ? `is-${color}` : ""}`}>
-      <div className="hero-body">
-        <div className="container has-text-centered">
-          <h1 className="title">Title</h1>
-          <h2 className="subtitle">Subtitle</h2>
-        </div>
-      </div>
-    </div>
-  ),
-});
-
-export const DefaultColorHero = createHeroStory("");
-export const PrimaryHero = createHeroStory("primary");
-export const LinkHero = createHeroStory("link");
-export const InfoHero = createHeroStory("info");
-export const SuccessHero = createHeroStory("success");
-export const WarningHero = createHeroStory("warning");
-export const DangerHero = createHeroStory("danger");
-export const DarkHero = createHeroStory("dark");
-
-export const HeroWithNavbar: Story = {
-  render: () => (
-    <div>
-      <nav className="navbar is-primary">
-        <div className="container">
-          <div className="navbar-brand">
-            <a className="navbar-item">
-              <img src="/markdown-space-logo.svg" alt="Logo" />
-            </a>
-            <span className="navbar-burger burger">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </div>
-          <div className="navbar-menu">
-            <div className="navbar-end">
-              <a className="navbar-item is-active">Home</a>
-              <a className="navbar-item">Examples</a>
-              <a className="navbar-item">Documentation</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-      <div className="hero is-primary">
-        <div className="hero-body">
-          <div className="container has-text-centered">
-            <h1 className="title">Title</h1>
-            <h2 className="subtitle">Subtitle</h2>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      {(
+        [
+          "primary",
+          "link",
+          "info",
+          "success",
+          "warning",
+          "danger",
+          "light",
+          "dark",
+        ] as Color[]
+      ).map((color) => (
+        <Hero key={color} color={color}>
+          <HeroTitle>
+            {color.charAt(0).toUpperCase() + color.slice(1)} Hero
+          </HeroTitle>
+          <HeroSubtitle>This is a {color} hero</HeroSubtitle>
+        </Hero>
+      ))}
+    </>
   ),
 };
 
-export const HeroWithTabs: Story = {
+export const CustomContent: Story = {
+  args: {
+    color: "info",
+    children: (
+      <>
+        <HeroTitle>Custom Content Hero</HeroTitle>
+        <HeroSubtitle>This hero has custom content</HeroSubtitle>
+        <Button color="primary">Click me!</Button>
+      </>
+    ),
+  },
+};
+
+export const StyledTitle: Story = {
+  args: {
+    color: "success",
+    children: (
+      <>
+        <HeroTitle style={{ color: "white", textTransform: "uppercase" }}>
+          Styled Title
+        </HeroTitle>
+        <HeroSubtitle>This hero has a styled title</HeroSubtitle>
+      </>
+    ),
+  },
+};
+
+export const StyledSubtitle: Story = {
+  args: {
+    color: "warning",
+    children: (
+      <>
+        <HeroTitle>Styled Subtitle</HeroTitle>
+        <HeroSubtitle style={{ fontStyle: "italic", color: "darkred" }}>
+          This hero has a styled subtitle
+        </HeroSubtitle>
+      </>
+    ),
+  },
+};
+
+export const LongContent: Story = {
+  args: {
+    color: "light",
+    children: (
+      <>
+        <HeroTitle>Long Content Hero</HeroTitle>
+        <HeroSubtitle>
+          This hero has a long subtitle to demonstrate how it handles larger
+          amounts of text. Lorem ipsum dolor sit amet, consectetur adipiscing
+          elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet
+          nunc, vitae aliquam nisl nunc vitae nisl.
+        </HeroSubtitle>
+      </>
+    ),
+  },
+};
+
+export const WithoutSubtitle: Story = {
+  args: {
+    color: "dark",
+    children: <HeroTitle>Hero Without Subtitle</HeroTitle>,
+  },
+};
+
+export const WithoutTitle: Story = {
+  args: {
+    color: "primary",
+    children: <HeroSubtitle>Hero Without Title</HeroSubtitle>,
+  },
+};
+
+export const NestedHeroes: Story = {
   render: () => (
-    <div className="hero is-primary">
-      <div className="hero-body">
-        <div className="container has-text-centered">
-          <h1 className="title">Title</h1>
-          <h2 className="subtitle">Subtitle</h2>
-        </div>
-      </div>
-      <div className="hero-foot">
-        <nav className="tabs">
-          <div className="container">
-            <ul>
-              <li className="is-active">
-                <a>Overview</a>
-              </li>
-              <li>
-                <a>Modifiers</a>
-              </li>
-              <li>
-                <a>Grid</a>
-              </li>
-              <li>
-                <a>Elements</a>
-              </li>
-              <li>
-                <a>Components</a>
-              </li>
-              <li>
-                <a>Layout</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </div>
+    <Hero color="primary">
+      <HeroTitle>Outer Hero</HeroTitle>
+      <HeroSubtitle>This hero contains another hero</HeroSubtitle>
+      <Hero color="info">
+        <HeroTitle>Inner Hero</HeroTitle>
+        <HeroSubtitle>This is a nested hero</HeroSubtitle>
+      </Hero>
+    </Hero>
   ),
 };
