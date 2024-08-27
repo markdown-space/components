@@ -8,16 +8,31 @@ export type HeroSize =
   | "fullheight"
   | "halfheight";
 
-export interface HeroProps {
+type HeroPropsBase = {
   children: ReactNode;
   color?: Color;
+};
+
+interface HeroPropsWithoutNavbar extends HeroPropsBase {
   size?: HeroSize;
+  withNavbar?: false;
 }
 
-export const Hero = ({ children, color, size }: HeroProps) => {
+interface HeroPropsWithNavbar extends HeroPropsBase {
+  size: "fullheight";
+  withNavbar: true;
+}
+
+export type HeroProps = HeroPropsWithoutNavbar | HeroPropsWithNavbar;
+
+export const Hero = ({ children, color, size, withNavbar }: HeroProps) => {
   const baseClass = "hero";
   const colorClass = color ? `is-${color}` : "";
-  const sizeClass = size ? `is-${size}` : "";
+  let sizeClass = size ? `is-${size}` : "";
+
+  if (size === "fullheight" && withNavbar) {
+    sizeClass = "is-fullheight-with-navbar";
+  }
 
   const classes = [baseClass, colorClass, sizeClass].filter(Boolean).join(" ");
 

@@ -2,6 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { Block } from "../components/Block";
 import { Button } from "../components/Button";
 import { Hero, HeroSize, HeroSubtitle, HeroTitle } from "../components/Hero";
+import { Navbar } from "../components/Navbar";
 import { Color } from "../types/shared";
 
 const meta: Meta<typeof Hero> = {
@@ -25,6 +26,9 @@ const meta: Meta<typeof Hero> = {
     size: {
       control: "select",
       options: ["small", "medium", "large", "fullheight", "halfheight"],
+    },
+    withNavbar: {
+      control: "boolean",
     },
   },
 };
@@ -187,14 +191,38 @@ export const FullHeightHero: Story = {
   },
 };
 
+export const WithNavbar: Story = {
+  render: () => (
+    <>
+      <Navbar
+        brand={<a className="navbar-item">Brand</a>}
+        startItems={[
+          { label: "Home", href: "#" },
+          { label: "Docs", href: "#" },
+        ]}
+        endButtons={[{ label: "Sign up" }, { label: "Log in" }]}
+      />
+      <Hero color="primary" withNavbar size="fullheight">
+        <HeroTitle>Hero with Navbar</HeroTitle>
+        <HeroSubtitle>
+          This hero adapts to the presence of a navbar
+        </HeroSubtitle>
+      </Hero>
+    </>
+  ),
+};
+
 export const Playground: Story = {
   args: {
     color: "primary",
     size: "medium",
+    withNavbar: false,
     children: (
       <>
         <HeroTitle>Playground Hero</HeroTitle>
-        <HeroSubtitle>Experiment with different colors and sizes</HeroSubtitle>
+        <HeroSubtitle>
+          Experiment with different colors, sizes, and navbar settings
+        </HeroSubtitle>
       </>
     ),
   },
