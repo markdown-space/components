@@ -10,6 +10,19 @@ const meta: Meta<typeof Navbar> = {
   tags: ["autodocs"],
   argTypes: {
     brand: { control: "text" },
+    color: {
+      control: "select",
+      options: [
+        "primary",
+        "link",
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "light",
+        "dark",
+      ],
+    },
     startItems: { control: "object" },
     endButtons: { control: "object" },
   },
@@ -21,7 +34,7 @@ type Story = StoryObj<typeof Navbar>;
 const defaultBrand = (
   <span className="navbar-item">
     <img
-      src="/markdown-space-logo.svg"
+      src="/public/markdown-space-logo.svg"
       alt="Bulma: a modern CSS framework based on Flexbox"
       height="28"
     />
@@ -55,6 +68,13 @@ export const Default: Story = {
   },
 };
 
+export const ColoredNavbar: Story = {
+  args: {
+    ...Default.args,
+    color: "primary",
+  },
+};
+
 export const WithoutDropdown: Story = {
   args: {
     ...Default.args,
@@ -70,7 +90,14 @@ export const WithoutDropdown: Story = {
 export const WithoutEndButtons: Story = {
   args: {
     ...Default.args,
-    endButtons: [],
+    endButtons: undefined,
+  },
+};
+
+export const WithoutStartItems: Story = {
+  args: {
+    ...Default.args,
+    startItems: undefined,
   },
 };
 
@@ -104,6 +131,13 @@ export const ManyItems: Story = {
         ],
       },
     ],
+  },
+};
+
+export const MinimalNavbar: Story = {
+  args: {
+    ...Default.args,
+    hideToggle: true,
   },
 };
 

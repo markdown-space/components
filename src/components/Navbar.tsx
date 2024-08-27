@@ -19,12 +19,25 @@ export type EndButtonProps = {
 };
 
 export type NavbarProps = {
-  brand: ReactNode;
-  startItems: (NavbarItemProps | NavbarDropdownProps)[];
-  endButtons: EndButtonProps[];
+  brand?: ReactNode;
+  color?: Color;
+  hideToggle?: boolean;
+  startItems?: (NavbarItemProps | NavbarDropdownProps)[];
+  endButtons?: EndButtonProps[];
 };
 
-export const Navbar = ({ brand, startItems, endButtons }: NavbarProps) => {
+export const Navbar = ({
+  brand,
+  color,
+  hideToggle = false,
+  startItems,
+  endButtons,
+}: NavbarProps) => {
+  const baseClass = "navbar";
+  const colorClass = color ? `is-${color}` : "";
+
+  const classes = [baseClass, colorClass].filter(Boolean).join(" ");
+
   const [isActive, setIsActive] = useState(false);
 
   const toggleMenu = () => {
@@ -50,6 +63,7 @@ export const Navbar = ({ brand, startItems, endButtons }: NavbarProps) => {
         </div>
       );
     }
+
     return (
       <a key={item.label} className="navbar-item" href={item.href}>
         {item.label}
@@ -58,34 +72,42 @@ export const Navbar = ({ brand, startItems, endButtons }: NavbarProps) => {
   };
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav className={classes} role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
         {brand}
-        <a
-          role="button"
-          className={`navbar-burger ${isActive ? "is-active" : ""}`}
-          aria-label="menu"
-          aria-expanded="false"
-          onClick={toggleMenu}
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+        {!hideToggle && (
+          <a
+            role="button"
+            className={`navbar-burger ${isActive ? "is-active" : ""}`}
+            aria-label="menu"
+            aria-expanded="false"
+            onClick={toggleMenu}
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        )}
       </div>
       <div className={`navbar-menu ${isActive ? "is-active" : ""}`}>
-        <div className="navbar-start">{startItems.map(renderNavbarItem)}</div>
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              {endButtons.map((button) => (
-                <Button key={button.label} color={button.color || "primary"}>
-                  {button.label}
-                </Button>
-              ))}
+        {startItems?.length && (
+          <div className="navbar-start">
+            {startItems?.map(renderNavbarItem)}
+          </div>
+        )}
+        {endButtons?.length && (
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                {endButtons?.map((button) => (
+                  <Button key={button.label} color={button.color || "primary"}>
+                    {button.label}
+                  </Button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );
