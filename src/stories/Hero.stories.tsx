@@ -1,6 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
+import { Block } from "../components/Block";
 import { Button } from "../components/Button";
-import { Hero, HeroSubtitle, HeroTitle } from "../components/Hero";
+import { Hero, HeroSize, HeroSubtitle, HeroTitle } from "../components/Hero";
 import { Color } from "../types/shared";
 
 const meta: Meta<typeof Hero> = {
@@ -20,6 +21,10 @@ const meta: Meta<typeof Hero> = {
         "light",
         "dark",
       ],
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large", "fullheight", "halfheight"],
     },
   },
 };
@@ -41,7 +46,7 @@ export const Default: Story = {
 
 export const ColorVariants: Story = {
   render: () => (
-    <>
+    <Block style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       {(
         [
           "primary",
@@ -61,7 +66,24 @@ export const ColorVariants: Story = {
           <HeroSubtitle>This is a {color} hero</HeroSubtitle>
         </Hero>
       ))}
-    </>
+    </Block>
+  ),
+};
+
+export const SizeVariants: Story = {
+  render: () => (
+    <Block style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      {(
+        ["small", "medium", "large", "fullheight", "halfheight"] as HeroSize[]
+      ).map((size) => (
+        <Hero key={size} color="primary" size={size}>
+          <HeroTitle>
+            {size.charAt(0).toUpperCase() + size.slice(1)} Hero
+          </HeroTitle>
+          <HeroSubtitle>This is a {size} hero</HeroSubtitle>
+        </Hero>
+      ))}
+    </Block>
   ),
 };
 
@@ -139,13 +161,41 @@ export const WithoutTitle: Story = {
 
 export const NestedHeroes: Story = {
   render: () => (
-    <Hero color="primary">
+    <Hero color="primary" size="large">
       <HeroTitle>Outer Hero</HeroTitle>
       <HeroSubtitle>This hero contains another hero</HeroSubtitle>
-      <Hero color="info">
+      <Hero color="info" size="small">
         <HeroTitle>Inner Hero</HeroTitle>
         <HeroSubtitle>This is a nested hero</HeroSubtitle>
       </Hero>
     </Hero>
   ),
+};
+
+export const FullHeightHero: Story = {
+  args: {
+    color: "primary",
+    size: "fullheight",
+    children: (
+      <>
+        <HeroTitle>Full Height Hero</HeroTitle>
+        <HeroSubtitle>
+          This hero takes up the full height of the viewport
+        </HeroSubtitle>
+      </>
+    ),
+  },
+};
+
+export const Playground: Story = {
+  args: {
+    color: "primary",
+    size: "medium",
+    children: (
+      <>
+        <HeroTitle>Playground Hero</HeroTitle>
+        <HeroSubtitle>Experiment with different colors and sizes</HeroSubtitle>
+      </>
+    ),
+  },
 };
