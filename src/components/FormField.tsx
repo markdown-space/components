@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 export type FormFieldSize = "small" | "normal" | "medium" | "large";
 export type FormFieldColor =
@@ -9,7 +9,7 @@ export type FormFieldColor =
   | "danger";
 export type FormFieldState = "hovered" | "focused" | "loading";
 
-interface FormFieldProps {
+export interface FormFieldProps {
   label?: ReactNode;
   labelProps?: Omit<ComponentProps<"label">, "children">;
   helperText?: ReactNode;
@@ -24,7 +24,7 @@ interface FormFieldProps {
   isGrouped?: boolean;
 }
 
-export const FormField: React.FC<FormFieldProps> = ({
+export const FormField = ({
   label,
   labelProps,
   helperText,
@@ -37,7 +37,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   iconPosition = "left",
   isHorizontal,
   isGrouped,
-}) => {
+}: FormFieldProps) => {
   const fieldClasses = [
     "field",
     isHorizontal && "is-horizontal",
