@@ -9,18 +9,27 @@ type Doc = {
   updated_at: string;
   published_at: string;
   metadata: {
+    short_description: string;
     [key: string]: unknown;
   };
 };
 
 const Post = (doc: Doc) => {
   return (
-    <h3 key={doc.id}>
-      <a href={`https://pages.markdown.space/home/${doc.slug}`}>{doc.name}</a>
-      {doc.metadata?.short_description
-        ? " - " + doc.metadata?.short_description
-        : ""}
-    </h3>
+    <div className="card" key={doc.id}>
+      <div className="card-content">
+        <p className="title">
+          <a href={`https://pages.markdown.space/home/${doc.slug}`}>
+            {doc.name}
+          </a>
+        </p>
+        {doc.metadata?.short_description ? (
+          <p className="subtitle">{doc.metadata?.short_description}</p>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
   );
 };
 
@@ -63,7 +72,11 @@ export const TableOfContents = ({
       <small>
         {offset + 1} - {Math.min(offset + pageLength, total)} of {total}
       </small>
-      <nav className="pagination" role="navigation" aria-label="pagination">
+      <nav
+        className="pagination is-centered"
+        role="navigation"
+        aria-label="pagination"
+      >
         <button
           className="pagination-previous"
           disabled={offset == 0}
