@@ -1,39 +1,108 @@
-import { ComponentProps, ReactNode } from "react";
+import React, { ComponentProps, ReactNode } from "react";
+
+export type FormFieldSize = "small" | "normal" | "medium" | "large";
+export type FormFieldColor =
+  | "primary"
+  | "info"
+  | "success"
+  | "warning"
+  | "danger";
+export type FormFieldState = "hovered" | "focused" | "loading";
 
 interface FormFieldProps {
   label?: ReactNode;
-  labelProps: Omit<ComponentProps<"label">, "children">;
+  labelProps?: Omit<ComponentProps<"label">, "children">;
   helperText?: ReactNode;
   helperTextProps?: Omit<ComponentProps<"p">, "children">;
+  inputProps?: ComponentProps<"input">;
+  size?: FormFieldSize;
+  color?: FormFieldColor;
+  state?: FormFieldState;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
+  isHorizontal?: boolean;
+  isGrouped?: boolean;
 }
 
-export const FormField = ({
+export const FormField: React.FC<FormFieldProps> = ({
   label,
   labelProps,
   helperText,
   helperTextProps,
-}: FormFieldProps) => {
+  inputProps,
+  size,
+  color,
+  state,
+  icon,
+  iconPosition = "left",
+  isHorizontal,
+  isGrouped,
+}) => {
+  const fieldClasses = [
+    "field",
+    isHorizontal && "is-horizontal",
+    isGrouped && "is-grouped",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const labelClasses = ["label", size && `is-${size}`, labelProps?.className]
+    .filter(Boolean)
+    .join(" ");
+
+  const controlClasses = [
+    "control",
+    icon && `has-icons-${iconPosition}`,
+    state === "loading" && "is-loading",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const inputClasses = [
+    "input",
+    size && `is-${size}`,
+    color && `is-${color}`,
+    state && state !== "loading" && `is-${state}`,
+    inputProps?.className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const helperTextClasses = [
+    "help",
+    color && `is-${color}`,
+    helperTextProps?.className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className="field">
-      {label && (
-        <label
-          {...labelProps}
-          className={`label${labelProps?.className && ` ${labelProps?.className}`}`}
-        >
-          {label}
-        </label>
+    <div className={fieldClasses}>
+      {isHorizontal && label && (
+        <div className="field-label">
+          <label {...labelProps} className={labelClasses}>
+            {label}
+          </label>
+        </div>
       )}
-      <div className="control">
-        <input className="input" type="text" placeholder="Text input"></input>
+      <div className={isHorizontal ? "field-body" : undefined}>
+        {!isHorizontal && label && (
+          <label {...labelProps} className={labelClasses}>
+            {label}
+          </label>
+        )}
+        <div className={controlClasses}>
+          <input {...inputProps} className={inputClasses} />
+          {icon && (
+            <span className={`icon is-small is-${iconPosition}`}>{icon}</span>
+          )}
+          {helperText && (
+            <p {...helperTextProps} className={helperTextClasses}>
+              {helperText}
+            </p>
+          )}
+        </div>
       </div>
-      {helperText && (
-        <p
-          {...helperTextProps}
-          className={`help${helperTextProps?.className && ` ${helperTextProps?.className}`}`}
-        >
-          {helperText}
-        </p>
-      )}
     </div>
   );
 };
