@@ -21,6 +21,7 @@ export const Textarea = ({
   readOnly,
   hasFixedSize,
   state,
+  ...props
 }: TextareaProps) => {
   const baseClass = "textarea";
   const colorClass = color ? `is-${color}` : "";
@@ -39,6 +40,7 @@ export const Textarea = ({
       rows={rows}
       disabled={disabled}
       readOnly={readOnly}
+      {...props}
     ></textarea>
   );
 };
