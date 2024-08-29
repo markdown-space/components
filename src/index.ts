@@ -3,6 +3,7 @@ export { Breadcrumb } from "./components/Breadcrumb";
 export { Button } from "./components/Button";
 export { Card } from "./components/Card";
 export { HeroSection } from "./components/HeroSection";
+export { Input } from "./components/Input";
 export { Modal } from "./components/Modal";
 export { Navbar } from "./components/Navbar";
 export { Notification } from "./components/Notification";
