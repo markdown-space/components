@@ -10,3 +10,4 @@ export { Pagination } from "./components/Pagination";
 export { Tab } from "./components/Tab";
 export { TableOfContents } from "./components/TableOfContents";
 export { Tag } from "./components/Tag";
+export { Textarea } from "./components/Textarea";
