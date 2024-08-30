@@ -22,6 +22,7 @@ export interface FormFieldProps {
   iconPosition?: "left" | "right";
   isHorizontal?: boolean;
   isGrouped?: boolean;
+  children?: ReactNode;
 }
 
 export const FormField = ({
@@ -37,6 +38,7 @@ export const FormField = ({
   iconPosition = "left",
   isHorizontal,
   isGrouped,
+  children,
 }: FormFieldProps) => {
   const fieldClasses = [
     "field",
@@ -92,7 +94,7 @@ export const FormField = ({
           </label>
         )}
         <div className={controlClasses}>
-          <input {...inputProps} className={inputClasses} />
+          {children || <input {...inputProps} className={inputClasses} />}
           {icon && (
             <span className={`icon is-small is-${iconPosition}`}>{icon}</span>
           )}
