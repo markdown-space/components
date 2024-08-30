@@ -3,6 +3,7 @@ export { Box } from "./components/Box";
 export { Breadcrumb } from "./components/Breadcrumb";
 export { Button } from "./components/Button";
 export { Card } from "./components/Card";
+export { Checkbox } from "./components/Checkbox";
 export { Dropdown } from "./components/Dropdown";
 export { Form } from "./components/Form";
 export { FormField } from "./components/FormField";
