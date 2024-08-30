@@ -5,6 +5,7 @@ export { Button } from "./components/Button";
 export { Card } from "./components/Card";
 export { Dropdown } from "./components/Dropdown";
 export { Form } from "./components/Form";
+export { FormField } from "./components/FormField";
 export { Hero } from "./components/Hero";
 export { HeroSection } from "./components/HeroSection";
 export { Input } from "./components/Input";
