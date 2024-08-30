@@ -44,15 +44,15 @@ export default {
       options: sizes,
       description: "The size of the select",
     },
-    rounded: {
+    isRounded: {
       control: "boolean",
       description: "Applies rounded corners",
     },
-    multiple: {
+    isMultiple: {
       control: "boolean",
       description: "Allows multiple selections",
     },
-    loading: {
+    isLoading: {
       control: "boolean",
       description: "Shows a loading state",
     },
@@ -99,21 +99,21 @@ export const SizeVariants: Story = {
 export const Rounded: Story = {
   args: {
     options: defaultOptions,
-    rounded: true,
+    isRounded: true,
   },
 };
 
 export const Multiple: Story = {
   args: {
     options: defaultOptions,
-    multiple: true,
+    isMultiple: true,
   },
 };
 
 export const Loading: Story = {
   args: {
     options: defaultOptions,
-    loading: true,
+    isLoading: true,
   },
 };
 
@@ -157,9 +157,9 @@ export const Playground: Story = {
     options: defaultOptions,
     color: "primary",
     size: "normal",
-    rounded: false,
-    multiple: false,
-    loading: false,
+    isRounded: false,
+    isMultiple: false,
+    isLoading: false,
     state: undefined,
   },
 };
