@@ -5,7 +5,6 @@ import {
   FormFieldSize,
   FormFieldState,
 } from "../components/FormField";
-import { Select } from "../components/Select";
 
 const meta: Meta<typeof FormField> = {
   title: "Components/FormField",
@@ -172,25 +171,6 @@ export const GroupedFields: Story = {
       <FormField inputProps={{ placeholder: "Input" }} isGrouped />
       <FormField inputProps={{ placeholder: "Input" }} isGrouped />
       <FormField inputProps={{ value: "Submit", type: "submit" }} isGrouped />
-    </div>
-  ),
-};
-
-export const SelectField: Story = {
-  render: () => (
-    <div className="field ">
-      <FormField
-        label="Select the User"
-        icon={<i className="fas fa-globe"></i>}
-      >
-        <Select
-          options={[
-            { value: "1", label: "Alex Smith" },
-            { value: "2", label: "John Doe" },
-            { value: "3", label: "Jane Doe" },
-          ]}
-        />
-      </FormField>
     </div>
   ),
 };
