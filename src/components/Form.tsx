@@ -50,7 +50,7 @@ export const Form = () => {
             <label className="label">Files to join</label>
             <p className="control">
               <span className="select is-multiple">
-                <select multiple>
+                <select>
                   <option>Select dropdown</option>
                   <option>With options</option>
                 </select>
@@ -192,7 +192,7 @@ export const Form = () => {
             <div className="field-body">
               <p className="control">
                 <span className="select is-multiple">
-                  <select multiple>
+                  <select>
                     <option>Science computer</option>
                     <option>Development</option>
                     <option>Management</option>

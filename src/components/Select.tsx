@@ -13,9 +13,9 @@ export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   style?: CSSProperties;
   color?: "link" | "primary" | "info" | "success" | "warning" | "danger";
   size?: Size;
-  rounded?: boolean;
-  multiple?: boolean;
-  loading?: boolean;
+  isRounded?: boolean;
+  isMultiple?: boolean;
+  isLoading?: boolean;
   state?: "hovered" | "focused" | "active";
 }
 
@@ -24,18 +24,18 @@ export const Select = ({
   style,
   color,
   size,
-  rounded,
-  multiple,
-  loading,
+  isRounded,
+  isMultiple,
+  isLoading,
   state,
   ...props
 }: SelectProps) => {
   const baseClass = "select";
   const colorClass = color ? `is-${color}` : "";
   const sizeClass = size ? `is-${size}` : "";
-  const roundedClass = rounded ? "is-rounded" : "";
-  const multipleClass = multiple ? "is-multiple" : "";
-  const loadingClass = loading ? "is-loading" : "";
+  const roundedClass = isRounded ? "is-rounded" : "";
+  const multipleClass = isMultiple ? "is-multiple" : "";
+  const loadingClass = isLoading ? "is-loading" : "";
 
   const rootClasses = [
     baseClass,
