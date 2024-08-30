@@ -17,6 +17,7 @@ export interface SelectProps extends Omit<ComponentProps<"select">, "size"> {
   multiple?: boolean;
   loading?: boolean;
   state?: "hovered" | "focused" | "active";
+  containerProps?: Omit<ComponentProps<"div">, "children">;
 }
 
 export const Select = ({
@@ -28,6 +29,7 @@ export const Select = ({
   multiple,
   loading,
   state,
+  containerProps,
   ...props
 }: SelectProps) => {
   const baseClass = "select";
@@ -36,6 +38,7 @@ export const Select = ({
   const roundedClass = rounded ? "is-rounded" : "";
   const multipleClass = multiple ? "is-multiple" : "";
   const loadingClass = loading ? "is-loading" : "";
+  const containerClasses = containerProps?.className || "";
 
   const rootClasses = [
     baseClass,
@@ -44,6 +47,7 @@ export const Select = ({
     roundedClass,
     multipleClass,
     loadingClass,
+    containerClasses,
   ]
     .filter(Boolean)
     .join(" ");
@@ -53,11 +57,11 @@ export const Select = ({
   const selectClasses = [stateClass].filter(Boolean).join(" ");
 
   return (
-    <div className={rootClasses}>
+    <div className={rootClasses} {...containerProps}>
       <select className={selectClasses} style={style} {...props}>
-        {options.map(({ value, label, disabled, selected }) => (
+        {options.map(({ value, label, disabled, selected }, index) => (
           <option
-            key={value}
+            key={value + index}
             value={value}
             disabled={disabled}
             selected={selected}
