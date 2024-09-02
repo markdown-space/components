@@ -1,0 +1,142 @@
+const Themes: Theme[] = [
+  {
+    id: "default",
+    name: "Default",
+    description: "Bulma as-is",
+    dataTheme: "user",
+  },
+  {
+    id: "cerulean",
+    name: "Cerulean",
+    description: "A calm blue sky",
+    dataTheme: "light",
+  },
+  {
+    id: "cosmo",
+    name: "Cosmo",
+    description: "An ode to Metro",
+    dataTheme: "light",
+  },
+  {
+    id: "cyborg",
+    name: "Cyborg",
+    description: "Jet black and electric blue",
+    dataTheme: "dark",
+  },
+  {
+    id: "darkly",
+    name: "Darkly",
+    description: "Flatly in night-mode",
+    dataTheme: "dark",
+  },
+  {
+    id: "flatly",
+    name: "Flatly",
+    description: "Flat and thick",
+    dataTheme: "light",
+  },
+  {
+    id: "journal",
+    name: "Journal",
+    description: "Crisp like a new sheet of paper",
+    dataTheme: "light",
+  },
+  {
+    id: "litera",
+    name: "Litera",
+    description: "The medium is the message",
+    dataTheme: "light",
+  },
+  {
+    id: "lumen",
+    name: "Lumen",
+    description: "Light and shadow",
+    dataTheme: "light",
+  },
+  {
+    id: "lux",
+    name: "Lux",
+    description: "A touch of class",
+    dataTheme: "light",
+  },
+  {
+    id: "materia",
+    name: "Materia",
+    description: "Material is the metaphor",
+    dataTheme: "light",
+  },
+  {
+    id: "minty",
+    name: "Minty",
+    description: "A fresh feel",
+    dataTheme: "light",
+  },
+  {
+    id: "nuclear",
+    name: "Nuclear",
+    description: "A dark theme with irradiated highlights",
+    dataTheme: "dark",
+  },
+  {
+    id: "pulse",
+    name: "Pulse",
+    description: "A trace of purple",
+    dataTheme: "light",
+  },
+  {
+    id: "sandstone",
+    name: "Sandstone",
+    description: "A touch of warmth",
+    dataTheme: "light",
+  },
+  {
+    id: "simplex",
+    name: "Simplex",
+    description: "Mini and minimalist",
+    dataTheme: "light",
+  },
+  {
+    id: "slate",
+    name: "Slate",
+    description: "Shades of gunmetal gray",
+    dataTheme: "dark",
+  },
+  {
+    id: "solar",
+    name: "Solar",
+    description: "A spin on Solarized",
+    dataTheme: "dark",
+  },
+  {
+    id: "spacelab",
+    name: "Spacelab",
+    description: "Silvery and sleek",
+    dataTheme: "light",
+  },
+  {
+    id: "superhero",
+    name: "Superhero",
+    description: "The brave and the blue",
+    dataTheme: "dark",
+  },
+  {
+    id: "united",
+    name: "United",
+    description: "Ubuntu orange and unique font",
+    dataTheme: "light",
+  },
+  {
+    id: "yeti",
+    name: "Yeti",
+    description: "A friendly foundation",
+    dataTheme: "light",
+  },
+  {
+    id: "unicorn",
+    name: "Unicorn",
+    description: "Whimsy that makes you barf",
+    dataTheme: "light",
+  },
+];
+
+export default Themes;
