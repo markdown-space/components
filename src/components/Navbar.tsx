@@ -14,7 +14,7 @@ export type NavbarDropdownProps = {
 };
 
 export type EndButtonProps = {
-  label: string;
+  label: ReactNode; // Accepts any ReactNode now
   color?: Color;
 };
 
@@ -99,10 +99,17 @@ export const Navbar = ({
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                {endButtons?.map((button) => (
-                  <Button key={button.label} color={button.color || "primary"}>
-                    {button.label}
-                  </Button>
+                {endButtons?.map((button, index) => (
+                  // Check if label is a component or plain text
+                  <span key={index} className="button-wrapper">
+                    {typeof button.label === 'string' ? (
+                      <Button color={button.color || "primary"}>
+                        {button.label}
+                      </Button>
+                    ) : (
+                      button.label
+                    )}
+                  </span>
                 ))}
               </div>
             </div>

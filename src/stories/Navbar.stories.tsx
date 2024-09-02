@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { EndButtonProps, Navbar } from "../components/Navbar";
+import ThemeSelector from "../components/ThemeSelector";
 
 const meta: Meta<typeof Navbar> = {
   title: "Components/Navbar",
@@ -98,6 +99,17 @@ export const WithoutStartItems: Story = {
   args: {
     ...Default.args,
     startItems: undefined,
+  },
+};
+
+export const NavbarWithThemeSelector: Story = {
+  args: {
+    ...Default.args,
+    endButtons: [
+      {
+        label: <ThemeSelector />,
+      },
+    ],
   },
 };
 
