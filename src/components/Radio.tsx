@@ -16,6 +16,7 @@ export const Radio = ({
   children,
   className,
   id,
+  style,
   ...props
 }: RadioProps) => {
   const generatedId = useId();
@@ -31,6 +32,11 @@ export const Radio = ({
       htmlFor={radioId}
       className={labelClasses}
       {...labelProps}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        ...(labelProps?.style || {}),
+      }}
       aria-disabled={isDisabled}
     >
       <input
@@ -40,6 +46,7 @@ export const Radio = ({
         value={value}
         className={inputClasses}
         {...props}
+        style={{ marginRight: "0.5rem", ...style }}
         disabled={isDisabled}
       />
       {children}
@@ -55,7 +62,7 @@ export const RadioList = ({
   ...props
 }: RadioListProps) => {
   return (
-    <div className={`radio-list${!!className && ` ${className}`}`} {...props}>
+    <div className={`radios${!!className && ` ${className}`}`} {...props}>
       {children}
     </div>
   );
