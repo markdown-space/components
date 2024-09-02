@@ -28,13 +28,13 @@ export const File = ({
   ...props
 }: FileProps) => {
   const baseClasses = "file";
-  const hasNameClasses = fileName ? "has-name" : baseClasses;
-  const isRightClasses = isRight ? "is-right" : hasNameClasses;
-  const isCenteredClasses = isCentered ? "is-centered" : isRightClasses;
-  const isFullwidthClasses = isFullwidth ? "is-fullwidth" : isRightClasses;
-  const isBoxedClasses = isBoxed ? "is-boxed" : isFullwidthClasses;
-  const colorClasses = color ? `is-${color}` : isBoxedClasses;
-  const sizeClasses = size ? `is-${size}` : colorClasses;
+  const hasNameClasses = fileName ? "has-name" : "";
+  const isRightClasses = isRight && fileName ? "is-right" : "";
+  const isCenteredClasses = isCentered ? "is-centered" : "";
+  const isFullwidthClasses = isFullwidth ? "is-fullwidth" : "";
+  const isBoxedClasses = isBoxed ? "is-boxed" : "";
+  const colorClasses = color ? `is-${color}` : "";
+  const sizeClasses = size ? `is-${size}` : "";
 
   const classes = [
     baseClasses,
@@ -53,12 +53,10 @@ export const File = ({
     <div className={classes}>
       <label className="file-label">
         <input className="file-input" type="file" name={inputName} {...props} />
-        {(!!icon || !!label) && (
-          <span className="file-cta">
-            {icon && <span className="file-icon">{icon}</span>}
-            {label && <span className="file-label">{label}</span>}
-          </span>
-        )}
+        <span className="file-cta">
+          {icon && <span className="file-icon">{icon}</span>}
+          {label && <span className="file-label">{label}</span>}
+        </span>
         {fileName && <span className="file-name">{fileName}</span>}
       </label>
     </div>
