@@ -1,10 +1,9 @@
 export type Color =
   | "white"
+  | "black"
   | "light"
   | "dark"
-  | "black"
   | "text"
-  | "ghost"
   | "primary"
   | "link"
   | "info"

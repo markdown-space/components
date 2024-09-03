@@ -6,11 +6,10 @@ import { Color, Size } from "../types/shared";
 
 const colors: Color[] = [
   "white",
+  "black",
   "light",
   "dark",
-  "black",
   "text",
-  "ghost",
   "primary",
   "link",
   "info",
@@ -149,6 +148,18 @@ export const Loading: Story = {
     <div className="buttons">
       {colors.map((color) => (
         <Button key={color} color={color} isLoading>
+          Loading
+        </Button>
+      ))}
+    </div>
+  ),
+};
+
+export const Skeleton: Story = {
+  render: () => (
+    <div className="buttons">
+      {colors.map((color) => (
+        <Button key={color} color={color} isSkeleton>
           Loading
         </Button>
       ))}

@@ -13,6 +13,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isHovered?: boolean;
   isLight?: boolean;
   isDark?: boolean;
+  isSkeleton?: boolean;
   fullWidth?: boolean;
   theme?: "light" | "dark";
 }
@@ -29,6 +30,7 @@ export const Button = ({
   isFocused = false,
   isHovered = false,
   fullWidth = false,
+  isSkeleton = false,
   theme = undefined,
   className,
   ...props
@@ -43,6 +45,7 @@ export const Button = ({
   const activeClass = isActive ? "is-active" : "";
   const focusedClass = isFocused ? "is-focused" : "";
   const hoveredClass = isHovered ? "is-hovered" : "";
+  const skeletonClass = isSkeleton ? "is-skeleton" : "";
   const fullWidthClass = fullWidth ? "is-fullwidth" : "";
   const themeClass = theme ? `is-${theme}` : "";
 
@@ -57,6 +60,7 @@ export const Button = ({
     activeClass,
     focusedClass,
     hoveredClass,
+    skeletonClass,
     fullWidthClass,
     themeClass,
     className,
