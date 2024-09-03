@@ -24,9 +24,13 @@ export type Color =
   | "inherit";
 
 export interface IconProps extends ComponentProps<"span"> {
-  /** Font Awesome Icon class name */
+  /** Font Awesome icon class name */
   icon: string;
   textColor?: Color;
+  /**
+   * The Font Awesome icon should also have a size modifier.
+   * `https://docs.fontawesome.com/web/style/size`
+   */
   size?: "small" | "medium" | "large";
 }
 

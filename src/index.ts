@@ -10,6 +10,7 @@ export { Form } from "./components/Form";
 export { FormField } from "./components/FormField";
 export { Hero } from "./components/Hero";
 export { HeroSection } from "./components/HeroSection";
+export { Icon, IconText } from "./components/Icon";
 export { Image } from "./components/Image";
 export { Input } from "./components/Input";
 export { Level } from "./components/Level";
