@@ -4,6 +4,7 @@ import { Color } from "../types/shared";
 export interface NotificationProps {
   color?: Color;
   isLight?: boolean;
+  isSkeleton?: boolean;
   children: ReactNode;
   className?: string;
   style?: CSSProperties;
@@ -15,6 +16,7 @@ export interface NotificationProps {
 export const Notification = ({
   color,
   isLight = false,
+  isSkeleton = false,
   hasDelete = true,
   className,
   children,
@@ -25,8 +27,15 @@ export const Notification = ({
   const baseClasses = "notification";
   const colorClass = color ? `is-${color}` : "";
   const isLightClass = isLight ? "is-light" : "";
+  const skeletonClass = isSkeleton ? "is-skeleton" : "";
 
-  const classes = [baseClasses, colorClass, isLightClass, className]
+  const classes = [
+    baseClasses,
+    colorClass,
+    isLightClass,
+    skeletonClass,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 

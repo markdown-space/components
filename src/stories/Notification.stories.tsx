@@ -27,7 +27,6 @@ export default {
         "danger",
         "dark",
         "light",
-        "ghost",
       ],
       description: "The color of the notification",
     },
@@ -90,7 +89,6 @@ export const ColorVariants: Story = {
       <Notification color="danger">Danger Notification</Notification>
       <Notification color="dark">Dark Notification</Notification>
       <Notification color="light">Light Notification</Notification>
-      <Notification color="ghost">Ghost Notification</Notification>
     </div>
   ),
 };
@@ -126,6 +124,14 @@ export const LightVariants: Story = {
       </Notification>
     </div>
   ),
+};
+
+export const Skeleton: Story = {
+  args: {
+    isSkeleton: true,
+    hasDelete: false,
+    children: "This is a skeleton notification.",
+  },
 };
 
 export const WithoutDelete: Story = {
