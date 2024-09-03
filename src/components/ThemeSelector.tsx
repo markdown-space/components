@@ -46,7 +46,7 @@ const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialThe
   const [themes, setThemes] = useState<Theme[]>(Themes);
   const [currentTheme, setCurrentTheme] = useState(initialTheme || themes[0]?.id);
   const [loading, setLoading] = useState(false);
-  const uniqueId = useRef(`theme-stylesheet-${Math.random().toString(36).substr(2, 9)}`).current;
+  const uniqueId = useRef(`theme-stylesheet-${Math.random().toString(36).slice(2, 11)}`).current;
   const isFirstRender = useRef(true);
   const filteredThemes = useMemo(() => themes.filter(filter), [themes, filter]);
   const selectedTheme = useMemo(() => filteredThemes.find((theme) => theme.id === currentTheme) || filteredThemes[0], [currentTheme, filteredThemes]);
