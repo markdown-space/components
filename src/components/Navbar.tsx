@@ -14,7 +14,7 @@ export type NavbarDropdownProps = {
 };
 
 export type EndButtonProps = {
-  label: ReactNode; // Accepts any ReactNode now
+  label: ReactNode;
   color?: Color;
 };
 
