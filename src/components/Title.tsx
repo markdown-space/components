@@ -8,6 +8,7 @@ export type TitleProps = HTMLAttributes<HTMLElement> & {
   size: TitleSize;
   tag?: TitleTag;
   isSpaced?: boolean;
+  isSkeleton?: boolean;
 };
 
 export const Title = ({
@@ -15,6 +16,7 @@ export const Title = ({
   size,
   tag,
   isSpaced,
+  isSkeleton,
   className,
   children,
   ...props
@@ -22,8 +24,15 @@ export const Title = ({
   const Tag = tag || (`h${size}` as TitleTag);
   const sizeClasses = `is-${size}`;
   const spacingClasses = isSpaced ? "is-spaced" : "";
+  const skeletonClasses = isSkeleton ? "is-skeleton" : "";
 
-  const classes = [type, sizeClasses, spacingClasses, className]
+  const classes = [
+    type,
+    sizeClasses,
+    spacingClasses,
+    skeletonClasses,
+    className,
+  ]
     .filter(Boolean)
     .join(" ");
 
