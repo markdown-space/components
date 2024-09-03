@@ -119,6 +119,16 @@ export const Static: Story = {
   ),
 };
 
+export const Skeleton: Story = {
+  render: () => (
+    <div className="field">
+      <div className="control">
+        <Input type="text" value="This is static text" isSkeleton />
+      </div>
+    </div>
+  ),
+};
+
 export const WithIcons: Story = {
   render: () => (
     <div className="field">
