@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { EndButtonProps, Navbar } from "../components/Navbar";
-import ThemeSelector from "../components/ThemeSelector";
+import { ThemeSelector } from "../components/ThemeSelector";
 
 const meta: Meta<typeof Navbar> = {
   title: "Components/Navbar",
