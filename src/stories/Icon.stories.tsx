@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
 import { Block } from "../components/Block";
-import { Color, Icon, IconText } from "../components/Icon";
+import { Icon, IconColor, IconText } from "../components/Icon";
 
 const meta: Meta<typeof Icon> = {
   title: "Components/Icon",
@@ -23,7 +23,7 @@ export default meta;
 type IconStory = StoryObj<typeof Icon>;
 type IconTextStory = StoryObj<typeof IconText>;
 
-const colors: Color[] = [
+const colors: IconColor[] = [
   "white",
   "black",
   "light",
@@ -47,7 +47,6 @@ const colors: Color[] = [
 
 const sizes = ["small", "medium", "large"] as const;
 
-// Existing stories...
 export const BasicIcon: IconStory = {
   args: {
     icon: "fas fa-home",
@@ -57,7 +56,7 @@ export const BasicIcon: IconStory = {
 export const ColoredIcon: IconStory = {
   args: {
     icon: "fas fa-star",
-    textColor: "primary",
+    color: "primary",
   },
 };
 
@@ -82,7 +81,7 @@ export const IconColors: IconStory = {
   render: () => (
     <Block style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
       {colors.map((color) => (
-        <Icon key={color} icon="fas fa-square" textColor={color} />
+        <Icon key={color} icon="fas fa-square" color={color} />
       ))}
     </Block>
   ),
@@ -141,7 +140,7 @@ export const IconTextSizes: IconTextStory = {
   render: () => (
     <Block style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {sizes.map((size) => (
-        <IconText key={size}>
+        <IconText key={size} style={{ display: "flex", alignItems: "center" }}>
           <Icon icon={`fas fa-home ${getFaSize(size)}`} size={size} />
           <span
             className={`is-size-${size === "small" ? 6 : size === "medium" ? 4 : 3}`}
@@ -188,10 +187,9 @@ export const MixedSizesIconText: IconTextStory = {
   ),
 };
 
-// Existing stories continued...
 export const ColoredIconText: IconTextStory = {
   render: () => (
-    <IconText textColor="primary">
+    <IconText color="primary">
       <Icon icon="fas fa-info-circle" />
       <span>Information</span>
     </IconText>
@@ -201,7 +199,7 @@ export const ColoredIconText: IconTextStory = {
 export const IconTextAsDiv: IconTextStory = {
   render: () => (
     <IconText as="div">
-      <Icon icon="fas fa-exclamation-triangle" textColor="warning" />
+      <Icon icon="fas fa-exclamation-triangle" color="warning" />
       <span>Warning: This is important!</span>
     </IconText>
   ),
@@ -227,7 +225,7 @@ export const IconTextPlayground: IconTextStory = {
   ),
   args: {
     as: "span",
-    textColor: "info",
+    color: "info",
   },
   argTypes: {
     as: {
@@ -235,7 +233,7 @@ export const IconTextPlayground: IconTextStory = {
       options: ["span", "div"],
       description: "Element type to render",
     },
-    textColor: {
+    color: {
       control: "select",
       options: colors,
       description: "Text color of the IconText",
@@ -246,7 +244,7 @@ export const IconTextPlayground: IconTextStory = {
 export const IconPlayground: IconStory = {
   args: {
     icon: "fas fa-star fa-lg",
-    textColor: "primary",
+    color: "primary",
     size: "medium",
   },
   argTypes: {
@@ -254,7 +252,7 @@ export const IconPlayground: IconStory = {
       control: "text",
       description: "Font Awesome icon class (include size class if needed)",
     },
-    textColor: {
+    color: {
       control: "select",
       options: colors,
       description: "Color of the icon",

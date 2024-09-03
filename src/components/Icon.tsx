@@ -1,16 +1,8 @@
 import { ComponentProps, ElementType, ReactNode } from "react";
+import { Color } from "../types/shared";
 
-export type Color =
-  | "white"
-  | "black"
-  | "light"
-  | "dark"
-  | "primary"
-  | "link"
-  | "info"
-  | "success"
-  | "warning"
-  | "danger"
+export type IconColor =
+  | Exclude<Color, "text">
   | "black-bis"
   | "black-ter"
   | "grey-darker"
@@ -26,7 +18,7 @@ export type Color =
 export interface IconProps extends ComponentProps<"span"> {
   /** Font Awesome icon class name */
   icon: string;
-  textColor?: Color;
+  color?: IconColor;
   /**
    * The Font Awesome icon should also have a size modifier.
    * `https://docs.fontawesome.com/web/style/size`
@@ -34,9 +26,9 @@ export interface IconProps extends ComponentProps<"span"> {
   size?: "small" | "medium" | "large";
 }
 
-export const Icon = ({ icon, textColor, size }: IconProps) => {
+export const Icon = ({ icon, color, size }: IconProps) => {
   const baseClass = "icon";
-  const colorClass = textColor ? `has-text-${textColor}` : "";
+  const colorClass = color ? `has-text-${color}` : "";
   const sizeClass = size ? `is-${size}` : "";
 
   const classes = [baseClass, colorClass, sizeClass].filter(Boolean).join(" ");
@@ -49,13 +41,10 @@ export const Icon = ({ icon, textColor, size }: IconProps) => {
 };
 
 interface IconTextProps<T extends ElementType = "span"> {
-  /** The element type to render. Defaults to "span". */
   as?: T;
-  /** The content of the IconText component. */
   children: ReactNode;
-  /** Additional CSS classes to apply to the component. */
   className?: string;
-  textColor?: Color;
+  color?: IconColor;
 }
 
 type IconTextComponentProps<T extends ElementType> = IconTextProps<T> &
@@ -65,12 +54,12 @@ export const IconText = <T extends ElementType = "span">({
   as,
   className,
   children,
-  textColor,
+  color,
   ...props
 }: IconTextComponentProps<T>) => {
   const Component = as || "span";
   const baseClass = "icon-text";
-  const colorClass = textColor ? `has-text-${textColor}` : "";
+  const colorClass = color ? `has-text-${color}` : "";
   const classes = [baseClass, colorClass, className].filter(Boolean).join(" ");
 
   return (
