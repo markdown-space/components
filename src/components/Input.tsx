@@ -9,6 +9,7 @@ export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
   size?: Size;
   isRounded?: boolean;
   isStatic?: boolean;
+  isSkeleton?: boolean;
 }
 
 export const Input = ({
@@ -19,6 +20,7 @@ export const Input = ({
   size,
   isRounded,
   isStatic,
+  isSkeleton,
   ...props
 }: InputProps) => {
   const baseClass = "input";
@@ -26,8 +28,16 @@ export const Input = ({
   const sizeClass = size ? `is-${size}` : "";
   const roundedClass = isRounded ? "is-rounded" : "";
   const staticClass = isStatic ? "is-static" : "";
+  const skeletonClass = isSkeleton ? "is-skeleton" : "";
 
-  const classes = [baseClass, colorClass, sizeClass, roundedClass, staticClass]
+  const classes = [
+    baseClass,
+    colorClass,
+    sizeClass,
+    roundedClass,
+    staticClass,
+    skeletonClass,
+  ]
     .filter(Boolean)
     .join(" ");
 
