@@ -92,6 +92,17 @@ export const Rounded: Story = {
   },
 };
 
+export const Skeleton: Story = {
+  args: {
+    src: defaultImageSrc,
+    alt: "Rounded Ant Design logo",
+    isRounded: true,
+    isSkeleton: true,
+    size: "128x128",
+    style: { objectFit: "none", border: "2px solid #333" },
+  },
+};
+
 export const FixedSize: Story = {
   args: {
     src: defaultImageSrc,

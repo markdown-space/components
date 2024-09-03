@@ -4,6 +4,7 @@ export type ImageProps = ComponentProps<"img"> & {
   src: string;
   alt: string;
   isRounded?: boolean;
+  isSkeleton?: boolean;
   size?: "16x16" | "24x24" | "32x32" | "48x48" | "64x64" | "96x96" | "128x128";
   ratio?:
     | "square"
@@ -29,6 +30,7 @@ export const Image = ({
   src,
   alt,
   isRounded,
+  isSkeleton,
   size,
   ratio,
   containerProps,
@@ -37,9 +39,10 @@ export const Image = ({
   const baseClasses = "image";
   const sizeClasses = size ? `is-${size}` : "";
   const roundedClass = isRounded ? "is-rounded" : "";
+  const skeletonClass = isSkeleton ? "is-skeleton" : "";
   const ratioClasses = ratio ? `is-${ratio}` : "";
 
-  const figureClasses = [baseClasses, sizeClasses, ratioClasses]
+  const figureClasses = [baseClasses, sizeClasses, skeletonClass, ratioClasses]
     .filter(Boolean)
     .join(" ");
   const imageClasses = [size, roundedClass].filter(Boolean).join(" ");
