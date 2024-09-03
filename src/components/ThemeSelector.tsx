@@ -1,38 +1,7 @@
-import React, { useEffect, useState, FC, useMemo, useRef } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { Select } from './Select';
 import Themes from '../config/themes';
-
-const updateThemeStylesheet = (
-  theme: Theme,
-  onLoad: () => void,
-  id: string,
-  context: Document = document
-) => {
-  const url = `https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/css/${theme.id}.css`
-  const themeLinks = context.querySelectorAll('link[href*="markdownswatch"]');
-  themeLinks.forEach((link) => link.remove());
-
-  const newLink = context.createElement('link');
-  newLink.id = id;
-  newLink.rel = 'stylesheet';
-  newLink.href = url;
-
-  newLink.onload = () => {
-    context.documentElement.setAttribute('data-theme', theme.dataTheme);
-    onLoad();
-  };
-  newLink.onerror = () => {
-    newLink.remove();
-    onLoad();
-  };
-
-  const bulmaLink = context.querySelector('link[href*="bulma"]');
-  if (bulmaLink) {
-    bulmaLink.parentNode?.insertBefore(newLink, bulmaLink.nextSibling);
-  } else {
-    context.head.appendChild(newLink);
-  }
-};
+import { updateThemeStylesheet, fetchThemes } from '../utils/themeUtils';
 
 
 
@@ -41,7 +10,7 @@ interface ThemeSelectorProps {
   initialTheme?: string;
 }
 
-const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialTheme }) => {
+export const ThemeSelector = ({ filter = () => true, initialTheme }: ThemeSelectorProps) => {
   const [syncedThemes, setSyncedThemes] = useState(false); // Ensures filter doesn't change
   const [themes, setThemes] = useState<Theme[]>(Themes);
   const [currentTheme, setCurrentTheme] = useState(initialTheme || themes[0]?.id);
@@ -54,19 +23,7 @@ const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialThe
 
   useEffect(() => {
     if (syncedThemes) return;
-
-    const fetchThemes = async () => {
-      try {
-        const response = await fetch('https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/themes.json');
-        const data: { themes: Theme[] } = await response.json();
-        setThemes(data.themes);
-        setSyncedThemes(true);
-      } catch (error) {
-        console.error('Failed to fetch themes:', error);
-      }
-    };
-
-    fetchThemes();
+    fetchThemes().then(setThemes).then(() => setSyncedThemes(true));
   }, [syncedThemes]);
 
   useEffect(() => {
@@ -88,10 +45,9 @@ const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialThe
       options={selectOptions}
       color="primary"
       value={currentTheme}
-      loading={loading}
+      isLoading={loading}
       onChange={(e) => setCurrentTheme(e.target.value)}
     />
   );
 };
 
-export default ThemeSelector;

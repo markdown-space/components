@@ -1,7 +1,5 @@
-// ThemeSelector.stories.tsx
-import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import ThemeSelector from '../components/ThemeSelector';
+import { ThemeSelector } from '../components/ThemeSelector';
 import { Hero, HeroTitle, HeroSubtitle } from '../components/Hero';
 
 export default {
