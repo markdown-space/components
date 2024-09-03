@@ -127,6 +127,15 @@ export const ReadOnly: Story = {
   },
 };
 
+export const Skeleton: Story = {
+  args: {
+    placeholder: "This textarea is loading",
+    hasFixedSize: true,
+    rows: 5,
+    isSkeleton: true,
+  },
+};
+
 export const FixedSize: Story = {
   args: {
     placeholder: "This textarea has a fixed size",

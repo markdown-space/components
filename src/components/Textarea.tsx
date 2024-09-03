@@ -9,6 +9,7 @@ export interface TextareaProps extends ComponentProps<"textarea"> {
   disabled?: boolean;
   readonly?: boolean;
   hasFixedSize?: boolean;
+  isSkeleton?: boolean;
   state?: "hovered" | "focused" | "active";
 }
 
@@ -20,6 +21,7 @@ export const Textarea = ({
   disabled,
   readOnly,
   hasFixedSize,
+  isSkeleton,
   state,
   ...props
 }: TextareaProps) => {
@@ -27,9 +29,17 @@ export const Textarea = ({
   const colorClass = color ? `is-${color}` : "";
   const sizeClass = size ? `is-${size}` : "";
   const fixedSizeClass = hasFixedSize ? "has-fixed-size" : "";
+  const skeletonClass = isSkeleton ? "is-skeleton" : "";
   const stateClass = state ? `is-${state}` : "";
 
-  const classes = [baseClass, colorClass, sizeClass, fixedSizeClass, stateClass]
+  const classes = [
+    baseClass,
+    colorClass,
+    sizeClass,
+    fixedSizeClass,
+    skeletonClass,
+    stateClass,
+  ]
     .filter(Boolean)
     .join(" ");
 
