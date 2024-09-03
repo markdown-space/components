@@ -61,6 +61,15 @@ export const Subtitle: Story = {
   },
 };
 
+export const Skeleton: Story = {
+  args: {
+    type: "subtitle",
+    size: 1,
+    children: "This is a skeleton title",
+    isSkeleton: true,
+  },
+};
+
 export const CustomTag: Story = {
   args: {
     type: "title",
