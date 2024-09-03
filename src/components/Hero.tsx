@@ -50,25 +50,32 @@ export const Hero = ({ children, color, size, withNavbar }: HeroProps) => {
   );
 };
 
-export interface HeroTitleProps extends ComponentProps<"p"> {
+
+export interface HeroTitleProps extends ComponentProps<'p'> {
   children: ReactNode;
+  color?: Color;
 }
 
-export const HeroTitle = ({ children, style }: HeroTitleProps) => {
+export const HeroTitle  = ({ children, style, color, ...props }: HeroTitleProps) => {
+  const colorClass = color ? `has-text-${color}` : '';
+
   return (
-    <p className="title" style={style}>
+    <p className={`title ${colorClass}`} style={style} {...props}>
       {children}
     </p>
   );
 };
 
-export interface HeroSubtitleProps extends ComponentProps<"p"> {
+export interface HeroSubtitleProps extends ComponentProps<'p'> {
   children: ReactNode;
+  color?: Color; 
 }
 
-export const HeroSubtitle = ({ children, style }: HeroSubtitleProps) => {
+export const HeroSubtitle = ({ children, style, color, ...props }: HeroSubtitleProps) => {
+  const colorClass = color ? `has-text-${color}` : '';
+
   return (
-    <p className="subtitle" style={style}>
+    <p className={`subtitle ${colorClass}`} style={style} {...props}>
       {children}
     </p>
   );
