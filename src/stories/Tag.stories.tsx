@@ -146,6 +146,13 @@ export const HoverableTags: Story = {
   ),
 };
 
+export const SkeletonTag: Story = {
+  args: {
+    isSkeleton: true,
+    children: "Loading",
+  },
+};
+
 export const DeleteTags: Story = {
   render: () => (
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
