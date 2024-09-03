@@ -4,7 +4,6 @@ export type Color =
   | "dark"
   | "black"
   | "text"
-  | "ghost"
   | "primary"
   | "link"
   | "info"
