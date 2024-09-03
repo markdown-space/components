@@ -8,6 +8,7 @@ export interface TagProps extends ComponentProps<"span"> {
   isHoverable?: boolean;
   isRounded?: boolean;
   isDelete?: boolean;
+  isSkeleton?: boolean;
 }
 
 export const Tag = ({
@@ -17,6 +18,7 @@ export const Tag = ({
   isHoverable,
   isRounded,
   isDelete,
+  isSkeleton,
   className,
   children,
   ...props
@@ -28,6 +30,7 @@ export const Tag = ({
   const hoverableClasses = isHoverable ? "is-hoverable" : "";
   const roundedClasses = isRounded ? "is-rounded" : "";
   const deleteClasses = isDelete ? "is-delete" : "";
+  const skeletonClasses = isSkeleton ? "is-skeleton" : "";
 
   const classes = [
     baseClasses,
@@ -37,6 +40,7 @@ export const Tag = ({
     hoverableClasses,
     roundedClasses,
     deleteClasses,
+    skeletonClasses,
     className,
   ]
     .filter(Boolean)
