@@ -8,21 +8,19 @@ const updateThemeStylesheet = (
   id: string,
   context: Document = document
 ) => {
-  const existingLink = context.getElementById(id) as HTMLLinkElement;
+  const themeLinks = context.querySelectorAll(
+    'link[href*="markdownswatch"]'
+  );
+  themeLinks.forEach((link) => link.remove());
+
   const newLink = context.createElement('link');
-  newLink.id = `${id}-temp`;
+  newLink.id = id;
   newLink.rel = 'stylesheet';
   newLink.href = url;
 
-  newLink.onload = () => {
-    if (existingLink) {
-      existingLink.remove();
-    }
-    newLink.id = id;
-    onLoad();
-  };
-
+  newLink.onload = onLoad;
   newLink.onerror = () => {
+    console.error(`Failed to load theme stylesheet: ${url}`);
     newLink.remove();
     onLoad();
   };
@@ -55,7 +53,6 @@ const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialThe
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // Skip the effect on the first render
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
@@ -68,16 +65,11 @@ const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialThe
     setLoading(true);
     updateThemeStylesheet(themeURL, () => setLoading(false), uniqueId);
     document.documentElement.setAttribute('data-theme', dataTheme);
-
-    // No cleanup necessary since we don't want to remove the theme on unmount
   }, [currentTheme, filteredThemes]);
-
-  const handleThemeChange = (value: string) => setCurrentTheme(value);
 
   const selectOptions = filteredThemes.map(theme => ({
     value: theme.id,
     label: theme.name.charAt(0).toUpperCase() + theme.name.slice(1),
-    disabled: false,
   }));
 
   return (
@@ -86,7 +78,7 @@ const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialThe
       color="primary"
       value={currentTheme}
       loading={loading}
-      onChange={(e) => handleThemeChange(e.target.value)}
+      onChange={(e) => setCurrentTheme(e.target.value)}
     />
   );
 };
