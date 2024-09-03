@@ -3,14 +3,13 @@ import { Select } from './Select';
 import Themes from '../config/themes';
 
 const updateThemeStylesheet = (
-  url: string,
+  theme: Theme,
   onLoad: () => void,
   id: string,
   context: Document = document
 ) => {
-  const themeLinks = context.querySelectorAll(
-    'link[href*="markdownswatch"]'
-  );
+  const url = `https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/css/${theme.id}.css`
+  const themeLinks = context.querySelectorAll('link[href*="markdownswatch"]');
   themeLinks.forEach((link) => link.remove());
 
   const newLink = context.createElement('link');
@@ -18,9 +17,11 @@ const updateThemeStylesheet = (
   newLink.rel = 'stylesheet';
   newLink.href = url;
 
-  newLink.onload = onLoad;
+  newLink.onload = () => {
+    context.documentElement.setAttribute('data-theme', theme.dataTheme);
+    onLoad();
+  };
   newLink.onerror = () => {
-    console.error(`Failed to load theme stylesheet: ${url}`);
     newLink.remove();
     onLoad();
   };
@@ -33,11 +34,7 @@ const updateThemeStylesheet = (
   }
 };
 
-interface Theme {
-  id: string;
-  name: string;
-  dataTheme?: string;
-}
+
 
 interface ThemeSelectorProps {
   filter?: (theme: Theme) => boolean;
@@ -45,29 +42,43 @@ interface ThemeSelectorProps {
 }
 
 const ThemeSelector: FC<ThemeSelectorProps> = ({ filter = () => true, initialTheme }) => {
-  const filteredThemes = useMemo(() => Themes.filter(filter), [filter]);
-  const defaultTheme = initialTheme || filteredThemes[0]?.id;
-  const [currentTheme, setCurrentTheme] = useState(defaultTheme);
+  const [syncedThemes, setSyncedThemes] = useState(false); // Ensures filter doesn't change
+  const [themes, setThemes] = useState<Theme[]>(Themes);
+  const [currentTheme, setCurrentTheme] = useState(initialTheme || themes[0]?.id);
   const [loading, setLoading] = useState(false);
   const uniqueId = useRef(`theme-stylesheet-${Math.random().toString(36).substr(2, 9)}`).current;
   const isFirstRender = useRef(true);
+  const filteredThemes = useMemo(() => themes.filter(filter), [themes, filter]);
+  const selectedTheme = useMemo(() => filteredThemes.find((theme) => theme.id === currentTheme) || filteredThemes[0], [currentTheme, filteredThemes]);
+  const stableUniqueId = useRef(uniqueId).current;
+
+  useEffect(() => {
+    if (syncedThemes) return;
+
+    const fetchThemes = async () => {
+      try {
+        const response = await fetch('https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/themes.json');
+        const data: { themes: Theme[] } = await response.json();
+        setThemes(data.themes);
+        setSyncedThemes(true);
+      } catch (error) {
+        console.error('Failed to fetch themes:', error);
+      }
+    };
+
+    fetchThemes();
+  }, [syncedThemes]);
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-
-    const selectedTheme = filteredThemes.find(theme => theme.id === currentTheme);
-    const dataTheme = selectedTheme?.dataTheme || 'user';
-    const themeURL = `https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/css/${currentTheme}.css`;
-
     setLoading(true);
-    updateThemeStylesheet(themeURL, () => setLoading(false), uniqueId);
-    document.documentElement.setAttribute('data-theme', dataTheme);
-  }, [currentTheme, filteredThemes]);
+    updateThemeStylesheet(selectedTheme, () => setLoading(false), stableUniqueId);
+  }, [selectedTheme, stableUniqueId]);
 
-  const selectOptions = filteredThemes.map(theme => ({
+  const selectOptions = filteredThemes.map((theme) => ({
     value: theme.id,
     label: theme.name.charAt(0).toUpperCase() + theme.name.slice(1),
   }));
