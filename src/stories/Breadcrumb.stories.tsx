@@ -20,17 +20,17 @@ export default {
   argTypes: {
     alignment: {
       control: "select",
-      options: ["centered", "right"],
+      options: [undefined, "centered", "right"],
       description: "The alignment of the breadcrumb",
     },
     seperator: {
       control: "select",
-      options: ["arrow", "bullet", "dot", "succeeds"],
+      options: [undefined, "arrow", "bullet", "dot", "succeeds"],
       description: "The separator style between breadcrumb items",
     },
     size: {
       control: "select",
-      options: ["small", "medium", "large"],
+      options: [undefined, "small", "medium", "large"],
       description: "The size of the breadcrumb",
     },
     children: {
@@ -120,7 +120,7 @@ export const Alignments: Story = {
 
 export const Separators: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <Block style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <Breadcrumb seperator="arrow">
         <li>
           <a href="#">Home</a>
@@ -173,13 +173,13 @@ export const Separators: Story = {
           </a>
         </li>
       </Breadcrumb>
-    </div>
+    </Block>
   ),
 };
 
 export const Sizes: Story = {
   render: () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <Block style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       <Breadcrumb size="small">
         <li>
           <a href="#">Home</a>
@@ -232,7 +232,7 @@ export const Sizes: Story = {
           </a>
         </li>
       </Breadcrumb>
-    </div>
+    </Block>
   ),
 };
 
@@ -241,7 +241,7 @@ export const WithIcons: Story = {
     <Breadcrumb>
       <li>
         <a href="#">
-          <IconText color="grey-dark">
+          <IconText>
             <Icon icon="fas fa-home" />
             <span>Home</span>
           </IconText>
@@ -249,7 +249,7 @@ export const WithIcons: Story = {
       </li>
       <li>
         <a href="#">
-          <IconText color="grey-dark">
+          <IconText>
             <Icon icon="fas fa-book" />
             <span>Documentation</span>
           </IconText>
@@ -257,7 +257,7 @@ export const WithIcons: Story = {
       </li>
       <li className="is-active">
         <a href="#">
-          <IconText color="grey-dark">
+          <IconText>
             <Icon icon="fas fa-puzzle-piece" />
             <span>Components</span>
           </IconText>
