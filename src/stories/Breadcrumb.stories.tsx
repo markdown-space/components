@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import React from "react";
+import { Block } from "../components/Block";
 import { Breadcrumb } from "../components/Breadcrumb";
 
 export default {
   title: "Components/Breadcrumb",
   component: Breadcrumb,
   parameters: {
-    layout: "centered",
+    layout: "padded",
     docs: {
       description: {
         component:
@@ -19,17 +19,17 @@ export default {
   argTypes: {
     alignment: {
       control: "select",
-      options: [undefined, "centered", "right"],
+      options: ["centered", "right"],
       description: "The alignment of the breadcrumb",
     },
     seperator: {
       control: "select",
-      options: [undefined, "arrow", "bullet", "dot", "succeeds"],
+      options: ["arrow", "bullet", "dot", "succeeds"],
       description: "The separator style between breadcrumb items",
     },
     size: {
       control: "select",
-      options: [undefined, "small", "medium", "large"],
+      options: ["small", "medium", "large"],
       description: "The size of the breadcrumb",
     },
     children: {
@@ -41,31 +41,32 @@ export default {
 
 type Story = StoryObj<typeof Breadcrumb>;
 
-const DefaultBreadcrumbItems = (
-  <>
-    <li>
-      <a href="#">Home</a>
-    </li>
-    <li>
-      <a href="#">Products</a>
-    </li>
-    <li className="is-active">
-      <a href="#" aria-current="page">
-        Breadcrumb
-      </a>
-    </li>
-  </>
-);
-
 export const Default: Story = {
   args: {
-    children: DefaultBreadcrumbItems,
+    children: (
+      <>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </>
+    ),
   },
 };
 
 export const Alignments: Story = {
+  parameters: {
+    layout: "padded",
+  },
   render: () => (
-    <div
+    <Block
       style={{
         display: "flex",
         flexDirection: "column",
@@ -73,20 +74,104 @@ export const Alignments: Story = {
         width: "100%",
       }}
     >
-      <Breadcrumb>{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb alignment="centered">{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb alignment="right">{DefaultBreadcrumbItems}</Breadcrumb>
-    </div>
+      <Breadcrumb>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb alignment="centered">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb alignment="right">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+    </Block>
   ),
 };
 
 export const Separators: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <Breadcrumb seperator="arrow">{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb seperator="bullet">{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb seperator="dot">{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb seperator="succeeds">{DefaultBreadcrumbItems}</Breadcrumb>
+      <Breadcrumb seperator="arrow">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb seperator="bullet">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb seperator="dot">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb seperator="succeeds">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
     </div>
   ),
 };
@@ -94,10 +179,58 @@ export const Separators: Story = {
 export const Sizes: Story = {
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <Breadcrumb size="small">{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb>{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb size="medium">{DefaultBreadcrumbItems}</Breadcrumb>
-      <Breadcrumb size="large">{DefaultBreadcrumbItems}</Breadcrumb>
+      <Breadcrumb size="small">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb size="medium">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
+      <Breadcrumb size="large">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li className="is-active">
+          <a href="#" aria-current="page">
+            Breadcrumb
+          </a>
+        </li>
+      </Breadcrumb>
     </div>
   ),
 };
@@ -166,33 +299,17 @@ export const CustomStyling: Story = {
       className="has-background-light p-2"
       ulProps={{ className: "has-text-weight-semibold" }}
     >
-      {DefaultBreadcrumbItems}
+      <li>
+        <a href="#">Home</a>
+      </li>
+      <li>
+        <a href="#">Products</a>
+      </li>
+      <li className="is-active">
+        <a href="#" aria-current="page">
+          Breadcrumb
+        </a>
+      </li>
     </Breadcrumb>
   ),
-};
-
-export const InteractiveBreadcrumb: Story = {
-  render: function Render() {
-    const [activeIndex, setActiveIndex] = React.useState(2);
-    const items = ["Home", "Products", "Categories", "Items"];
-
-    return (
-      <Breadcrumb>
-        {items.map((item, index) => (
-          <li key={item} className={index === activeIndex ? "is-active" : ""}>
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                setActiveIndex(index);
-              }}
-              aria-current={index === activeIndex ? "page" : undefined}
-            >
-              {item}
-            </a>
-          </li>
-        ))}
-      </Breadcrumb>
-    );
-  },
 };
