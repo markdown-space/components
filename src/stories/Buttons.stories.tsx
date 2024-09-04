@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import React from "react";
+import { Block } from "../components/Block";
 import { Button } from "../components/Button";
+import { Icon, IconText } from "../components/Icon";
 import { Color, Size } from "../types/shared";
 
 const colors: Color[] = [
@@ -85,97 +86,217 @@ export const Default: Story = {
 
 export const ColorVariants: Story = {
   render: () => (
-    <div className="buttons">
-      {colors.map((color) => (
-        <Button key={color} color={color}>
-          {color.charAt(0).toUpperCase() + color.slice(1)}
-        </Button>
-      ))}
-    </div>
+    <Block className="buttons">
+      <Button>Default</Button>
+      <Button color="white">White</Button>
+      <Button color="black">Black</Button>
+      <Button color="light">Light</Button>
+      <Button color="dark">Dark</Button>
+      <Button color="text">Text</Button>
+      <Button color="primary">Primary</Button>
+      <Button color="link">Link</Button>
+      <Button color="info">Info</Button>
+      <Button color="success">Success</Button>
+      <Button color="warning">Warning</Button>
+      <Button color="danger">Danger</Button>
+    </Block>
   ),
 };
 
 export const SizeVariants: Story = {
   render: () => (
-    <div className="buttons">
-      {sizes.map((size) => (
-        <Button key={size} size={size}>
-          {size.charAt(0).toUpperCase() + size.slice(1)}
-        </Button>
-      ))}
-    </div>
+    <Block className="buttons">
+      <Button size="small">Small</Button>
+      <Button>Normal</Button>
+      <Button size="medium">Medium</Button>
+      <Button size="large">Large</Button>
+    </Block>
   ),
 };
 
 export const Outlined: Story = {
   render: () => (
-    <div className="buttons">
-      {colors.map((color) => (
-        <Button key={color} color={color} isOutlined>
-          Outlined
-        </Button>
-      ))}
-    </div>
+    <Block className="buttons">
+      <Button isOutlined color="black">
+        Black
+      </Button>
+      <Button isOutlined color="dark">
+        Dark
+      </Button>
+      <Button isOutlined color="primary">
+        Primary
+      </Button>
+      <Button isOutlined color="link">
+        Link
+      </Button>
+      <Button isOutlined color="info">
+        Info
+      </Button>
+      <Button isOutlined color="success">
+        Success
+      </Button>
+      <Button isOutlined color="warning">
+        Warning
+      </Button>
+      <Button isOutlined color="danger">
+        Danger
+      </Button>
+    </Block>
   ),
 };
 
 export const Inverted: Story = {
   render: () => (
-    <div className="notification is-primary p-5">
-      {colors.map((color) => (
-        <Button key={color} color={color} isInverted className="mr-2 mb-2">
-          Inverted
-        </Button>
-      ))}
-    </div>
+    <Block
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "1rem",
+        flexWrap: "wrap",
+      }}
+    >
+      <Button isInverted color="primary">
+        Primary
+      </Button>
+      <Button isInverted color="link">
+        Link
+      </Button>
+      <Button isInverted color="info">
+        Info
+      </Button>
+      <Button isInverted color="success">
+        Success
+      </Button>
+      <Button isInverted color="warning">
+        Warning
+      </Button>
+      <Button isInverted color="danger">
+        Danger
+      </Button>
+    </Block>
   ),
 };
 
 export const Rounded: Story = {
   render: () => (
-    <div className="buttons">
-      {colors.map((color) => (
-        <Button key={color} color={color} isRounded>
-          Rounded
-        </Button>
-      ))}
-    </div>
+    <Block className="buttons">
+      <Button isRounded>Default</Button>
+      <Button isRounded color="black">
+        Black
+      </Button>
+      <Button isRounded color="light">
+        Light
+      </Button>
+      <Button isRounded color="dark">
+        Dark
+      </Button>
+      <Button isRounded color="primary">
+        Primary
+      </Button>
+      <Button isRounded color="link">
+        Link
+      </Button>
+      <Button isRounded color="info">
+        Info
+      </Button>
+      <Button isRounded color="success">
+        Success
+      </Button>
+      <Button isRounded color="warning">
+        Warning
+      </Button>
+      <Button isRounded color="danger">
+        Danger
+      </Button>
+    </Block>
   ),
 };
 
 export const Loading: Story = {
   render: () => (
-    <div className="buttons">
-      {colors.map((color) => (
-        <Button key={color} color={color} isLoading>
-          Loading
-        </Button>
-      ))}
-    </div>
+    <Block className="buttons">
+      <Button isLoading>Default</Button>
+      <Button isLoading color="white">
+        White
+      </Button>
+      <Button isLoading color="black">
+        Black
+      </Button>
+      <Button isLoading color="light">
+        Light
+      </Button>
+      <Button isLoading color="dark">
+        Dark
+      </Button>
+      <Button isLoading color="primary">
+        Primary
+      </Button>
+      <Button isLoading color="link">
+        Link
+      </Button>
+      <Button isLoading color="info">
+        Info
+      </Button>
+      <Button isLoading color="success">
+        Success
+      </Button>
+      <Button isLoading color="warning">
+        Warning
+      </Button>
+      <Button isLoading color="danger">
+        Danger
+      </Button>
+    </Block>
   ),
 };
 
 export const Skeleton: Story = {
   render: () => (
-    <div className="buttons">
-      {colors.map((color) => (
-        <Button key={color} color={color} isSkeleton>
-          Loading
-        </Button>
-      ))}
-    </div>
+    <Block className="buttons">
+      <Button isSkeleton>Default</Button>
+      <Button isSkeleton color="white">
+        White
+      </Button>
+      <Button isSkeleton color="black">
+        Black
+      </Button>
+      <Button isSkeleton color="light">
+        Light
+      </Button>
+      <Button isSkeleton color="dark">
+        Dark
+      </Button>
+      <Button isSkeleton color="primary">
+        Primary
+      </Button>
+      <Button isSkeleton color="link">
+        Link
+      </Button>
+      <Button isSkeleton color="info">
+        Info
+      </Button>
+      <Button isSkeleton color="success">
+        Success
+      </Button>
+      <Button isSkeleton color="warning">
+        Warning
+      </Button>
+      <Button isSkeleton color="danger">
+        Danger
+      </Button>
+    </Block>
   ),
 };
 
 export const States: Story = {
   render: () => (
-    <div>
-      <div className="buttons mb-4">
+    <Block>
+      <Block className="buttons mb-4">
         <Button isActive>Active</Button>
         <Button isFocused>Focused</Button>
         <Button isHovered>Hovered</Button>
-      </div>
-      <div className="buttons">
+      </Block>
+      <Block className="buttons">
         <Button color="primary" isActive>
           Active
         </Button>
@@ -185,89 +306,52 @@ export const States: Story = {
         <Button color="primary" isHovered>
           Hovered
         </Button>
-      </div>
-    </div>
+      </Block>
+    </Block>
   ),
 };
 
 export const FullWidth: Story = {
-  render: () => (
-    <div className="buttons is-direction-vertical">
-      <Button fullWidth>Full Width</Button>
-      <Button color="primary" fullWidth>
-        Full Width Primary
-      </Button>
-    </div>
-  ),
+  args: {
+    fullWidth: true,
+    children: "Full Width",
+  },
 };
 
 export const WithIcons: Story = {
   render: () => (
-    <div className="buttons">
+    <Block className="buttons">
       <Button>
-        <span className="icon">
-          <i className="fas fa-home"></i>
-        </span>
-        <span>Home</span>
+        <IconText>
+          <Icon icon="fas fa-home" />
+          <span>Home</span>
+        </IconText>
       </Button>
       <Button color="success">
-        <span className="icon">
-          <i className="fas fa-check"></i>
-        </span>
-        <span>Save</span>
+        <IconText>
+          <Icon icon="fas fa-check" />
+          <span>Save</span>
+        </IconText>
       </Button>
       <Button color="danger">
-        <span>Delete</span>
-        <span className="icon">
-          <i className="fas fa-times"></i>
-        </span>
+        <IconText>
+          <Icon icon="fas fa-times" />
+          <span>Delete</span>
+        </IconText>
       </Button>
-    </div>
+    </Block>
   ),
 };
-
-export const Combinations: Story = {
-  render: () => (
-    <div>
-      <div className="buttons mb-4">
-        <Button color="primary" isOutlined isRounded>
-          Primary Outlined Rounded
-        </Button>
-        <Button color="success" isInverted isRounded>
-          Success Inverted Rounded
-        </Button>
-        <Button color="info" isOutlined isLoading>
-          Info Outlined Loading
-        </Button>
-      </div>
-      <div className="buttons">
-        <Button color="warning" size="small" isRounded>
-          Warning Small Rounded
-        </Button>
-        <Button color="danger" size="large" isOutlined>
-          Danger Large Outlined
-        </Button>
-        <Button color="dark" isLight isInverted>
-          Dark Light Inverted
-        </Button>
-      </div>
-    </div>
-  ),
-};
-
-const ButtonGroup: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="buttons has-addons">{children}</div>
-);
 
 export const GroupedButtons: Story = {
   render: () => (
-    <div>
-      <ButtonGroup>
+    <Block>
+      <Block className="buttons has-addons">
         <Button color="success">Save</Button>
         <Button>Cancel</Button>
         <Button color="danger">Delete</Button>
-      </ButtonGroup>
-      <ButtonGroup>
+      </Block>
+      <Block className="buttons has-addons">
         <Button color="info" isOutlined>
           Left
         </Button>
@@ -277,19 +361,7 @@ export const GroupedButtons: Story = {
         <Button color="info" isOutlined>
           Right
         </Button>
-      </ButtonGroup>
-    </div>
+      </Block>
+    </Block>
   ),
-};
-
-export const Playground: Story = {
-  args: {
-    children: "Playground Button",
-    color: "primary",
-    size: "normal",
-    isOutlined: false,
-    isRounded: false,
-    isLoading: false,
-    fullWidth: false,
-  },
 };
