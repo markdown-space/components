@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
 import { Block } from "../components/Block";
 import { Breadcrumb } from "../components/Breadcrumb";
+import { Icon, IconText } from "../components/Icon";
 
 export default {
   title: "Components/Breadcrumb",
@@ -240,53 +241,26 @@ export const WithIcons: Story = {
     <Breadcrumb>
       <li>
         <a href="#">
-          <span className="icon is-small">
-            <i className="fas fa-home"></i>
-          </span>
-          <span>Home</span>
+          <IconText color="grey-dark">
+            <Icon icon="fas fa-home" />
+            <span>Home</span>
+          </IconText>
         </a>
       </li>
       <li>
         <a href="#">
-          <span className="icon is-small">
-            <i className="fas fa-book"></i>
-          </span>
-          <span>Documentation</span>
+          <IconText color="grey-dark">
+            <Icon icon="fas fa-book" />
+            <span>Documentation</span>
+          </IconText>
         </a>
       </li>
       <li className="is-active">
-        <a href="#" aria-current="page">
-          <span className="icon is-small">
-            <i className="fas fa-puzzle-piece"></i>
-          </span>
-          <span>Components</span>
-        </a>
-      </li>
-    </Breadcrumb>
-  ),
-};
-
-export const LongBreadcrumb: Story = {
-  render: () => (
-    <Breadcrumb>
-      <li>
-        <a href="#">Home</a>
-      </li>
-      <li>
-        <a href="#">Categories</a>
-      </li>
-      <li>
-        <a href="#">Subcategories</a>
-      </li>
-      <li>
-        <a href="#">Items</a>
-      </li>
-      <li>
-        <a href="#">Variations</a>
-      </li>
-      <li className="is-active">
-        <a href="#" aria-current="page">
-          Final Product
+        <a href="#">
+          <IconText color="grey-dark">
+            <Icon icon="fas fa-puzzle-piece" />
+            <span>Components</span>
+          </IconText>
         </a>
       </li>
     </Breadcrumb>
