@@ -63,9 +63,6 @@ export const Default: Story = {
 };
 
 export const Alignments: Story = {
-  parameters: {
-    layout: "padded",
-  },
   render: () => (
     <Block
       style={{
