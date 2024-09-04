@@ -26,15 +26,17 @@ export interface IconProps extends ComponentProps<"span"> {
   size?: "small" | "medium" | "large";
 }
 
-export const Icon = ({ icon, color, size }: IconProps) => {
+export const Icon = ({ icon, color, size, className, ...props }: IconProps) => {
   const baseClass = "icon";
   const colorClass = color ? `has-text-${color}` : "";
   const sizeClass = size ? `is-${size}` : "";
 
-  const classes = [baseClass, colorClass, sizeClass].filter(Boolean).join(" ");
+  const classes = [baseClass, colorClass, sizeClass, className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <span className={classes}>
+    <span className={classes} {...props}>
       <i className={icon} />
     </span>
   );
