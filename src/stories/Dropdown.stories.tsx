@@ -1,42 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
-import { ReactNode } from "react";
 import { Button } from "../components/Button";
-import { Dropdown, DropdownItem } from "../components/Dropdown";
-
-const defaultItems: DropdownItem[] = [
-  {
-    type: "item",
-    label: "Item 1",
-    onClick: () => console.log("Item 1 clicked"),
-  },
-  {
-    type: "item",
-    label: "Item 2",
-    onClick: () => console.log("Item 2 clicked"),
-  },
-  { type: "divider" },
-  {
-    type: "item",
-    label: "Item 3",
-    href: "https://example.com",
-    onClick: () => console.log("Item 3 clicked"),
-  },
-];
-
-const StoryContainer = ({ children }: { children: ReactNode }) => (
-  <div
-    style={{
-      padding: "10rem 0",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      gap: "2rem",
-    }}
-  >
-    {children}
-  </div>
-);
+import { Dropdown } from "../components/Dropdown";
 
 export default {
   title: "Components/Dropdown",
@@ -74,10 +39,18 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
-      <StoryContainer>
-        <Story />
-      </StoryContainer>
+    (story) => (
+      <div
+        style={{
+          padding: "10rem 0",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "2rem",
+        }}
+      >
+        {story()}
+      </div>
     ),
   ],
 } satisfies Meta<typeof Dropdown>;
@@ -87,7 +60,25 @@ type Story = StoryObj<typeof Dropdown>;
 export const Default: Story = {
   args: {
     trigger: <Button>Dropdown</Button>,
-    items: defaultItems,
+    items: [
+      {
+        type: "item",
+        label: "Item 1",
+        onClick: () => console.log("Item 1 clicked"),
+      },
+      {
+        type: "item",
+        label: "Item 2",
+        onClick: () => console.log("Item 2 clicked"),
+      },
+      { type: "divider" },
+      {
+        type: "item",
+        label: "Item 3",
+        href: "https://example.com",
+        onClick: () => console.log("Item 3 clicked"),
+      },
+    ],
   },
 };
 
@@ -123,41 +114,31 @@ export const WithActiveItem: Story = {
   args: {
     ...Default.args,
     items: [
-      ...defaultItems.slice(0, 2),
+      {
+        type: "item",
+        label: "Item 1",
+        onClick: () => console.log("Item 1 clicked"),
+      },
+      {
+        type: "item",
+        label: "Item 2",
+        onClick: () => console.log("Item 2 clicked"),
+      },
+      { type: "divider" },
       {
         type: "item",
         label: "Active Item",
         isActive: true,
         onClick: () => console.log("Active item clicked"),
       },
-      ...defaultItems.slice(2),
+      {
+        type: "item",
+        label: "Item 3",
+        href: "https://example.com",
+        onClick: () => console.log("Item 3 clicked"),
+      },
     ],
   },
-};
-
-export const MultipleDropdowns: Story = {
-  render: () => (
-    <StoryContainer>
-      <Dropdown
-        trigger={<button className="button is-info">Info Dropdown</button>}
-        items={defaultItems}
-      />
-      <Dropdown
-        trigger={
-          <button className="button is-success">Success Dropdown</button>
-        }
-        items={defaultItems}
-        isRight
-      />
-      <Dropdown
-        trigger={
-          <button className="button is-warning">Warning Dropdown</button>
-        }
-        items={defaultItems}
-        isUp
-      />
-    </StoryContainer>
-  ),
 };
 
 export const NestedContent: Story = {
@@ -187,16 +168,5 @@ export const NestedContent: Story = {
         ),
       },
     ],
-  },
-};
-
-export const Playground: Story = {
-  args: {
-    trigger: <Button>Playground Dropdown</Button>,
-    items: defaultItems,
-    isRight: false,
-    isUp: false,
-    isHoverable: false,
-    className: "",
   },
 };
