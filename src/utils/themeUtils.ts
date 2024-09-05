@@ -6,7 +6,6 @@ export const updateThemeStylesheet = (
   ) => {
     const url = `https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/css/${theme.id}.css`
     const themeLinks = context.querySelectorAll('link[href*="markdownswatch"]');
-    themeLinks.forEach((link) => link.remove());
   
     const newLink = context.createElement('link');
     newLink.id = id;
@@ -14,6 +13,7 @@ export const updateThemeStylesheet = (
     newLink.href = url;
   
     newLink.onload = () => {
+      themeLinks.forEach((link) => link.remove());
       context.documentElement.setAttribute('data-theme', theme.dataTheme);
       onLoad();
     };
