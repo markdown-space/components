@@ -5,7 +5,7 @@ import { Button } from "../components/Button";
 import { Modal } from "../components/Modal";
 
 const meta: Meta<typeof Modal> = {
-  title: "Components/Modal",
+  title: "Bulma Components/Modal",
   component: Modal,
   parameters: {
     layout: "fullscreen",

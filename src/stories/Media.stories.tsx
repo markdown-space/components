@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Media } from "../components/Media";
 
 const meta = {
-  title: "Components/Media",
+  title: "Bulma Components/Media",
   component: Media,
   parameters: {
     layout: "padded",

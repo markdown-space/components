@@ -10,7 +10,7 @@ const sizes: Size[] = ["small", "normal", "medium", "large"];
 const types = ["text", "password", "email", "tel"] as const;
 
 export default {
-  title: "Components/Input",
+  title: "Bulma Components/Input",
   component: Input,
   parameters: {
     layout: "padded",

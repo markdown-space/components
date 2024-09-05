@@ -7,7 +7,7 @@ import {
 } from "../components/FormField";
 
 const meta: Meta<typeof FormField> = {
-  title: "Components/FormField",
+  title: "Bulma Components/FormField",
   component: FormField,
   tags: ["autodocs"],
   argTypes: {

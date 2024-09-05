@@ -4,7 +4,7 @@ import React from "react";
 import { Box } from "../components/Box";
 
 export default {
-  title: "Components/Box",
+  title: "Bulma Components/Box",
   component: Box,
   parameters: {
     layout: "centered",

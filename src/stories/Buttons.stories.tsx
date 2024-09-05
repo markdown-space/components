@@ -22,7 +22,7 @@ const colors: Color[] = [
 const sizes: Size[] = ["small", "normal", "medium", "large"];
 
 export default {
-  title: "Components/Button",
+  title: "Bulma Components/Button",
   component: Button,
   parameters: {
     layout: "padded",

@@ -5,7 +5,7 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import { Icon, IconText } from "../components/Icon";
 
 export default {
-  title: "Components/Breadcrumb",
+  title: "Bulma Components/Breadcrumb",
   component: Breadcrumb,
   parameters: {
     layout: "padded",

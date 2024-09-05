@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Radio, RadioList } from "../components/Radio";
 
 const meta: Meta<typeof Radio> = {
-  title: "Components/Radio",
+  title: "Bulma Components/Radio",
   component: Radio,
   parameters: {
     layout: "padded",

@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Card } from "../components/Card";
 
 const meta = {
-  title: "Components/Card",
+  title: "Bulma Components/Card",
   component: Card,
   parameters: {
     layout: "padded",

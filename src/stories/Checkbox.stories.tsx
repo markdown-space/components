@@ -4,7 +4,7 @@ import { Block } from "../components/Block";
 import { Checkbox } from "../components/Checkbox";
 
 export default {
-  title: "Components/Checkbox",
+  title: "Bulma Components/Checkbox",
   component: Checkbox,
   parameters: {
     layout: "padded",

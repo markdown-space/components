@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Pagination } from "../components/Pagination";
 
 const meta = {
-  title: "Components/Pagination",
+  title: "Bulma Components/Pagination",
   component: Pagination,
   parameters: {
     layout: "padded",

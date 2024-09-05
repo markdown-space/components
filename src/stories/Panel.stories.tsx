@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Panel } from "../components/Panel";
 
 const meta = {
-  title: "Components/Panel",
+  title: "Bulma Components/Panel",
   component: Panel,
   parameters: {
     layout: "padded",

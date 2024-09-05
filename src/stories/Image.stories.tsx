@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Image, ImageProps } from "../components/Image";
 
 export default {
-  title: "Components/Image",
+  title: "Bulma Components/Image",
   component: Image,
   parameters: {
     layout: "centered",

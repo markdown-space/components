@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Message } from "../components/Message";
 
 const meta = {
-  title: "Components/Message",
+  title: "Bulma Components/Message",
   component: Message,
   parameters: {
     layout: "padded",

@@ -21,7 +21,7 @@ const defaultOptions = [
 ];
 
 export default {
-  title: "Components/Select",
+  title: "Bulma Components/Select",
   component: Select,
   parameters: {
     layout: "padded",

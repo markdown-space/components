@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Level } from "../components/Level";
 
 const meta = {
-  title: "Components/Level",
+  title: "Bulma Components/Level",
   component: Level,
   parameters: {
     layout: "fullscreen",

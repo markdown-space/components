@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Typography } from "../components/Typography";
 
 const meta = {
-  title: "Components/Typography",
+  title: "Bulma Components/Typography",
   component: Typography,
   parameters: {
     layout: "padded",
