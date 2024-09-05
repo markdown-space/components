@@ -39,27 +39,27 @@ type Story = StoryObj<typeof Checkbox>;
 
 export const Default: Story = {
   args: {
-    children: " Default Checkbox",
+    children: "Default Checkbox",
   },
 };
 
 export const Checked: Story = {
   args: {
-    children: " Checked Checkbox",
+    children: "Checked Checkbox",
     defaultChecked: true,
   },
 };
 
 export const Disabled: Story = {
   args: {
-    children: " Disabled Checkbox",
+    children: "Disabled Checkbox",
     isDisabled: true,
   },
 };
 
 export const DisabledChecked: Story = {
   args: {
-    children: " Disabled Checked Checkbox",
+    children: "Disabled Checked Checkbox",
     isDisabled: true,
     defaultChecked: true,
   },
@@ -67,14 +67,14 @@ export const DisabledChecked: Story = {
 
 export const WithCustomClass: Story = {
   args: {
-    children: " Custom Class Checkbox",
+    children: "Custom Class Checkbox",
     className: "has-background-primary-light",
   },
 };
 
 export const WithLabelProps: Story = {
   args: {
-    children: " Checkbox with Custom Label",
+    children: "Checkbox with Custom Label",
     labelProps: {
       className: "has-text-weight-bold has-text-primary",
     },
@@ -85,7 +85,6 @@ export const WithHTMLInLabel: Story = {
   args: {
     children: (
       <>
-        {" "}
         I agree to the <a href="#">terms and conditions</a>
       </>
     ),
@@ -104,7 +103,7 @@ export const Group: Story = {
 
 export const Playground: Story = {
   args: {
-    children: " Playground Checkbox",
+    children: "Playground Checkbox",
     isDisabled: false,
     className: "",
     labelProps: {},

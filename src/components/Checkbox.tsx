@@ -12,6 +12,7 @@ export const Checkbox = ({
   children,
   className,
   id,
+  style,
   ...props
 }: CheckboxProps) => {
   const generatedId = useId();
@@ -27,6 +28,11 @@ export const Checkbox = ({
       htmlFor={checkboxId}
       className={labelClasses}
       {...labelProps}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        ...labelProps?.style,
+      }}
       aria-disabled={isDisabled}
     >
       <input
@@ -35,6 +41,7 @@ export const Checkbox = ({
         disabled={isDisabled}
         className={inputClasses}
         {...props}
+        style={{ marginRight: "0.5rem", ...style }}
       />
       {children}
     </label>
