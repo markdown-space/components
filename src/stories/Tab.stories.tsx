@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Tab } from "../components/Tab";
 
 const meta = {
-  title: "Components/Tabs",
+  title: "Bulma Components/Tabs",
   component: Tab,
   parameters: {
     layout: "padded",

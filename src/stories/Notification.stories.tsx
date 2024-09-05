@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Notification } from "../components/Notification";
 
 export default {
-  title: "Components/Notification",
+  title: "Bulma Components/Notification",
   component: Notification,
   parameters: {
     layout: "centered",

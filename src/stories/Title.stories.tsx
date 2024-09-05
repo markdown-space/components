@@ -4,7 +4,7 @@ import React from "react";
 import { Title, TitleProps } from "../components/Title";
 
 export default {
-  title: "Components/Title",
+  title: "Bulma Components/Title",
   component: Title,
   parameters: {
     layout: "centered",

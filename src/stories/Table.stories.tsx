@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Table, TD, TH, TR } from "../components/Table";
 
 const meta: Meta<typeof Table> = {
-  title: "Components/Table",
+  title: "Bulma Components/Table",
   component: Table,
   parameters: {
     layout: "padded",

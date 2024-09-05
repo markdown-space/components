@@ -4,7 +4,7 @@ import { Block } from "../components/Block";
 import { Icon, IconColor, IconText } from "../components/Icon";
 
 const meta: Meta<typeof Icon> = {
-  title: "Components/Icon",
+  title: "Bulma Components/Icon",
   component: Icon,
   parameters: {
     layout: "padded",

@@ -4,7 +4,7 @@ import React from "react";
 import { Block } from "../components/Block";
 
 export default {
-  title: "Components/Block",
+  title: "Bulma Components/Block",
   component: Block,
   parameters: {
     layout: "centered",

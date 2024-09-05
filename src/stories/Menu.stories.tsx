@@ -41,7 +41,7 @@ const defaultMenuData = [
 ];
 
 export default {
-  title: "Components/Menu",
+  title: "Bulma Components/Menu",
   component: Menu,
   parameters: {
     layout: "padded",

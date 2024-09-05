@@ -6,7 +6,7 @@ import { Navbar } from "../components/Navbar";
 import { Color } from "../types/shared";
 
 const meta: Meta<typeof Hero> = {
-  title: "Components/Hero",
+  title: "Bulma Components/Hero",
   component: Hero,
   tags: ["autodocs"],
   argTypes: {

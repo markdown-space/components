@@ -4,7 +4,7 @@ import { Block } from "../components/Block";
 import { Skeleton } from "../components/Skeleton";
 
 const meta: Meta<typeof Skeleton> = {
-  title: "Components/Skeleton",
+  title: "Bulma Components/Skeleton",
   component: Skeleton,
   parameters: {
     layout: "padded",

@@ -7,7 +7,7 @@ import { Title } from "../components/Title";
 import { Color, Size } from "../types/shared";
 
 export default {
-  title: "Components/Progress",
+  title: "Bulma Components/Progress",
   component: Progress,
   parameters: {
     layout: "fullscreen",

@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { Form } from "../components/Form";
 
 const meta = {
-  title: "Components/Form",
+  title: "Bulma Components/Form",
   component: Form,
   parameters: {
     layout: "padded",

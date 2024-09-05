@@ -3,7 +3,7 @@ import { EndButtonProps, Navbar } from "../components/Navbar";
 import { ThemeSelector } from "../components/ThemeSelector";
 
 const meta: Meta<typeof Navbar> = {
-  title: "Components/Navbar",
+  title: "Bulma Components/Navbar",
   component: Navbar,
   parameters: {
     layout: "fullscreen",

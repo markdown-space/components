@@ -4,7 +4,7 @@ import { Tag } from "../components/Tag";
 import { Color, Size } from "../types/shared";
 
 export default {
-  title: "Components/Tag",
+  title: "Bulma Components/Tag",
   component: Tag,
   parameters: {
     layout: "centered",

@@ -15,7 +15,7 @@ const sizes: Size[] = ["small", "normal", "medium", "large"];
 const states = ["hovered", "focused", "active"] as const;
 
 export default {
-  title: "Components/Textarea",
+  title: "Bulma Components/Textarea",
   component: Textarea,
   parameters: {
     layout: "padded",

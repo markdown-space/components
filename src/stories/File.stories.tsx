@@ -3,7 +3,7 @@ import "bulma/css/bulma.min.css";
 import { File } from "../components/File";
 
 const meta: Meta<typeof File> = {
-  title: "Components/File",
+  title: "Bulma Components/File",
   component: File,
   parameters: {
     layout: "padded",
