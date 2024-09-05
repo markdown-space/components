@@ -9,11 +9,13 @@ const meta: Meta<typeof Modal> = {
   component: Modal,
   parameters: {
     layout: "fullscreen",
-    padding: 0,
     docs: {
       description: {
         component:
           "A versatile Modal component with various configurations for enhanced user interaction and customization.",
+      },
+      source: {
+        type: "code",
       },
     },
   },
