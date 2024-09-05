@@ -1,12 +1,14 @@
 import { ComponentProps, ReactNode, useId } from "react";
 
 export interface CheckboxProps extends Omit<ComponentProps<"input">, "type"> {
+  isChecked?: boolean;
   isDisabled?: boolean;
   labelProps?: Omit<ComponentProps<"label">, "children">;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const Checkbox = ({
+  isChecked,
   isDisabled,
   labelProps,
   children,
@@ -38,6 +40,7 @@ export const Checkbox = ({
       <input
         id={checkboxId}
         type="checkbox"
+        {...(isChecked && { checked: true })}
         disabled={isDisabled}
         className={inputClasses}
         {...props}
