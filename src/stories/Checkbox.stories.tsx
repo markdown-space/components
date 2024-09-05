@@ -54,6 +54,11 @@ export const Disabled: Story = {
   args: {
     children: "Disabled Checkbox",
     isDisabled: true,
+    labelProps: {
+      style: {
+        opacity: 0.5,
+      },
+    },
   },
 };
 
@@ -62,13 +67,11 @@ export const DisabledChecked: Story = {
     children: "Disabled Checked Checkbox",
     isDisabled: true,
     defaultChecked: true,
-  },
-};
-
-export const WithCustomClass: Story = {
-  args: {
-    children: "Custom Class Checkbox",
-    className: "has-background-primary-light",
+    labelProps: {
+      style: {
+        opacity: 0.5,
+      },
+    },
   },
 };
 
@@ -84,9 +87,9 @@ export const WithLabelProps: Story = {
 export const WithHTMLInLabel: Story = {
   args: {
     children: (
-      <>
-        I agree to the <a href="#">terms and conditions</a>
-      </>
+      <span>
+        I agree to the <a href="#"> terms and conditions</a>
+      </span>
     ),
   },
 };
@@ -94,18 +97,9 @@ export const WithHTMLInLabel: Story = {
 export const Group: Story = {
   render: () => (
     <Block className="checkboxes">
-      <Checkbox className="mr-2">Option 1</Checkbox>
-      <Checkbox className="mr-2">Option 2</Checkbox>
-      <Checkbox className="mr-2">Option 3</Checkbox>
+      <Checkbox>Option 1</Checkbox>
+      <Checkbox>Option 2</Checkbox>
+      <Checkbox>Option 3</Checkbox>
     </Block>
   ),
-};
-
-export const Playground: Story = {
-  args: {
-    children: "Playground Checkbox",
-    isDisabled: false,
-    className: "",
-    labelProps: {},
-  },
 };
