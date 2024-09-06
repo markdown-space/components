@@ -28,7 +28,17 @@ type ButtonTypeProps<T extends ElementType> = ButtonBaseProps &
       : { as: T }) &
   Omit<ComponentPropsWithoutRef<T>, "as" | keyof ButtonBaseProps | "type">;
 
-export type ButtonProps<T extends ElementType = "button"> = ButtonTypeProps<T>;
+type ButtonPropsInput = ButtonTypeProps<"input"> & {
+  children?: never;
+};
+
+type ButtonPropsNonInput<T extends ElementType> = ButtonTypeProps<T> & {
+  children?: React.ReactNode;
+};
+
+export type ButtonProps<T extends ElementType = "button"> = T extends "input"
+  ? ButtonPropsInput
+  : ButtonPropsNonInput<T>;
 
 type ButtonRef<T extends ElementType> = T extends "button"
   ? HTMLButtonElement
@@ -40,8 +50,10 @@ type ButtonRef<T extends ElementType> = T extends "button"
 
 export const Button = forwardRef(
   <T extends ElementType = "button">(
-    {
-      children,
+    props: ButtonProps<T>,
+    ref: Ref<ButtonRef<T>>,
+  ) => {
+    const {
       color,
       size,
       isOutlined = false,
@@ -57,9 +69,8 @@ export const Button = forwardRef(
       className,
       as,
       ...rest
-    }: ButtonProps<T>,
-    ref: Ref<ButtonRef<T>>,
-  ) => {
+    } = props;
+
     const Component = as || "button";
     const baseClasses = "button";
     const colorClasses = color ? `is-${color}` : "";
@@ -96,7 +107,7 @@ export const Button = forwardRef(
     return (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       <Component className={buttonClasses} ref={ref as any} {...(rest as any)}>
-        {children}
+        {Component !== "input" && "children" in props && props.children}
       </Component>
     );
   },
