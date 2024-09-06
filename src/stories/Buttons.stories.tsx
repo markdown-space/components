@@ -35,43 +35,103 @@ export default {
   },
   tags: ["autodocs"],
   argTypes: {
+    as: {
+      options: ["button", "a", "input"],
+      description:
+        "The element type to render. Can be 'button', 'a', or 'input'.",
+      table: {
+        type: { summary: "button | a | input" },
+        defaultValue: { summary: "button" },
+      },
+    },
     color: {
       control: "select",
       options: colors,
       description: "The color of the button",
+      table: {
+        type: {
+          summary: colors.join(" | "),
+        },
+      },
     },
     size: {
       control: "select",
       options: sizes,
       description: "The size of the button",
+      table: {
+        type: {
+          summary: sizes.join(" | "),
+        },
+      },
     },
     isOutlined: {
       control: "boolean",
       description: "Applies an outlined style",
+      type: "boolean",
     },
     isInverted: {
       control: "boolean",
       description: "Inverts the button colors",
+      type: "boolean",
     },
-    isRounded: { control: "boolean", description: "Applies rounded corners" },
-    isLoading: { control: "boolean", description: "Shows a loading spinner" },
-    isActive: { control: "boolean", description: "Applies an active state" },
-    isFocused: { control: "boolean", description: "Applies a focused state" },
-    isHovered: { control: "boolean", description: "Applies a hover state" },
-    isLight: { control: "boolean", description: "Applies a light variant" },
-    isDark: { control: "boolean", description: "Applies a dark variant" },
+    isRounded: {
+      control: "boolean",
+      description: "Applies rounded corners",
+      type: "boolean",
+    },
+    isLoading: {
+      control: "boolean",
+      description: "Shows a loading spinner",
+      type: "boolean",
+    },
+    isActive: {
+      control: "boolean",
+      description: "Applies an active state",
+      type: "boolean",
+    },
+    isFocused: {
+      control: "boolean",
+      description: "Applies a focused state",
+      type: "boolean",
+    },
+    isHovered: {
+      control: "boolean",
+      description: "Applies a hover state",
+      type: "boolean",
+    },
+    isLight: {
+      control: "boolean",
+      description: "Applies a light variant",
+      type: "boolean",
+    },
+    isDark: {
+      control: "boolean",
+      description: "Applies a dark variant",
+      type: "boolean",
+    },
     fullWidth: {
       control: "boolean",
       description: "Makes the button full width",
+      type: "boolean",
     },
     theme: {
       control: "radio",
       options: ["light", "dark"],
       description: "Sets the overall theme",
+      table: {
+        type: {
+          summary: "light | dark",
+        },
+      },
     },
     children: {
-      control: { type: "text" },
-      description: "The content of the button",
+      description: "The content of the button (not applicable for input type)",
+      control: {
+        type: "text",
+      },
+      table: {
+        type: { summary: "ReactNode" },
+      },
     },
   },
 } satisfies Meta<typeof Button>;
