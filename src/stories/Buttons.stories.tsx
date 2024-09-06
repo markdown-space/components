@@ -365,3 +365,25 @@ export const GroupedButtons: Story = {
     </Block>
   ),
 };
+
+export const Link: Story = {
+  render: () => {
+    return (
+      <Button as="a" href="https://markdown.space/" target="_blank">
+        Visit Example
+      </Button>
+    );
+  },
+};
+
+export const ResetInput: Story = {
+  render: () => {
+    return <Button as="input" type="reset" color="light" />;
+  },
+};
+
+export const SubmitInput: Story = {
+  render: () => {
+    return <Button as="input" type="submit" color="info" />;
+  },
+};
