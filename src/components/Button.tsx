@@ -68,6 +68,7 @@ export const Button = forwardRef(
       theme = undefined,
       className,
       as,
+      children,
       ...rest
     } = props;
 
@@ -107,7 +108,7 @@ export const Button = forwardRef(
     return (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       <Component className={buttonClasses} ref={ref as any} {...(rest as any)}>
-        {Component !== "input" && "children" in props && props.children}
+        {children && children}
       </Component>
     );
   },
