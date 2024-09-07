@@ -6,7 +6,7 @@ import {
 } from "../components/Accordion";
 
 const meta: Meta<typeof Accordion> = {
-  title: "Components/Accordion",
+  title: "Bulma Components/Accordion",
   component: Accordion,
   tags: ["autodocs"],
   argTypes: {
