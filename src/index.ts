@@ -33,5 +33,4 @@ export { TableOfContents } from "./components/TableOfContents";
 export { Tag } from "./components/Tag";
 export { Textarea } from "./components/Textarea";
 export { Title } from "./components/Title";
-export { Typography } from "./components/Typography";
 export { ThemeSelector } from "./components/ThemeSelector";
