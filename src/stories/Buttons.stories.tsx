@@ -35,15 +35,6 @@ export default {
   },
   tags: ["autodocs"],
   argTypes: {
-    as: {
-      options: ["button", "a", "input"],
-      description:
-        "The element type to render. Can be 'button', 'a', or 'input'.",
-      table: {
-        type: { summary: "button | a | input" },
-        defaultValue: { summary: "button" },
-      },
-    },
     color: {
       control: "select",
       options: colors,
@@ -429,21 +420,9 @@ export const GroupedButtons: Story = {
 export const Link: Story = {
   render: () => {
     return (
-      <Button as="a" href="https://markdown.space/" target="_blank">
+      <Button href="https://markdown.space/" target="_blank">
         Visit Example
       </Button>
     );
-  },
-};
-
-export const ResetInput: Story = {
-  render: () => {
-    return <Button as="input" type="reset" color="light" />;
-  },
-};
-
-export const SubmitInput: Story = {
-  render: () => {
-    return <Button as="input" type="submit" color="info" />;
   },
 };
