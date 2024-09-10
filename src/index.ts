@@ -12,7 +12,6 @@ export { Icon, IconText } from "./components/Icon";
 export { Image } from "./components/Image";
 export { Input } from "./components/Input";
 export { LinkPage } from "./components/LinkPage";
-export { Media } from "./components/Media";
 export { Menu } from "./components/Menu";
 export { Message } from "./components/Message";
 export { Modal } from "./components/Modal";
