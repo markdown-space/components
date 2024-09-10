@@ -5,7 +5,6 @@ export { Button } from "./components/Button";
 export { Checkbox } from "./components/Checkbox";
 export { Dropdown } from "./components/Dropdown";
 export { File } from "./components/File";
-export { Form } from "./components/Form";
 export { FormField } from "./components/FormField";
 export { Hero, HeroTitle, HeroSubtitle } from "./components/Hero";
 export { HeroSection } from "./components/HeroSection";
