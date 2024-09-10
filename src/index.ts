@@ -18,7 +18,6 @@ export { Modal } from "./components/Modal";
 export { Navbar } from "./components/Navbar";
 export { Notification } from "./components/Notification";
 export { Pagination } from "./components/Pagination";
-export { Panel } from "./components/Panel";
 export { Progress } from "./components/Progress";
 export { Radio, RadioList } from "./components/Radio";
 export { Select } from "./components/Select";
