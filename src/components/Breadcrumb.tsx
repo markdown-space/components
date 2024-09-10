@@ -3,7 +3,7 @@ import { Size } from "../types/shared";
 
 export type BreadcrumbProps = ComponentProps<"nav"> & {
   alignment?: "centered" | "right";
-  seperator?: "arrow" | "bullet" | "dot" | "succeeds";
+  separator?: "arrow" | "bullet" | "dot" | "succeeds";
   size?: Exclude<Size, "normal">;
   /**
    * The children of a breadcrumb component should be `<li/>` elements.
@@ -17,7 +17,7 @@ export type BreadcrumbProps = ComponentProps<"nav"> & {
 
 export const Breadcrumb = ({
   alignment,
-  seperator,
+  separator,
   size,
   className,
   children,
@@ -26,13 +26,13 @@ export const Breadcrumb = ({
 }: BreadcrumbProps) => {
   const baseClasses = "breadcrumb";
   const alignmentClass = alignment ? `is-${alignment}` : "";
-  const seperatorClass = seperator ? `has-${seperator}-separator` : "";
+  const separatorClass = separator ? `has-${separator}-separator` : "";
   const sizeClass = size ? `is-${size}` : "";
 
   const classes = [
     baseClasses,
     alignmentClass,
-    seperatorClass,
+    separatorClass,
     sizeClass,
     className,
   ]
