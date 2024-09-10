@@ -23,7 +23,7 @@ export default {
       options: [undefined, "centered", "right"],
       description: "The alignment of the breadcrumb",
     },
-    seperator: {
+    separator: {
       control: "select",
       options: [undefined, "arrow", "bullet", "dot", "succeeds"],
       description: "The separator style between breadcrumb items",
@@ -118,7 +118,7 @@ export const Alignments: Story = {
 export const Separators: Story = {
   render: () => (
     <Block style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-      <Breadcrumb seperator="arrow">
+      <Breadcrumb separator="arrow">
         <li>
           <a href="#">Home</a>
         </li>
@@ -131,7 +131,7 @@ export const Separators: Story = {
           </a>
         </li>
       </Breadcrumb>
-      <Breadcrumb seperator="bullet">
+      <Breadcrumb separator="bullet">
         <li>
           <a href="#">Home</a>
         </li>
@@ -144,7 +144,7 @@ export const Separators: Story = {
           </a>
         </li>
       </Breadcrumb>
-      <Breadcrumb seperator="dot">
+      <Breadcrumb separator="dot">
         <li>
           <a href="#">Home</a>
         </li>
@@ -157,7 +157,7 @@ export const Separators: Story = {
           </a>
         </li>
       </Breadcrumb>
-      <Breadcrumb seperator="succeeds">
+      <Breadcrumb separator="succeeds">
         <li>
           <a href="#">Home</a>
         </li>
