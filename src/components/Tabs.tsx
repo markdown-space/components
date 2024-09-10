@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
-export interface TabsProps {
+export interface TabsProps extends ComponentProps<"div"> {
   alignment?: "centered" | "right" | "left";
   size?: "small" | "medium" | "large";
   isBoxed?: boolean;
@@ -21,6 +21,8 @@ export const Tabs = ({
   isToggleRounded,
   isFullWidth,
   children,
+  className,
+  ...props
 }: TabsProps) => {
   const baseClasses = "tabs";
   const alignmentClass = alignment ? `is-${alignment}` : "";
@@ -38,12 +40,13 @@ export const Tabs = ({
     toggleClass,
     toggleRoundedClass,
     fullWidthClass,
+    className,
   ]
     .filter(Boolean)
     .join(" ");
 
   return (
-    <div className={classes}>
+    <div className={classes} {...props}>
       <ul>{children}</ul>
     </div>
   );
