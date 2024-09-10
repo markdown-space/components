@@ -12,7 +12,6 @@ export { HeroSection } from "./components/HeroSection";
 export { Icon, IconText } from "./components/Icon";
 export { Image } from "./components/Image";
 export { Input } from "./components/Input";
-export { Level } from "./components/Level";
 export { LinkPage } from "./components/LinkPage";
 export { Media } from "./components/Media";
 export { Menu } from "./components/Menu";
