@@ -245,7 +245,8 @@ export const Autoplay: Story = {
       },
     ],
     autoplay: true,
-    interval: 3000,
+    showControls: false,
+    interval: 1000,
   },
 };
 
