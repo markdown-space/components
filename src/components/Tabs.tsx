@@ -1,16 +1,21 @@
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps } from "react";
 
-export interface TabsProps extends ComponentProps<"div"> {
+export interface TabItemProps extends ComponentProps<"li"> {
+  id: string;
+  isActive?: boolean;
+  label: string;
+  href?: ComponentProps<"a">["href"];
+  target?: ComponentProps<"a">["target"];
+}
+
+export interface TabsProps extends Omit<ComponentProps<"div">, "children"> {
   alignment?: "centered" | "right" | "left";
   size?: "small" | "medium" | "large";
   isBoxed?: boolean;
   isToggle?: boolean;
   isToggleRounded?: boolean;
   isFullWidth?: boolean;
-  /**
-   * The children of a tabs component should be `<li/>` elements.
-   */
-  children: ReactNode;
+  items?: TabItemProps[];
 }
 
 export const Tabs = ({
@@ -20,8 +25,8 @@ export const Tabs = ({
   isToggle,
   isToggleRounded,
   isFullWidth,
-  children,
   className,
+  items = [],
   ...props
 }: TabsProps) => {
   const baseClasses = "tabs";
@@ -47,7 +52,17 @@ export const Tabs = ({
 
   return (
     <div className={classes} {...props}>
-      <ul>{children}</ul>
+      <ul>
+        {items.map(({ id, isActive, href, target, label, ...itemProps }) => {
+          return (
+            <li key={id} className={isActive ? "is-active" : ""} {...itemProps}>
+              <a {...(href && { href })} {...(target && { target })}>
+                {label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
