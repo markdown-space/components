@@ -68,7 +68,7 @@ export const Default: Story = {
 
     const items: TabItemProps[] = [
       { id: "1", label: "Pictures", isActive: activeTab === "1" },
-      { id: "2", label: "Music", isActive: activeTab === "2" },
+      { id: "2", label: "Downloads", isActive: activeTab === "2" },
       { id: "3", label: "Videos", isActive: activeTab === "3" },
       { id: "4", label: "Documents", isActive: activeTab === "4" },
     ];
@@ -89,13 +89,13 @@ export const Alignments: Story = {
     const [activeTab, setActiveTab] = useState("1");
 
     const items: TabItemProps[] = [
-      { id: "1", label: "Tab 1", isActive: activeTab === "1" },
-      { id: "2", label: "Tab 2", isActive: activeTab === "2" },
-      { id: "3", label: "Tab 3", isActive: activeTab === "3" },
+      { id: "1", label: "Documentation", isActive: activeTab === "1" },
+      { id: "2", label: "Examples", isActive: activeTab === "2" },
+      { id: "3", label: "Playground", isActive: activeTab === "3" },
     ];
 
     return (
-      <div>
+      <Block>
         <Tabs
           alignment="left"
           className="mb-4"
@@ -119,7 +119,7 @@ export const Alignments: Story = {
             onClick: () => setActiveTab(item.id),
           }))}
         />
-      </div>
+      </Block>
     );
   },
 };
@@ -129,9 +129,9 @@ export const Sizes: Story = {
     const [activeTab, setActiveTab] = useState("1");
 
     const items: TabItemProps[] = [
-      { id: "1", label: "Tab 1", isActive: activeTab === "1" },
-      { id: "2", label: "Tab 2", isActive: activeTab === "2" },
-      { id: "3", label: "Tab 3", isActive: activeTab === "3" },
+      { id: "1", label: "My Feed", isActive: activeTab === "1" },
+      { id: "2", label: "Subscriptions", isActive: activeTab === "2" },
+      { id: "3", label: "Account", isActive: activeTab === "3" },
     ];
 
     return (
@@ -176,9 +176,9 @@ export const Boxed: Story = {
     const [activeTab, setActiveTab] = useState("1");
 
     const items: TabItemProps[] = [
-      { id: "1", label: "Boxed 1", isActive: activeTab === "1" },
-      { id: "2", label: "Boxed 2", isActive: activeTab === "2" },
-      { id: "3", label: "Boxed 3", isActive: activeTab === "3" },
+      { id: "1", label: "Projects", isActive: activeTab === "1" },
+      { id: "2", label: "Settings", isActive: activeTab === "2" },
+      { id: "3", label: "Account", isActive: activeTab === "3" },
     ];
 
     return (
@@ -198,9 +198,10 @@ export const Toggle: Story = {
     const [activeTab, setActiveTab] = useState("1");
 
     const items: TabItemProps[] = [
-      { id: "1", label: "Toggle 1", isActive: activeTab === "1" },
-      { id: "2", label: "Toggle 2", isActive: activeTab === "2" },
-      { id: "3", label: "Toggle 3", isActive: activeTab === "3" },
+      { id: "1", label: "Home", isActive: activeTab === "1" },
+      { id: "2", label: "Products", isActive: activeTab === "2" },
+      { id: "3", label: "About Us", isActive: activeTab === "3" },
+      { id: "4", label: "Contact", isActive: activeTab === "4" },
     ];
 
     return (
@@ -220,11 +221,11 @@ export const ToggleRounded: Story = {
     const [activeTab, setActiveTab] = useState("1");
 
     const items: TabItemProps[] = [
-      { id: "1", label: "Rounded 1", isActive: activeTab === "1" },
-      { id: "2", label: "Rounded 2", isActive: activeTab === "2" },
-      { id: "3", label: "Rounded 3", isActive: activeTab === "3" },
+      { id: "1", label: "All", isActive: activeTab === "1" },
+      { id: "2", label: "Articles", isActive: activeTab === "2" },
+      { id: "3", label: "Videos", isActive: activeTab === "3" },
+      { id: "4", label: "Podcasts", isActive: activeTab === "4" },
     ];
-
     return (
       <Tabs
         isToggle
@@ -243,10 +244,10 @@ export const FullWidth: Story = {
     const [activeTab, setActiveTab] = useState("1");
 
     const items: TabItemProps[] = [
-      { id: "1", label: "Full 1", isActive: activeTab === "1" },
-      { id: "2", label: "Full 2", isActive: activeTab === "2" },
-      { id: "3", label: "Full 3", isActive: activeTab === "3" },
-      { id: "4", label: "Full 4", isActive: activeTab === "4" },
+      { id: "1", label: "General", isActive: activeTab === "1" },
+      { id: "2", label: "Privacy", isActive: activeTab === "2" },
+      { id: "3", label: "Notifications", isActive: activeTab === "3" },
+      { id: "4", label: "Security", isActive: activeTab === "4" },
     ];
 
     return (
