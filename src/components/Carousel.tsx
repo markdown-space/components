@@ -1,54 +1,102 @@
-import type { ComponentProps, CSSProperties, ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { AnimatePresence, motion, PanInfo } from "framer-motion";
+import {
+  ComponentProps,
+  CSSProperties,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { Block } from "./Block";
 import { Button } from "./Button";
 
-export interface CarouselItemProps
-  extends Omit<ComponentProps<"div">, "content"> {
+interface CarouselItem {
   id: string;
   content: ReactNode;
 }
 
-export interface CarouselProps extends Omit<ComponentProps<"div">, "children"> {
-  items: CarouselItemProps[];
+const sliderVariants = {
+  incoming: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+  }),
+  active: { x: 0, scale: 1, opacity: 1 },
+  exit: (direction: number) => ({
+    x: direction > 0 ? "-100%" : "100%",
+  }),
+};
+
+const sliderTransition = {
+  duration: 0.5,
+  ease: "easeInOut",
+};
+
+interface CarouselProps extends ComponentProps<"div"> {
+  items: CarouselItem[];
   autoplay?: boolean;
   interval?: number;
-  showIndicators?: boolean;
   showControls?: boolean;
+  showIndicators?: boolean;
 }
 
-export const Carousel = ({
+export function Carousel({
   items,
-  autoplay = false,
-  interval = 5000,
-  showIndicators = true,
-  showControls = true,
-  className,
   style,
-  ...props
-}: CarouselProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  autoplay,
+  interval = 5000,
+  showControls = true,
+  showIndicators = true,
+}: CarouselProps): JSX.Element {
+  const [[activeIndex, direction], setActiveIndex] = useState<[number, number]>(
+    [0, 0],
+  );
+
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  function wrap(min: number, max: number, v: number): number {
+    const rangeSize = max - min;
+    return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+  }
+
+  const swipeToItem = useCallback(
+    (swipeDirection: number) => {
+      setIsDisabled(true);
+      setActiveIndex(([prevIndex]) => [
+        wrap(0, items.length, prevIndex + swipeDirection),
+        swipeDirection,
+      ]);
+
+      setTimeout(() => {
+        setIsDisabled(false);
+      }, 500);
+    },
+    [items.length],
+  );
+
+  function dragEndHandler(dragInfo: PanInfo): void {
+    const draggedDistance = dragInfo.offset.x;
+    const swipeThreshold = 50;
+    if (draggedDistance > swipeThreshold) {
+      swipeToItem(-1);
+    } else if (draggedDistance < -swipeThreshold) {
+      swipeToItem(1);
+    }
+  }
+
+  function skipToItem(itemId: string): void {
+    const newIndex = items.findIndex((item) => item.id === itemId);
+    if (newIndex !== -1 && newIndex !== activeIndex) {
+      setActiveIndex([newIndex, newIndex > activeIndex ? 1 : -1]);
+    }
+  }
 
   useEffect(() => {
     if (autoplay) {
       const timer = setInterval(() => {
-        setActiveIndex((current) => (current + 1) % items.length);
+        swipeToItem(1);
       }, interval);
       return () => clearInterval(timer);
     }
-  }, [autoplay, interval, items.length]);
-
-  function goToNext() {
-    setActiveIndex((current) => (current + 1) % items.length);
-  }
-
-  function goToPrev() {
-    setActiveIndex((current) => (current - 1 + items.length) % items.length);
-  }
-
-  function goToIndex(index: number) {
-    setActiveIndex(index);
-  }
+  }, [autoplay, interval, swipeToItem]);
 
   const controlStyle: CSSProperties = {
     position: "absolute",
@@ -65,41 +113,69 @@ export const Carousel = ({
   return (
     <Block
       style={{
-        position: "relative",
-        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
         width: "100%",
         height: "400px",
         ...style,
       }}
-      className={className}
-      {...props}
     >
-      {items.map((item, index) => (
-        <Block
-          key={item.id}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            opacity: index === activeIndex ? 1 : 0,
-            transition: "opacity 0.5s ease-in-out",
-          }}
-        >
-          {item.content}
-        </Block>
-      ))}
-      {showControls && (
-        <>
-          <Button style={{ ...controlStyle, left: "10px" }} onClick={goToPrev}>
-            &#10094;
-          </Button>
-          <Button style={{ ...controlStyle, right: "10px" }} onClick={goToNext}>
-            &#10095;
-          </Button>
-        </>
-      )}
+      <Block
+        style={{
+          position: "relative",
+          height: "100%",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <AnimatePresence initial={false} custom={direction}>
+          <motion.div
+            key={activeIndex}
+            style={{
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+            }}
+            custom={direction}
+            variants={sliderVariants}
+            initial="incoming"
+            animate="active"
+            exit="exit"
+            transition={sliderTransition}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(_, dragInfo) => dragEndHandler(dragInfo)}
+          >
+            {items[activeIndex].content}
+          </motion.div>
+        </AnimatePresence>
+        {showControls && (
+          <>
+            <Button
+              style={{
+                ...controlStyle,
+                left: 10,
+              }}
+              disabled={isDisabled}
+              onClick={() => swipeToItem(-1)}
+            >
+              &#10094;
+            </Button>
+            <Button
+              style={{
+                ...controlStyle,
+                right: 10,
+              }}
+              disabled={isDisabled}
+              onClick={() => swipeToItem(1)}
+            >
+              &#10095;
+            </Button>
+          </>
+        )}
+      </Block>
       {showIndicators && (
         <Block
           style={{
@@ -111,8 +187,9 @@ export const Carousel = ({
           }}
         >
           {items.map((item, index) => (
-            <Button
+            <Block
               key={item.id}
+              onClick={() => skipToItem(item.id)}
               style={{
                 width: "10px",
                 height: "10px",
@@ -125,11 +202,10 @@ export const Carousel = ({
                 cursor: "pointer",
                 padding: 0,
               }}
-              onClick={() => goToIndex(index)}
-            ></Button>
+            />
           ))}
         </Block>
       )}
     </Block>
   );
-};
+}
