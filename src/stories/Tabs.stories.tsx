@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
+import { useState } from "react";
 import { Block } from "../components/Block";
 import { Tabs } from "../components/Tabs";
 
@@ -70,223 +71,159 @@ export default {
 type Story = StoryObj<typeof Tabs>;
 
 export const Default: Story = {
-  args: {
-    children: (
-      <>
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </>
-    ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Tabs>
+        {tabs.map((tab) => (
+          <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+            <a onClick={() => setActiveTab(tab)}>{tab}</a>
+          </li>
+        ))}
+      </Tabs>
+    );
   },
 };
 
 export const Alignments: Story = {
-  render: () => (
-    <Block>
-      <Tabs alignment="left" className="mb-4">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-      <Tabs alignment="centered" className="mb-4">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-      <Tabs alignment="right">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-    </Block>
-  ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Block>
+        <Tabs alignment="left" className="mb-4">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+        <Tabs alignment="centered" className="mb-4">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+        <Tabs alignment="right">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+      </Block>
+    );
+  },
 };
 
 export const Sizes: Story = {
-  render: () => (
-    <Block>
-      <Tabs size="small" className="mb-4">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-      <Tabs className="mb-4">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-      <Tabs size="medium" className="mb-4">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-      <Tabs size="large">
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </Tabs>
-    </Block>
-  ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Block>
+        <Tabs size="small" className="mb-4">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+        <Tabs className="mb-4">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+        <Tabs size="medium" className="mb-4">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+        <Tabs size="large">
+          {tabs.map((tab) => (
+            <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+              <a onClick={() => setActiveTab(tab)}>{tab}</a>
+            </li>
+          ))}
+        </Tabs>
+      </Block>
+    );
+  },
 };
 
 export const Boxed: Story = {
-  args: {
-    isBoxed: true,
-    children: (
-      <>
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </>
-    ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Tabs isBoxed>
+        {tabs.map((tab) => (
+          <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+            <a onClick={() => setActiveTab(tab)}>{tab}</a>
+          </li>
+        ))}
+      </Tabs>
+    );
   },
 };
 
 export const Toggle: Story = {
-  args: {
-    isToggle: true,
-    children: (
-      <>
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </>
-    ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Tabs isToggle>
+        {tabs.map((tab) => (
+          <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+            <a onClick={() => setActiveTab(tab)}>{tab}</a>
+          </li>
+        ))}
+      </Tabs>
+    );
   },
 };
 
 export const ToggleRounded: Story = {
-  args: {
-    isToggle: true,
-    isToggleRounded: true,
-    children: (
-      <>
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </>
-    ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Tabs isToggle isToggleRounded>
+        {tabs.map((tab) => (
+          <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+            <a onClick={() => setActiveTab(tab)}>{tab}</a>
+          </li>
+        ))}
+      </Tabs>
+    );
   },
 };
 
 export const FullWidth: Story = {
-  args: {
-    isFullWidth: true,
-    children: (
-      <>
-        <li className="is-active">
-          <a>Pictures</a>
-        </li>
-        <li>
-          <a>Downloads</a>
-        </li>
-        <li>
-          <a>Videos</a>
-        </li>
-        <li>
-          <a>Documents</a>
-        </li>
-      </>
-    ),
+  render: () => {
+    const [activeTab, setActiveTab] = useState("Pictures");
+    const tabs = ["Pictures", "Downloads", "Videos", "Documents"];
+
+    return (
+      <Tabs isFullWidth>
+        {tabs.map((tab) => (
+          <li key={tab} className={activeTab === tab ? "is-active" : ""}>
+            <a onClick={() => setActiveTab(tab)}>{tab}</a>
+          </li>
+        ))}
+      </Tabs>
+    );
   },
 };
