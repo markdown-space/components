@@ -4,7 +4,7 @@ import { Block } from "../components/Block";
 import { Carousel } from "../components/Carousel";
 
 export default {
-  title: "Bulma Components/Carousel",
+  title: "Markdown Space Components/Carousel",
   component: Carousel,
   parameters: {
     layout: "padded",
