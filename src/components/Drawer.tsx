@@ -14,7 +14,7 @@ type DrawerBaseProps = {
   isOpen: boolean;
   onClose: () => void;
   position?: Position;
-  size?: string;
+  width?: CSSProperties["width"];
   overlay?: boolean;
   closeOnOverlayClick?: boolean;
   closeOnEsc?: boolean;
@@ -29,7 +29,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       isOpen,
       onClose,
       position = "right",
-      size = "300px",
+      width = "300px",
       overlay = true,
       closeOnOverlayClick = true,
       closeOnEsc = true,
@@ -84,8 +84,8 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
       zIndex: 1000,
       ...(position === "left" || position === "right"
-        ? { top: 0, bottom: 0, width: size }
-        : { left: 0, right: 0, height: size }),
+        ? { top: 0, bottom: 0, width: width }
+        : { left: 0, right: 0, height: width }),
       ...getInitialPosition(),
       ...style,
     };
