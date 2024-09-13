@@ -1,3 +1,4 @@
+import { AnimatePresence, motion, MotionProps, Variants } from "framer-motion";
 import {
   ComponentPropsWithoutRef,
   CSSProperties,
@@ -27,7 +28,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     {
       isOpen,
       onClose,
-      position,
+      position = "right",
       size = "300px",
       overlay = true,
       closeOnOverlayClick = true,
@@ -43,7 +44,6 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
 
     useEffect(() => {
       setMounted(true);
-
       return () => setMounted(false);
     }, []);
 
@@ -63,72 +63,77 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
       };
     }, [isOpen, closeOnEsc, onClose]);
 
-    const positionStyles: Record<Position, CSSProperties> = {
-      left: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        width: size,
-        transform: isOpen ? "translateX(0)" : `translateX(-100%)`,
-      },
-      right: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        width: size,
-        transform: isOpen ? "translateX(0)" : `translateX(100%)`,
-      },
-      top: {
-        top: 0,
-        left: 0,
-        right: 0,
-        height: size,
-        transform: isOpen ? "translateY(0)" : `translateY(-100%)`,
-      },
-      bottom: {
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: size,
-        transform: isOpen ? "translateY(0)" : `translateY(100%)`,
-      },
+    const getInitialPosition = (): { [key: string]: string } => {
+      switch (position) {
+        case "left":
+          return { left: `-100%` };
+        case "right":
+          return { right: `-100%` };
+        case "top":
+          return { top: `-100%` };
+        case "bottom":
+          return { bottom: `-100%` };
+        default:
+          return { right: `-100%` };
+      }
     };
 
     const drawerStyle: CSSProperties = {
       position: "fixed",
-      transition: "transform 0.3s ease-in-out",
       backgroundColor: "white",
       boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
       zIndex: 1000,
-      ...(positionStyles?.[position || "right"] || {}),
+      ...(position === "left" || position === "right"
+        ? { top: 0, bottom: 0, width: size }
+        : { left: 0, right: 0, height: size }),
+      ...getInitialPosition(),
       ...style,
     };
 
-    const overlayStyle: CSSProperties = {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      zIndex: 999,
-      opacity: isOpen ? 1 : 0,
-      visibility: isOpen ? "visible" : "hidden",
-      transition: "opacity 0.3s ease-in-out, visibility 0.3s ease-in-out",
+    const variants: Variants = {
+      open: { [position]: 0 },
+      closed: { ...getInitialPosition(), transition: { duration: 1 } },
     };
 
     const content = (
-      <>
-        {overlay && (
-          <div
-            style={overlayStyle}
-            onClick={closeOnOverlayClick ? onClose : undefined}
-          />
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {overlay && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0, pointerEvents: "none" }}
+                transition={{ duration: 0.3 }}
+                style={{
+                  position: "fixed",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  zIndex: 999,
+                  pointerEvents: !isOpen ? "none" : "auto",
+                }}
+                onClick={closeOnOverlayClick ? onClose : undefined}
+              />
+            )}
+            <motion.div
+              ref={ref}
+              className={className}
+              style={drawerStyle}
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={variants}
+              transition={{ type: "tween", duration: 0.3 }}
+              {...(rest as MotionProps)}
+            >
+              {children}
+            </motion.div>
+          </>
         )}
-        <div ref={ref} className={className} style={drawerStyle} {...rest}>
-          {children}
-        </div>
-      </>
+      </AnimatePresence>
     );
 
     return mounted ? createPortal(content, document.body) : null;
