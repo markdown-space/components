@@ -69,28 +69,28 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
         left: 0,
         bottom: 0,
         width: size,
-        transform: isOpen ? "translateX(0)" : `translateX(-${size})`,
+        transform: isOpen ? "translateX(0)" : `translateX(-100%)`,
       },
       right: {
         top: 0,
         right: 0,
         bottom: 0,
         width: size,
-        transform: isOpen ? "translateX(0)" : `translateX(${size})`,
+        transform: isOpen ? "translateX(0)" : `translateX(100%)`,
       },
       top: {
         top: 0,
         left: 0,
         right: 0,
         height: size,
-        transform: isOpen ? "translateY(0)" : `translateY(-${size})`,
+        transform: isOpen ? "translateY(0)" : `translateY(-100%)`,
       },
       bottom: {
         bottom: 0,
         left: 0,
         right: 0,
         height: size,
-        transform: isOpen ? "translateY(0)" : `translateY(${size})`,
+        transform: isOpen ? "translateY(0)" : `translateY(100%)`,
       },
     };
 
