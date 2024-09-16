@@ -41,7 +41,8 @@ type Story = StoryObj<typeof Card>;
 export const Default: Story = {
   args: {
     style: { width: "400px" },
-    children: "This is a basic card with only content.",
+    children:
+      "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
   },
 };
 
@@ -70,7 +71,8 @@ export const WithImage: Story = {
 
 export const WithFooter: Story = {
   args: {
-    children: "This card has a footer with real links.",
+    children:
+      "Storybook is a frontend workshop for building UI components and pages in isolation. Thousands of teams use it for UI development, testing, and documentation. It's open source and free.",
     style: { width: "400px" },
     footer: (
       <>
@@ -111,8 +113,9 @@ export const FullCard: Story = {
       <div className="content">
         <h2>Card Content</h2>
         <p>
-          This is an example of a card with all possible elements: header,
-          image, content, and footer with real links.
+          Storybook is a frontend workshop for building UI components and pages
+          in isolation. Thousands of teams use it for UI development, testing,
+          and documentation. It's open source and free.
         </p>
       </div>
     ),
