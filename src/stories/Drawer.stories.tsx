@@ -34,8 +34,6 @@ const meta: Meta<typeof Drawer> = {
       },
     },
     position: {
-      control: "select",
-      options: ["left", "right", "top", "bottom"],
       description: "The position of the drawer",
       table: {
         type: {
