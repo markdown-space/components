@@ -1,6 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { EndButtonProps, Navbar } from "../components/Navbar";
+import { Block } from "../components/Block";
+import { Button } from "../components/Button";
+import { Navbar, NavbarDropdown, NavbarItem } from "../components/Navbar";
 import { ThemeSelector } from "../components/ThemeSelector";
+
+const colors = [
+  "primary",
+  "link",
+  "info",
+  "success",
+  "warning",
+  "danger",
+  "black",
+  "dark",
+  "light",
+  "white",
+];
 
 const meta: Meta<typeof Navbar> = {
   title: "Bulma Components/Navbar",
@@ -10,62 +25,116 @@ const meta: Meta<typeof Navbar> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    brand: { control: "text" },
+    brand: {
+      control: "text",
+      description: "The brand element to display in the navbar",
+    },
     color: {
       control: "select",
-      options: [
-        "primary",
-        "link",
-        "info",
-        "success",
-        "warning",
-        "danger",
-        "light",
-        "dark",
-      ],
+      options: colors,
+      description: "The color of the navbar",
+      table: {
+        type: {
+          summary: colors.join(" | "),
+        },
+      },
     },
-    startItems: { control: "object" },
-    endButtons: { control: "object" },
+    startItems: {
+      description: "Items to display at the start of the navbar",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+      control: { disable: true },
+    },
+    endItems: {
+      description: "Items to display at the end of the navbar",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+      control: { disable: true },
+    },
+    isSpaced: {
+      control: "boolean",
+      description: "Whether the navbar should have more padding",
+    },
+    hasShadow: {
+      control: "boolean",
+      description: "Whether the navbar should have a shadow",
+    },
+    isFixedTop: {
+      control: "boolean",
+      description: "Whether the navbar should be fixed to the top of the page",
+    },
+    hideToggle: {
+      control: "boolean",
+      description: "Whether to hide the mobile toggle button",
+    },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ padding: "0 0 16rem" }}>
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;
 type Story = StoryObj<typeof Navbar>;
 
-const defaultBrand = (
-  <span className="navbar-item">
-    <img
-      src="/public/markdown-space-logo.svg"
-      alt="Bulma: a modern CSS framework based on Flexbox"
-      height="28"
-    />
-  </span>
-);
-
-const defaultStartItems = [
-  { label: "Home" },
-  { label: "Documentation" },
-  {
-    label: "More",
-    items: [
-      { label: "About" },
-      { label: "Jobs", isSelected: true },
-      { label: "Contact" },
-      { label: "Report an issue" },
-    ],
-  },
-];
-
-const defaultEndButtons: EndButtonProps[] = [
-  { label: "Sign up", color: "primary" },
-  { label: "Log in", color: "light" },
-];
-
 export const Default: Story = {
   args: {
-    brand: defaultBrand,
-    startItems: defaultStartItems,
-    endButtons: defaultEndButtons,
+    brand: (
+      <NavbarItem href="#">
+        <img
+          src="https://files.markdown.space/9836cef3-b4a8-4a8c-bf9f-7412f0042573/markdown-space-white-logo.svg"
+          alt="Bulma: a modern CSS framework based on Flexbox"
+          height="28"
+        />
+      </NavbarItem>
+    ),
+    startItems: (
+      <>
+        <NavbarItem href="#">Home</NavbarItem>
+        <NavbarItem href="#">Documentation</NavbarItem>
+        <NavbarDropdown
+          label="More"
+          items={
+            <>
+              <NavbarItem href="#">About</NavbarItem>
+              <NavbarItem href="#" isSelected>
+                Jobs
+              </NavbarItem>
+              <NavbarItem href="#">Contact</NavbarItem>
+              <NavbarItem href="#">Report an issue</NavbarItem>
+            </>
+          }
+        />
+      </>
+    ),
+    endItems: (
+      <>
+        <NavbarDropdown
+          label="More"
+          isRight
+          items={
+            <>
+              <NavbarItem href="#">About</NavbarItem>
+              <NavbarItem href="#" isSelected>
+                Jobs
+              </NavbarItem>
+              <NavbarItem href="#">Contact</NavbarItem>
+              <NavbarItem href="#">Report an issue</NavbarItem>
+            </>
+          }
+        />
+        <Button>Sign In</Button>
+      </>
+    ),
   },
 };
 
@@ -76,40 +145,108 @@ export const ColoredNavbar: Story = {
   },
 };
 
-export const WithoutDropdown: Story = {
+export const SpacedNavbar: Story = {
   args: {
     ...Default.args,
-    startItems: [
-      { label: "Home" },
-      { label: "Documentation" },
-      { label: "About" },
-      { label: "Contact" },
-    ],
+    isSpaced: true,
+    color: "warning",
+    startItems: (
+      <>
+        <NavbarItem href="#">Home</NavbarItem>
+        <NavbarItem href="#">Documentation</NavbarItem>
+        <NavbarDropdown
+          label="More"
+          items={
+            <>
+              <NavbarItem href="#">About</NavbarItem>
+              <NavbarItem href="#" isSelected>
+                Jobs
+              </NavbarItem>
+              <NavbarItem href="#">Contact</NavbarItem>
+              <NavbarItem href="#">Report an issue</NavbarItem>
+            </>
+          }
+        />
+      </>
+    ),
+    endItems: (
+      <>
+        <NavbarItem href="#">About</NavbarItem>
+        <NavbarItem href="#">Contact</NavbarItem>
+        <NavbarItem href="#">Report an issue</NavbarItem>
+      </>
+    ),
   },
 };
 
-export const WithoutEndButtons: Story = {
+export const WithFixedTop: Story = {
   args: {
-    ...Default.args,
-    endButtons: undefined,
+    brand: (
+      <NavbarItem href="#">
+        <img
+          src="https://files.markdown.space/9836cef3-b4a8-4a8c-bf9f-7412f0042573/markdown-space-white-logo.svg"
+          alt="Bulma: a modern CSS framework based on Flexbox"
+          height="28"
+        />
+      </NavbarItem>
+    ),
+    color: "white",
+    isFixedTop: true,
+    startItems: (
+      <>
+        <NavbarItem href="#">Home</NavbarItem>
+        <NavbarItem href="#">Documentation</NavbarItem>
+        <NavbarDropdown
+          label="More"
+          items={
+            <>
+              <NavbarItem href="#">About</NavbarItem>
+              <NavbarItem href="#" isSelected>
+                Jobs
+              </NavbarItem>
+              <NavbarItem href="#">Contact</NavbarItem>
+              <NavbarItem href="#">Report an issue</NavbarItem>
+            </>
+          }
+        />
+      </>
+    ),
+    endItems: (
+      <NavbarDropdown
+        label="More"
+        isRight
+        items={
+          <>
+            <NavbarItem href="#">About</NavbarItem>
+            <NavbarItem href="#" isSelected>
+              Jobs
+            </NavbarItem>
+            <NavbarItem href="#">Contact</NavbarItem>
+            <NavbarItem href="#">Report an issue</NavbarItem>
+          </>
+        }
+      />
+    ),
   },
-};
-
-export const WithoutStartItems: Story = {
-  args: {
-    ...Default.args,
-    startItems: undefined,
+  render: (args) => {
+    return (
+      <div>
+        <Navbar {...args} />
+        <Block
+          style={{ height: "200vh", display: "flex", flexDirection: "column" }}
+        >
+          <div style={{ height: "100%", background: "#56a7d3" }} />
+          <div style={{ height: "100%", background: "#297fae" }} />
+        </Block>
+      </div>
+    );
   },
 };
 
 export const NavbarWithThemeSelector: Story = {
   args: {
     ...Default.args,
-    endButtons: [
-      {
-        label: <ThemeSelector />,
-      },
-    ],
+    endItems: <ThemeSelector />,
   },
 };
 
@@ -117,44 +254,9 @@ export const CustomBrand: Story = {
   args: {
     ...Default.args,
     brand: (
-      <a className="navbar-item" href="#">
+      <NavbarItem href="#">
         <strong>CUSTOM BRAND</strong>
-      </a>
+      </NavbarItem>
     ),
-  },
-};
-
-export const ManyItems: Story = {
-  args: {
-    ...Default.args,
-    startItems: [
-      { label: "Home" },
-      { label: "Products" },
-      { label: "Services" },
-      { label: "About" },
-      { label: "Contact" },
-      {
-        label: "More",
-        items: [
-          { label: "Team" },
-          { label: "Careers" },
-          { label: "Blog" },
-          { label: "FAQ" },
-        ],
-      },
-    ],
-  },
-};
-
-export const MinimalNavbar: Story = {
-  args: {
-    ...Default.args,
-    hideToggle: true,
-  },
-};
-
-export const Playground: Story = {
-  args: {
-    ...Default.args,
   },
 };
