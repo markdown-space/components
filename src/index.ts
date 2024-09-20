@@ -1,3 +1,6 @@
+export { Accordion } from "./components/Accordion";
+export { Carousel } from "./components/Carousel";
+export { Drawer } from "./components/Drawer";
 export { Block } from "./components/Block";
 export { Box } from "./components/Box";
 export { Breadcrumb } from "./components/Breadcrumb";
