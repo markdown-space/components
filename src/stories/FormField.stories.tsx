@@ -5,6 +5,7 @@ import {
   FormFieldSize,
   FormFieldState,
 } from "../components/FormField";
+import { Textarea } from "../components/Textarea";
 
 const meta: Meta<typeof FormField> = {
   title: "Bulma Components/FormField",
@@ -160,6 +161,18 @@ export const IconPositions: Story = {
         icon={<i className="fas fa-envelope"></i>}
         iconPosition="right"
         inputProps={{ placeholder: "Right icon input" }}
+      />
+    </>
+  ),
+};
+
+export const TextareaInput: Story = {
+  render: () => (
+    <>
+      <FormField
+        label="Enter your text"
+        iconPosition="left"
+        customInput={<Textarea color="success" />}
       />
     </>
   ),

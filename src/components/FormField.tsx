@@ -9,12 +9,11 @@ export type FormFieldColor =
   | "danger";
 export type FormFieldState = "hovered" | "focused" | "loading";
 
-export interface FormFieldProps {
+interface BaseProps {
   label?: ReactNode;
   labelProps?: Omit<ComponentProps<"label">, "children">;
   helperText?: ReactNode;
   helperTextProps?: Omit<ComponentProps<"p">, "children">;
-  inputProps?: ComponentProps<"input">;
   size?: FormFieldSize;
   color?: FormFieldColor;
   state?: FormFieldState;
@@ -24,11 +23,24 @@ export interface FormFieldProps {
   isGrouped?: boolean;
 }
 
+interface CustomInputProps extends BaseProps {
+  customInput: ReactNode;
+  inputProps?: never;
+}
+
+interface InputProps extends BaseProps {
+  customInput?: never;
+  inputProps?: ComponentProps<"input">;
+}
+
+export type FormFieldProps = CustomInputProps | InputProps;
+
 export const FormField = ({
   label,
   labelProps,
   helperText,
   helperTextProps,
+  customInput,
   inputProps,
   size,
   color,
@@ -92,7 +104,11 @@ export const FormField = ({
           </label>
         )}
         <div className={controlClasses}>
-          <input {...inputProps} className={inputClasses} />
+          {customInput ? (
+            customInput
+          ) : (
+            <input {...inputProps} className={inputClasses} />
+          )}
           {icon && (
             <span className={`icon is-small is-${iconPosition}`}>{icon}</span>
           )}
