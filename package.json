@@ -51,7 +51,8 @@
   },
   "dependencies": {
     "bulma": "^1.0.2",
-    "framer-motion": "^11.3.30"
+    "framer-motion": "^11.3.30",
+    "styled-components": "^6.1.13"
   },
   "prettier": {}
 }

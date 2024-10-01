@@ -30,6 +30,7 @@ export { Progress } from "./components/Progress";
 export { Radio, RadioList } from "./components/Radio";
 export { Select } from "./components/Select";
 export { Skeleton } from "./components/Skeleton";
+export { Switch } from "./components/Switch";
 export { Table } from "./components/Table";
 export { TableOfContents } from "./components/TableOfContents";
 export { Tabs } from "./components/Tabs";
