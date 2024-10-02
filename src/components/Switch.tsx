@@ -1,19 +1,32 @@
+import { ComponentProps } from "react";
 import styled from "styled-components";
 
-export const Switch = () => {
+export interface SwitchProps
+  extends Omit<ComponentProps<"input">, "onChange" | "size"> {
+  checked: boolean;
+  onCheckedChange: (checked: boolean) => void;
+}
+
+export const Switch = ({ checked, onCheckedChange }: SwitchProps) => {
   return (
-    <Label className="switch">
-      <input type="checkbox" />
+    <Label className="switch" size={1}>
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={({ target }) => {
+          onCheckedChange(target.checked);
+        }}
+      />
       <span className="slider round"></span>
     </Label>
   );
 };
 
-const Label = styled.label`
+const Label = styled.label<{ size: number }>`
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: ${({ size }) => size * 44}px;
+  height: ${({ size }) => size * 24}px;
 
   input {
     opacity: 0;
@@ -36,10 +49,10 @@ const Label = styled.label`
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 2.25px;
     background-color: white;
     -webkit-transition: 0.2s;
     transition: 0.2s;
@@ -54,14 +67,14 @@ const Label = styled.label`
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
   }
 
   /* Rounded sliders */
   .slider.round {
-    border-radius: 34px;
+    border-radius: 24px;
   }
 
   .slider.round:before {
