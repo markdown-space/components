@@ -7,17 +7,40 @@ export interface SwitchProps
   onCheckedChange: (checked: boolean) => void;
 }
 
-export const Switch = ({ checked, onCheckedChange }: SwitchProps) => {
+export const Switch = ({
+  checked,
+  onCheckedChange,
+  disabled,
+  ...props
+}: SwitchProps) => {
   return (
-    <Label className="switch" size={1}>
+    <Label
+      className="switch"
+      size={1}
+      style={{
+        cursor: disabled ? "not-allowed" : "pointer",
+        opacity: disabled ? 0.5 : 1,
+      }}
+    >
       <input
         type="checkbox"
         checked={checked}
         onChange={({ target }) => {
+          if (disabled) return;
+
           onCheckedChange(target.checked);
         }}
+        style={{
+          cursor: disabled ? "not-allowed" : "pointer",
+        }}
+        {...props}
       />
-      <span className="slider round"></span>
+      <span
+        className="slider round"
+        style={{
+          cursor: disabled ? "not-allowed" : "pointer",
+        }}
+      />
     </Label>
   );
 };
