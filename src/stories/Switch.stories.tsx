@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 import { Switch } from "../components/Switch";
 
 export default {
@@ -19,5 +20,14 @@ export default {
 type Story = StoryObj<typeof Switch>;
 
 export const Default: Story = {
-  render: () => <Switch />,
+  render: () => {
+    const [checked, setChecked] = useState(false);
+
+    return (
+      <Switch
+        checked={checked}
+        onCheckedChange={(checked) => setChecked(checked)}
+      />
+    );
+  },
 };
