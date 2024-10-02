@@ -1,7 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import "bulma/css/bulma.min.css";
 import { Button } from "../components/Button";
-import { Dropdown } from "../components/Dropdown";
+import {
+  Dropdown,
+  DropdownDivider,
+  DropdownItem,
+} from "../components/Dropdown";
 
 export default {
   title: "Bulma Components/Dropdown",
@@ -34,12 +38,30 @@ export default {
       description: "Additional CSS classes",
     },
     trigger: {
-      control: { type: "text" },
       description: "The content of the dropdown trigger",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+      control: {
+        disable: true,
+      },
+    },
+    children: {
+      description: "The content of the dropdown",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+      control: {
+        disable: true,
+      },
     },
   },
   decorators: [
-    (story) => (
+    (Story) => (
       <div
         style={{
           padding: "10rem 0",
@@ -49,7 +71,7 @@ export default {
           gap: "2rem",
         }}
       >
-        {story()}
+        <Story />
       </div>
     ),
   ],
@@ -57,28 +79,25 @@ export default {
 
 type Story = StoryObj<typeof Dropdown>;
 
+const DefaultDropdownContent = () => (
+  <>
+    <DropdownItem onClick={() => console.log("Item 1 clicked")}>
+      Item 1
+    </DropdownItem>
+    <DropdownItem onClick={() => console.log("Item 2 clicked")}>
+      Item 2
+    </DropdownItem>
+    <DropdownDivider />
+    <DropdownItem onClick={() => console.log("Item 3 clicked")}>
+      Item 3
+    </DropdownItem>
+  </>
+);
+
 export const Default: Story = {
   args: {
     trigger: <Button>Dropdown</Button>,
-    items: [
-      {
-        type: "item",
-        label: "Item 1",
-        onClick: () => console.log("Item 1 clicked"),
-      },
-      {
-        type: "item",
-        label: "Item 2",
-        onClick: () => console.log("Item 2 clicked"),
-      },
-      { type: "divider" },
-      {
-        type: "item",
-        label: "Item 3",
-        href: "https://example.com",
-        onClick: () => console.log("Item 3 clicked"),
-      },
-    ],
+    children: <DefaultDropdownContent />,
   },
 };
 
@@ -113,60 +132,51 @@ export const CustomTrigger: Story = {
 export const WithActiveItem: Story = {
   args: {
     ...Default.args,
-    items: [
-      {
-        type: "item",
-        label: "Item 1",
-        onClick: () => console.log("Item 1 clicked"),
-      },
-      {
-        type: "item",
-        label: "Item 2",
-        onClick: () => console.log("Item 2 clicked"),
-      },
-      { type: "divider" },
-      {
-        type: "item",
-        label: "Active Item",
-        isActive: true,
-        onClick: () => console.log("Active item clicked"),
-      },
-      {
-        type: "item",
-        label: "Item 3",
-        href: "https://example.com",
-        onClick: () => console.log("Item 3 clicked"),
-      },
-    ],
+    children: (
+      <>
+        <DropdownItem onClick={() => console.log("Item 1 clicked")}>
+          Item 1
+        </DropdownItem>
+        <DropdownItem onClick={() => console.log("Item 2 clicked")}>
+          Item 2
+        </DropdownItem>
+        <DropdownDivider />
+        <DropdownItem
+          isActive
+          onClick={() => console.log("Active item clicked")}
+        >
+          Active Item
+        </DropdownItem>
+        <DropdownItem onClick={() => console.log("Item 3 clicked")}>
+          Item 3
+        </DropdownItem>
+      </>
+    ),
   },
 };
 
 export const NestedContent: Story = {
   args: {
     trigger: <Button>Nested Content</Button>,
-    items: [
-      { type: "item", label: "Simple Item" },
-      {
-        type: "item",
-        label: (
+    children: (
+      <>
+        <DropdownItem>Simple Item</DropdownItem>
+        <DropdownItem>
           <div>
             <strong>Bold Item</strong>
             <p>With additional content</p>
           </div>
-        ),
-      },
-      { type: "divider" },
-      {
-        type: "item",
-        label: (
+        </DropdownItem>
+        <DropdownDivider />
+        <DropdownItem>
           <div className="is-flex is-align-items-center">
             <span className="icon mr-2">
               <i className="fas fa-exclamation-triangle"></i>
             </span>
             <span>Item with Icon</span>
           </div>
-        ),
-      },
-    ],
+        </DropdownItem>
+      </>
+    ),
   },
 };
