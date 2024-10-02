@@ -1,29 +1,22 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
-
-export type DropdownItem = {
-  type: "item" | "divider";
-  label?: ReactNode;
-  href?: string;
-  onClick?: () => void;
-  isActive?: boolean;
-};
+import styled from "styled-components";
 
 export type DropdownProps = {
   trigger: ReactNode;
-  items: DropdownItem[];
   isRight?: boolean;
   isUp?: boolean;
   isHoverable?: boolean;
   className?: string;
+  children: ReactNode;
 };
 
 export const Dropdown = ({
   trigger,
-  items,
   isRight = false,
   isUp = false,
   isHoverable = false,
   className = "",
+  children,
 }: DropdownProps) => {
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -63,33 +56,46 @@ export const Dropdown = ({
         {trigger}
       </div>
       <div className="dropdown-menu" role="menu">
-        <div className="dropdown-content">
-          {items.map((item, index) => {
-            if (item.type === "divider") {
-              return <hr key={index} className="dropdown-divider" />;
-            }
-
-            const commonProps = {
-              className: `dropdown-item ${item.isActive ? "is-active" : ""}`,
-              onClick: (e: React.MouseEvent) => {
-                if (!item.href) e.preventDefault();
-                item.onClick?.();
-                if (!isHoverable) setIsActive(false);
-              },
-            };
-
-            return item.href ? (
-              <a href={item.href} {...commonProps} key={index}>
-                {item.label}
-              </a>
-            ) : (
-              <div {...commonProps} key={index}>
-                {item.label}
-              </div>
-            );
-          })}
-        </div>
+        <ul className="dropdown-content">{children}</ul>
       </div>
     </div>
   );
 };
+
+export type DropdownItemProps = {
+  onClick?: () => void;
+  isActive?: boolean;
+  children: ReactNode;
+};
+
+export const DropdownItem = ({
+  onClick,
+  isActive,
+  children,
+}: DropdownItemProps) => {
+  const commonProps = {
+    className: `dropdown-item ${isActive ? "is-active" : ""}`,
+    ...(onClick && { onClick }),
+    isActive,
+  };
+
+  return <StyledDropdownItem {...commonProps}>{children}</StyledDropdownItem>;
+};
+
+const StyledDropdownItem = styled.li<{ isActive?: boolean }>`
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bulma-scheme-main);
+    filter: brightness(95%);
+  }
+
+  ${({ isActive }) =>
+    isActive &&
+    `
+    background-color: var(--bulma-scheme-main);
+    filter: brightness(95%);
+    `}
+`;
+
+export const DropdownDivider = () => <hr className="dropdown-divider" />;

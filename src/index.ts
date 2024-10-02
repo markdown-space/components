@@ -7,7 +7,7 @@ export { Card } from "./components/Card";
 export { Carousel } from "./components/Carousel";
 export { Checkbox } from "./components/Checkbox";
 export { Drawer } from "./components/Drawer";
-export { Dropdown } from "./components/Dropdown";
+export { Dropdown, DropdownDivider, DropdownItem } from "./components/Dropdown";
 export { File } from "./components/File";
 export { Form } from "./components/Form";
 export { FormField } from "./components/FormField";
