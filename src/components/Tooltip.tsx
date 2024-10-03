@@ -46,7 +46,7 @@ export const TooltipContent = styled(TooltipPrimitive.Content)`
     padding: 10px 15px;
     font-size: 15px;
     line-height: 1;
-    color: var(--bulma-title-color);
+    color: var(--bulma-body-color);
     background-color: var(--bulma-background);
     user-select: none;
     animation-duration: 400ms;
