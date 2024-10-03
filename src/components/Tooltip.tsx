@@ -2,18 +2,30 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { ReactNode } from "react";
 import { styled } from "styled-components";
 
-export interface TooltipProps {
+export interface TooltipProps extends TooltipPrimitive.TooltipProps {
   trigger: ReactNode;
   children: ReactNode;
+  providerProps?: TooltipPrimitive.TooltipProviderProps;
+  contentProps?: TooltipPrimitive.TooltipContentProps;
 }
 
-export const Tooltip = ({ trigger, children }: TooltipProps) => {
+export const Tooltip = ({
+  trigger,
+  children,
+  providerProps,
+  contentProps,
+  ...props
+}: TooltipProps) => {
   return (
-    <TooltipPrimitive.Provider>
-      <TooltipPrimitive.Root>
+    <TooltipPrimitive.Provider {...providerProps}>
+      <TooltipPrimitive.Root {...props}>
         <TooltipPrimitive.Trigger asChild>{trigger}</TooltipPrimitive.Trigger>
         <TooltipPrimitive.Portal>
-          <TooltipContent className="TooltipContent" sideOffset={5}>
+          <TooltipContent
+            sideOffset={5}
+            {...contentProps}
+            className={`TooltipContent${contentProps?.className ? ` ${contentProps.className}` : ""}`}
+          >
             {children}
             <TooltipPrimitive.Arrow className="TooltipArrow" />
           </TooltipContent>
@@ -34,49 +46,32 @@ export const TooltipContent = styled(TooltipPrimitive.Content)`
     padding: 10px 15px;
     font-size: 15px;
     line-height: 1;
-    color: var(--violet-11);
+    color: var(--bulma-title-color);
     background-color: var(--bulma-background);
-    /* box-shadow: 0 2px 6px #00000026; */
     user-select: none;
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
   }
+
   .TooltipContent[data-state="delayed-open"][data-side="top"] {
     animation-name: slideDownAndFade;
   }
+
   .TooltipContent[data-state="delayed-open"][data-side="right"] {
     animation-name: slideLeftAndFade;
   }
+
   .TooltipContent[data-state="delayed-open"][data-side="bottom"] {
     animation-name: slideUpAndFade;
   }
+
   .TooltipContent[data-state="delayed-open"][data-side="left"] {
     animation-name: slideRightAndFade;
   }
 
   .TooltipArrow {
     fill: var(--bulma-background);
-  }
-
-  .IconButton {
-    font-family: inherit;
-    border-radius: 100%;
-    height: 35px;
-    width: 35px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--violet-11);
-    background-color: white;
-    box-shadow: 0 2px 10px var(--black-a7);
-    user-select: none;
-  }
-  .IconButton:hover {
-    background-color: var(--violet-3);
-  }
-  .IconButton:focus {
-    box-shadow: 0 0 0 2px black;
   }
 
   @keyframes slideUpAndFade {
