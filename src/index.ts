@@ -38,4 +38,5 @@ export { Tag } from "./components/Tag";
 export { Textarea } from "./components/Textarea";
 export { ThemeSelector } from "./components/ThemeSelector";
 export { Title } from "./components/Title";
+export { Tooltip } from "./components/Tooltip";
 export { Typography } from "./components/Typography";
