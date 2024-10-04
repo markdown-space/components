@@ -116,20 +116,18 @@ export const Button = forwardRef(
       .filter(Boolean)
       .join(" ");
 
+    const buttonProps = {
+      className: buttonClasses,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref: ref as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ...(rest as any),
+    };
+
     if (tooltip) {
       return (
         <Tooltip
-          trigger={
-            <Component
-              className={buttonClasses}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              ref={ref as any}
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              {...(rest as any)}
-            >
-              {children}
-            </Component>
-          }
+          trigger={<Component {...buttonProps}>{children}</Component>}
           {...tooltipProps}
         >
           {tooltip}
@@ -137,12 +135,7 @@ export const Button = forwardRef(
       );
     }
 
-    return (
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      <Component className={buttonClasses} ref={ref as any} {...(rest as any)}>
-        {children}
-      </Component>
-    );
+    return <Component {...buttonProps}>{children}</Component>;
   },
 ) as <T extends ButtonProps>(
   props: T & { ref?: Ref<ButtonRef<T>> },
