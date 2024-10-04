@@ -119,7 +119,17 @@ export const Button = forwardRef(
     if (tooltip) {
       return (
         <Tooltip
-          trigger={<Component className={buttonClasses}>{children}</Component>}
+          trigger={
+            <Component
+              className={buttonClasses}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ref={ref as any}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              {...(rest as any)}
+            >
+              {children}
+            </Component>
+          }
           {...tooltipProps}
         >
           {tooltip}
