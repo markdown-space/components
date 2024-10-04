@@ -26,6 +26,14 @@ export default {
       control: "text",
       description: "The content of the tooltip",
     },
+    providerProps: {
+      control: false,
+      description: "Props for the TooltipProvider",
+    },
+    contentProps: {
+      control: false,
+      description: "Props for the TooltipContent",
+    },
   },
 } satisfies Meta<typeof Tooltip>;
 
@@ -69,6 +77,26 @@ export const WithHTML: Story = {
         </p>
       </div>
     ),
+  },
+};
+
+export const CustomDelay: Story = {
+  args: {
+    trigger: <Button>Hover with delay</Button>,
+    children: "This tooltip appears after a 500ms delay",
+    providerProps: {
+      delayDuration: 500,
+    },
+  },
+};
+
+export const CustomPosition: Story = {
+  args: {
+    trigger: <Button>Hover for custom position</Button>,
+    children: "This tooltip appears on the right",
+    contentProps: {
+      side: "right",
+    },
   },
 };
 
