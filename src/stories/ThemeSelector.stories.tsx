@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "../components/Button";
+import { Hero, HeroSubtitle, HeroTitle } from "../components/Hero";
 import { ThemeSelector } from "../components/ThemeSelector";
-import { Hero, HeroTitle, HeroSubtitle } from "../components/Hero";
+import Themes from "../config/themes";
 
 export default {
   title: "Markdown Space Components/ThemeSelector",
@@ -14,17 +16,35 @@ export default {
       },
     },
   },
+  argTypes: {
+    initialTheme: {
+      control: "select",
+      description: "Initial theme to apply",
+      options: Themes.map((theme) => theme.id),
+      table: {
+        type: {
+          summary: Themes.map((theme) => theme.id).join(" | "),
+        },
+      },
+    },
+    filter: {
+      control: false,
+      description: "Filter themes based on a condition",
+    },
+    saveTheme: {
+      control: "boolean",
+      description: "Save theme to local storage",
+    },
+  },
   tags: ["autodocs"],
 } satisfies Meta<typeof ThemeSelector>;
 
 type Story = StoryObj<typeof ThemeSelector>;
 
-// Default story showcasing only the ThemeSelector without additional wrapping
 export const Default: Story = {
   render: () => <ThemeSelector />,
 };
 
-// Story showcasing ThemeSelector within a Hero for Light themes
 export const LightThemes: Story = {
   render: () => (
     <Hero color="light" size="halfheight">
@@ -32,12 +52,14 @@ export const LightThemes: Story = {
       <HeroSubtitle color="info">
         Select a light theme from the dropdown below
       </HeroSubtitle>
-      <ThemeSelector filter={(theme) => theme.dataTheme === "light"} />
+      <ThemeSelector
+        filter={(theme) => theme.dataTheme === "light"}
+        saveTheme
+      />
     </Hero>
   ),
 };
 
-// Story showcasing ThemeSelector within a Hero for Dark themes
 export const DarkThemes: Story = {
   render: () => (
     <Hero color="black" size="halfheight">
@@ -50,7 +72,6 @@ export const DarkThemes: Story = {
   ),
 };
 
-// Default story showcasing all themes within a Hero
 export const AllThemes: Story = {
   render: () => (
     <Hero color="primary" size="halfheight">
@@ -59,6 +80,26 @@ export const AllThemes: Story = {
         Choose any theme from the dropdown below
       </HeroSubtitle>
       <ThemeSelector />
+    </Hero>
+  ),
+};
+
+export const SaveThemes: Story = {
+  render: () => (
+    <Hero color="primary" size="halfheight">
+      <HeroTitle color="white">Save Theme</HeroTitle>
+      <HeroSubtitle color="light">
+        Choose any theme from the dropdown below
+      </HeroSubtitle>
+      <ThemeSelector saveTheme />
+      <Button
+        onClick={() => {
+          localStorage.removeItem("theme");
+        }}
+        style={{ display: "block", marginTop: "1rem" }}
+      >
+        Unsave Theme
+      </Button>
     </Hero>
   ),
 };

@@ -1,38 +1,67 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
-import { Select } from './Select';
-import Themes from '../config/themes';
-import { updateThemeStylesheet, fetchThemes } from '../utils/themeUtils';
-
-
+import { useEffect, useMemo, useRef, useState } from "react";
+import Themes from "../config/themes";
+import { fetchThemes, updateThemeStylesheet } from "../utils/themeUtils";
+import { Select } from "./Select";
 
 interface ThemeSelectorProps {
   filter?: (theme: Theme) => boolean;
-  initialTheme?: string;
+  initialTheme?: ThemeColor;
+  /** Save theme to local storage */
+  saveTheme?: boolean;
 }
 
-export const ThemeSelector = ({ filter = () => true, initialTheme }: ThemeSelectorProps) => {
-  const [syncedThemes, setSyncedThemes] = useState(false); // Ensures filter doesn't change
+export const ThemeSelector = ({
+  filter = () => true,
+  initialTheme,
+  saveTheme = false,
+}: ThemeSelectorProps) => {
+  const storedTheme = localStorage.getItem("theme") || "default";
+
+  // Ensures filter doesn't change
+  const [syncedThemes, setSyncedThemes] = useState(false);
   const [themes, setThemes] = useState<Theme[]>(Themes);
-  const [currentTheme, setCurrentTheme] = useState(initialTheme || themes[0]?.id);
   const [loading, setLoading] = useState(false);
-  const uniqueId = useRef(`theme-stylesheet-${Math.random().toString(36).slice(2, 11)}`).current;
+  const [currentTheme, setCurrentTheme] = useState(
+    saveTheme ? storedTheme : initialTheme || themes[0]?.id,
+  );
+
+  const uniqueId = useRef(
+    `theme-stylesheet-${Math.random().toString(36).slice(2, 11)}`,
+  ).current;
+
   const isFirstRender = useRef(true);
-  const filteredThemes = useMemo(() => themes.filter(filter), [themes, filter]);
-  const selectedTheme = useMemo(() => filteredThemes.find((theme) => theme.id === currentTheme) || filteredThemes[0], [currentTheme, filteredThemes]);
   const stableUniqueId = useRef(uniqueId).current;
+
+  const filteredThemes = useMemo(() => themes.filter(filter), [themes, filter]);
+  const selectedTheme = useMemo(
+    () =>
+      filteredThemes.find((theme) => theme.id === currentTheme) ||
+      filteredThemes[0],
+    [currentTheme, filteredThemes],
+  );
 
   useEffect(() => {
     if (syncedThemes) return;
-    fetchThemes().then(setThemes).then(() => setSyncedThemes(true));
+
+    fetchThemes()
+      .then(setThemes)
+      .then(() => setSyncedThemes(true));
   }, [syncedThemes]);
 
+  // Set initial theme.
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
+
     setLoading(true);
-    updateThemeStylesheet(selectedTheme, () => setLoading(false), stableUniqueId);
+
+    updateThemeStylesheet(
+      selectedTheme,
+      () => setLoading(false),
+      stableUniqueId,
+    );
   }, [selectedTheme, stableUniqueId]);
 
   const selectOptions = filteredThemes.map((theme) => ({
@@ -46,8 +75,13 @@ export const ThemeSelector = ({ filter = () => true, initialTheme }: ThemeSelect
       color="primary"
       value={currentTheme}
       isLoading={loading}
-      onChange={(e) => setCurrentTheme(e.target.value)}
+      onChange={({ target: { value } }) => {
+        if (saveTheme) {
+          localStorage.setItem("theme", value);
+        }
+
+        setCurrentTheme(value);
+      }}
     />
   );
 };
-
