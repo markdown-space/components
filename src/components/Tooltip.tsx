@@ -55,6 +55,7 @@ export const TooltipContent = styled(TooltipPrimitive.Content)`
     animation-duration: 400ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
+    z-index: 40;
   }
 
   .TooltipContent[data-state="delayed-open"][data-side="top"] {
