@@ -1,5 +1,12 @@
-import { ComponentPropsWithoutRef, forwardRef, ReactElement, Ref } from "react";
+import {
+  ComponentPropsWithoutRef,
+  forwardRef,
+  ReactElement,
+  ReactNode,
+  Ref,
+} from "react";
 import { Color, Size } from "../types/shared";
+import { Tooltip, TooltipProps } from "./Tooltip";
 
 type ButtonBaseProps = {
   color?: Color;
@@ -16,15 +23,32 @@ type ButtonBaseProps = {
   isSkeleton?: boolean;
   fullWidth?: boolean;
   theme?: "light" | "dark";
+  tooltip?: ReactNode;
 };
 
-type ButtonElementProps = ButtonBaseProps &
-  Omit<ComponentPropsWithoutRef<"button">, keyof ButtonBaseProps> & {
+type ButtonPropsWithTooltip = ButtonBaseProps & {
+  tooltip: ReactNode;
+  tooltipProps?: Omit<TooltipProps, "trigger" | "children">;
+};
+
+type ButtonPropsWithoutTooltip = ButtonBaseProps & {
+  tooltip?: undefined;
+  tooltipProps?: never;
+};
+
+type ButtonElementProps = (ButtonPropsWithTooltip | ButtonPropsWithoutTooltip) &
+  Omit<
+    ComponentPropsWithoutRef<"button">,
+    keyof ButtonBaseProps | "tooltipProps"
+  > & {
     href?: never;
   };
 
-type AnchorElementProps = ButtonBaseProps &
-  Omit<ComponentPropsWithoutRef<"a">, keyof ButtonBaseProps> & {
+type AnchorElementProps = (ButtonPropsWithTooltip | ButtonPropsWithoutTooltip) &
+  Omit<
+    ComponentPropsWithoutRef<"a">,
+    keyof ButtonBaseProps | "tooltipProps"
+  > & {
     href: string;
   };
 
@@ -51,6 +75,8 @@ export const Button = forwardRef(
       theme = undefined,
       className,
       children,
+      tooltip,
+      tooltipProps,
       ...rest
     } = props;
 
@@ -89,6 +115,17 @@ export const Button = forwardRef(
     ]
       .filter(Boolean)
       .join(" ");
+
+    if (tooltip) {
+      return (
+        <Tooltip
+          trigger={<Component className={buttonClasses}>{children}</Component>}
+          {...tooltipProps}
+        >
+          {tooltip}
+        </Tooltip>
+      );
+    }
 
     return (
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

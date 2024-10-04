@@ -115,6 +115,24 @@ export default {
         },
       },
     },
+    tooltip: {
+      control: false,
+      description: "The content of the tooltip",
+      table: {
+        type: {
+          summary: "ReactNode",
+        },
+      },
+    },
+    tooltipProps: {
+      control: false,
+      description: "Props for the Tooltip",
+      table: {
+        type: {
+          summary: "TooltipProps",
+        },
+      },
+    },
     children: {
       description: "The content of the button (not applicable for input type)",
       control: {
@@ -423,6 +441,21 @@ export const Link: Story = {
       <Button href="https://markdown.space/" target="_blank">
         Visit Example
       </Button>
+    );
+  },
+};
+
+export const WithTooltip: Story = {
+  render: () => {
+    return (
+      <Block style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          tooltip={<p>You can add a tooltip to this button component.</p>}
+          tooltipProps={{ delayDuration: 100 }}
+        >
+          Hover for a Tooltip
+        </Button>
+      </Block>
     );
   },
 };
