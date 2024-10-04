@@ -452,6 +452,7 @@ export const WithTooltip: Story = {
         <Button
           tooltip={<p>You can add a tooltip to this button component.</p>}
           tooltipProps={{ delayDuration: 100 }}
+          onClick={() => alert("You clicked the button!")}
         >
           Hover for a Tooltip
         </Button>
