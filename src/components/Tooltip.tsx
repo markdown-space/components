@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 export interface TooltipProps extends TooltipPrimitive.TooltipProps {
   trigger: ReactNode;
   children: ReactNode;
-  providerProps?: TooltipPrimitive.TooltipProviderProps;
+  providerProps?: Omit<TooltipPrimitive.TooltipProviderProps, "children">;
   contentProps?: TooltipPrimitive.TooltipContentProps;
 }
 
@@ -17,7 +17,10 @@ export const Tooltip = ({
   ...props
 }: TooltipProps) => {
   return (
-    <TooltipPrimitive.Provider {...providerProps}>
+    <TooltipPrimitive.Provider
+      {...providerProps}
+      delayDuration={providerProps?.delayDuration || 0}
+    >
       <TooltipPrimitive.Root {...props}>
         <TooltipPrimitive.Trigger asChild>{trigger}</TooltipPrimitive.Trigger>
         <TooltipPrimitive.Portal>
@@ -42,11 +45,11 @@ export const TooltipContent = styled(TooltipPrimitive.Content)`
   }
 
   &.TooltipContent {
-    border-radius: 4px;
+    border-radius: var(--bulma-control-radius);
     padding: 10px 15px;
     font-size: 15px;
     line-height: 1;
-    color: var(--bulma-body-color);
+    color: var(--bulma-text);
     background-color: var(--bulma-background);
     user-select: none;
     animation-duration: 400ms;
