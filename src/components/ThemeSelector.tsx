@@ -29,16 +29,9 @@ export const ThemeSelector = ({
     `theme-stylesheet-${Math.random().toString(36).slice(2, 11)}`,
   ).current;
 
-  const isFirstRender = useRef(true);
   const stableUniqueId = useRef(uniqueId).current;
 
   const filteredThemes = useMemo(() => themes.filter(filter), [themes, filter]);
-  const selectedTheme = useMemo(
-    () =>
-      filteredThemes.find((theme) => theme.id === currentTheme) ||
-      filteredThemes[0],
-    [currentTheme, filteredThemes],
-  );
 
   useEffect(() => {
     if (syncedThemes) return;
@@ -47,22 +40,6 @@ export const ThemeSelector = ({
       .then(setThemes)
       .then(() => setSyncedThemes(true));
   }, [syncedThemes]);
-
-  // Set initial theme.
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    setLoading(true);
-
-    updateThemeStylesheet(
-      selectedTheme,
-      () => setLoading(false),
-      stableUniqueId,
-    );
-  }, [selectedTheme, stableUniqueId]);
 
   const selectOptions = filteredThemes.map((theme) => ({
     value: theme.id,
@@ -81,6 +58,14 @@ export const ThemeSelector = ({
         }
 
         setCurrentTheme(value);
+
+        setLoading(true);
+
+        const theme =
+          filteredThemes.find((theme) => theme.id === value) ||
+          filteredThemes[0];
+
+        updateThemeStylesheet(theme, () => setLoading(false), stableUniqueId);
       }}
     />
   );

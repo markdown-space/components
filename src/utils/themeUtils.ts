@@ -8,6 +8,7 @@ export const updateThemeStylesheet = (
   const themeLinks = context.querySelectorAll('link[href*="markdownswatch"]');
 
   const newLink = context.createElement("link");
+
   newLink.id = id;
   newLink.rel = "stylesheet";
   newLink.href = url;
@@ -36,6 +37,7 @@ export const fetchThemes = async (): Promise<Theme[]> => {
   const response = await fetch(
     "https://cdn.jsdelivr.net/npm/@markdownspace/markdownswatch/themes.json",
   );
+
   const data: { themes: Theme[] } = await response.json();
 
   return data.themes;
