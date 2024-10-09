@@ -42,11 +42,14 @@ export const ThemeSelector = ({
   }, [syncedThemes]);
 
   useEffect(() => {
+    if (!syncedThemes) return;
+
     const theme =
       filteredThemes.find((theme) => theme.id === currentTheme) ||
       filteredThemes[0];
+    setLoading(true);
     updateThemeStylesheet(theme, () => setLoading(false), stableUniqueId);
-  }, [currentTheme, filteredThemes, stableUniqueId]);
+  }, [syncedThemes, currentTheme, filteredThemes, stableUniqueId]);
 
   const selectOptions = filteredThemes.map((theme) => ({
     value: theme.id,

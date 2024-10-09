@@ -1,4 +1,4 @@
-import { Button, HeroSection, TableOfContents } from "../dist/index";
+import { Button, HeroSection, TableOfContents } from "./index";
 
 export default function App() {
   return (

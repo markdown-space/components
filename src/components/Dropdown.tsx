@@ -55,7 +55,7 @@ export const Dropdown = ({
       <div className="dropdown-trigger" onClick={toggleDropdown}>
         {trigger}
       </div>
-      <div className="dropdown-menu" role="menu">
+      <div className="dropdown-menu" role="menu" style={{ zIndex: 40 }}>
         <ul className="dropdown-content">{children}</ul>
       </div>
     </div>
