@@ -41,6 +41,13 @@ export const ThemeSelector = ({
       .then(() => setSyncedThemes(true));
   }, [syncedThemes]);
 
+  useEffect(() => {
+    const theme =
+      filteredThemes.find((theme) => theme.id === currentTheme) ||
+      filteredThemes[0];
+    updateThemeStylesheet(theme, () => setLoading(false), stableUniqueId);
+  }, [currentTheme, filteredThemes, stableUniqueId]);
+
   const selectOptions = filteredThemes.map((theme) => ({
     value: theme.id,
     label: theme.name.charAt(0).toUpperCase() + theme.name.slice(1),
