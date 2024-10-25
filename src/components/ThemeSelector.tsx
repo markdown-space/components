@@ -35,7 +35,6 @@ export const ThemeSelector = ({
 
   useEffect(() => {
     if (syncedThemes) return;
-    console.log("fetching themes");
 
     fetchThemes()
       .then(setThemes)
