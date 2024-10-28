@@ -3,7 +3,7 @@ import Themes from "../config/themes";
 import { fetchThemes, updateThemeStylesheet } from "../utils/themeUtils";
 import { Select } from "./Select";
 
-interface ThemeSelectorProps {
+export interface ThemeSelectorProps {
   filter?: (theme: Theme) => boolean;
   initialTheme?: ThemeColor;
   /** Save theme to local storage */
@@ -47,9 +47,13 @@ export const ThemeSelector = ({
     const theme =
       filteredThemes.find((theme) => theme.id === currentTheme) ||
       filteredThemes[0];
+
     setLoading(true);
+
     updateThemeStylesheet(theme, () => setLoading(false), stableUniqueId);
-  }, [syncedThemes, currentTheme, filteredThemes, stableUniqueId]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [syncedThemes, stableUniqueId]);
 
   const selectOptions = filteredThemes.map((theme) => ({
     value: theme.id,
