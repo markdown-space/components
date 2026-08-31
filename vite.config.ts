@@ -9,7 +9,7 @@ export default defineConfig({
     tsconfigPaths({
       projects: ["./tsconfig-build.json"],
     }),
-    react({ jsxImportSource: "https://esm.sh/react" }),
+    react(),
     dts({
       tsconfigPath: "./tsconfig-build.json",
       rollupTypes: true,
